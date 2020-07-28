@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+	<!-- title -->
+	
+	<title>
+	
+		Vue | 
+	 
+	Hexo
+	</title>
+	
+	<!-- keywords,description -->
+	 
+
+	<!-- favicon -->
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+  
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+	
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/darcula.min.css">
+
+
+	
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+	
+		
+<script src="https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script>
+
+		
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+	
+	
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+	<header id="header">
+    <a id="title" href="/" class="logo">Hexo</a>
+
+	<ul id="menu">
+		<li class="menu-item">
+			<a href="/about" class="menu-item-link">ABOUT</a>
+		</li>
+		
+		<li class="menu-item">
+			<a href="https://github.com/wujun234/uid-generator-spring-boot-starter" class="menu-item-link" target="_blank">
+				UidGenerator
+			</a>
+		</li>
+		<li class="menu-item">
+			<a href="https://github.com/wujun234" class="menu-item-link" target="_blank">
+				<i class="fa fa-github fa-2x"></i>
+			</a>
+		</li>
+	</ul>
+</header>
+
+	
+<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="text" placeholder="search...">
+		<div id="tree">
+			
+
+			
+							<ul>
+								<li class="file active">
+									<a href="/2020/07/28/Vue/">
+										Vue
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/24/hello-world/">
+										hello-world
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<!-- 引入正文 -->
+	<div id="content">
+		<h1 id="article-title">
+
+	Vue
+</h1>
+<div class="article-meta">
+	
+	<span>John Doe</span>
+	<span>2020-07-28 10:57:33</span>
+    
+		<div id="article-categories">
+            
+		</div>
+    
+</div>
+
+<div id="article-content">
+	<h2 id="第一章-vue介绍"><a href="#第一章-vue介绍" class="headerlink" title="第一章 vue介绍"></a>第一章 vue介绍</h2><h3 id="1-1Vue配置"><a href="#1-1Vue配置" class="headerlink" title="1.1Vue配置"></a>1.1Vue配置</h3><p>vue是构建用户界面的渐进式框架 特点是易用 灵活 性能优<br>vue脚手架的安装 vue CLI<br>安装 node.js 安装vue cli<br>创建vue工程</p>
+<h3 id="1-2-vue工程目录介绍"><a href="#1-2-vue工程目录介绍" class="headerlink" title="1.2 vue工程目录介绍"></a>1.2 vue工程目录介绍</h3><p>工程介绍<br>node_modules:存放npm命令下载的开发环境和生产环境的依赖包<br>public:项目的入口文件<br>src:存放项目源码和需要引用的资源的文件<br>assets:存放项目中需要用到的资源文件 css js images 等<br>componets:存放vue开发中的一些公共组件 例如项目初始的header.vue footer.vue就是公共组件<br>router:vue路由的配置文件<br>views:存放页面文件<br>app.vue ：使用标签渲染整个工程的vue组件<br>main.js:vue-cli工程的入口文件</p>
+<h2 id="第二章-Vue的双向绑定"><a href="#第二章-Vue的双向绑定" class="headerlink" title="第二章 Vue的双向绑定"></a>第二章 Vue的双向绑定</h2><h3 id="2-1-声明式渲染"><a href="#2-1-声明式渲染" class="headerlink" title="2.1 声明式渲染"></a>2.1 声明式渲染</h3><p>我们知道app.vue 是工程的根组件，所以我们将很多代码放在根组件app.vue中<br>每一个vue文件都由三个部分组成：template script style分别对应 html js 和css<br>template里面只能有一个块状标签 一般为div 有时也可以是其他</p>
+<p>vue采用差值表达式来渲染数据&lt;!–￼7–&gt; 两层花括号<br>例如使用差值表达式渲染字符串</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;h2&gt;&#123;&#123;title&#125;&#125;&lt;/h2&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  // <span class="built_in">export</span> default是固定格式，不需要纠结</span><br><span class="line">  <span class="built_in">export</span> default &#123;</span><br><span class="line">    // 模块的名字</span><br><span class="line">    name: <span class="string">'app'</span>,</span><br><span class="line">    // 页面中数据存放的地方</span><br><span class="line">    <span class="function"><span class="title">data</span></span>() &#123;</span><br><span class="line">      <span class="built_in">return</span> &#123;</span><br><span class="line">        title: <span class="string">'优课达--学的比别人好一点'</span>,</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- scope的意思表示这段样式只在本xxx.vue文件中生效，其他xxx.vue文件中不会生效，有锁定的意思 --&gt;</span><br><span class="line">&lt;style scope&gt;</span><br><span class="line">  h2 &#123;</span><br><span class="line">    color: deeppink;</span><br><span class="line">    border: 1px solid <span class="comment">#cccccc;</span></span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<p>或者用差值表达式渲染数组</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">&lt;h2 class=<span class="string">"title"</span>&gt;&#123;&#123;title&#125;&#125;&lt;/h2&gt;</span><br><span class="line">&lt;ul class=<span class="string">"list"</span>&gt;</span><br><span class="line">  &lt;li&gt;&#123;&#123;todoList[0]&#125;&#125;&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;&#123;&#123;todoList[1]&#125;&#125;&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;&#123;&#123;todoList[2]&#125;&#125;&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;&#123;&#123;todoList[3]&#125;&#125;&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;&#123;&#123;todoList[4]&#125;&#125;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="built_in">export</span> default &#123;</span><br><span class="line">  name: <span class="string">"app"</span>,</span><br><span class="line">  <span class="function"><span class="title">data</span></span>() &#123;</span><br><span class="line">    <span class="built_in">return</span> &#123;</span><br><span class="line">      title: <span class="string">"今日待完成事项"</span>,</span><br><span class="line">      todoList: [</span><br><span class="line">        <span class="string">"完成HTML标签学习"</span>,</span><br><span class="line">        <span class="string">"完成CSS文字样式学习"</span>,</span><br><span class="line">        <span class="string">"完成CSS盒模型学习"</span>,</span><br><span class="line">        <span class="string">"完成Flex布局学习"</span>,</span><br><span class="line">        <span class="string">"完成JavaScript入门学习"</span></span><br><span class="line">      ]</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>注意点 ：data方法用来存放数据或者全局变量<br>       scope可以理解为锁，将代码锁在本文件内，只有本文件内有用</p>
+<p> 当然还可以用差值表达式来渲染对象</p>
+<h3 id="2-2-处理用户输入"><a href="#2-2-处理用户输入" class="headerlink" title="2.2 处理用户输入"></a>2.2 处理用户输入</h3><p> 用户输入有哪些：input textarea select 单选 复选</p>
+<p> v-model(双向绑定)–input<br> 什么是双向绑定呢？我们拿input标签来说，如果有一个变量a绑定了input标签，a变量发生改变那么标签的值也会发生改变并且始终和a标签保持一致<br>                                 如果input标签发生改变，a变量也会改变为和input标签相同的值<br> 例如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;p class=<span class="string">"page"</span>&gt;&#123;&#123;message&#125;&#125;&lt;/p&gt;</span><br><span class="line">  &lt;input <span class="built_in">type</span>=<span class="string">"text"</span> v-model=<span class="string">"message"</span> placeholder=<span class="string">"请输入你想输入的内容"</span> /&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="built_in">export</span> default &#123;</span><br><span class="line">    name: <span class="string">"app"</span>,</span><br><span class="line">    <span class="function"><span class="title">data</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> &#123;</span><br><span class="line">            message: <span class="string">""</span></span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">同理可以适用到text-area上 &lt;textarea v-model=<span class="string">"message"</span> placeholder=<span class="string">"请在输入框内输入..."</span>&gt;</span><br><span class="line">```           </span><br><span class="line">v-model（双向绑定）checkbox（复选框）</span><br><span class="line"> 当checkbox绑定一个变量a时，复选框就会和变量a保持同步，举一个例子</span><br><span class="line"> ``` bash</span><br><span class="line">&lt;template&gt;</span><br><span class="line">&lt;div class=<span class="string">"food"</span>&gt;</span><br><span class="line">  &lt;div class=<span class="string">"check-box"</span>&gt;</span><br><span class="line">    &lt;input <span class="built_in">type</span>=<span class="string">"checkbox"</span> value=<span class="string">"新奥尔良鸡腿堡"</span> v-model=<span class="string">"checkedGoods"</span> /&gt; //在这里checkeGoods这个变量和 checkbox这个复选框双向</span><br><span class="line">绑定了 当选中复选框时，变量checkedGoods就会被赋予checkbox的值 这里为：新奥尔良鸡腿堡</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class=<span class="string">"food-name"</span>&gt;新奥尔良鸡腿堡&lt;/div&gt;</span><br><span class="line">  &lt;div class=<span class="string">"food-price"</span>&gt;￥24&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="built_in">export</span> default &#123;</span><br><span class="line">    name: <span class="string">"app"</span>,</span><br><span class="line">    <span class="function"><span class="title">data</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> &#123;</span><br><span class="line">            checkedGoods: []</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p> 这就是常用的三种用户输入 </p>
+<h3 id="2-3处理用户事件"><a href="#2-3处理用户事件" class="headerlink" title="2.3处理用户事件"></a>2.3处理用户事件</h3><p> v-on:事件绑定 例子</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">&lt;button v-on:click=<span class="string">"add"</span>&gt;按钮&lt;/button&gt; //这是绑定点击事件</span><br><span class="line">还可以简写为</span><br><span class="line">&lt;button @click=<span class="string">"add"</span>&gt;按钮&lt;/button&gt;   //v-on:可以简写为@</span><br><span class="line">```  </span><br><span class="line">methods方法：一般我们绑定了事件后，都需要给事件添加方法来告诉系统当这个事件发生之后，将会调用什么方法</span><br><span class="line">``` bash</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;p&gt;&#123;&#123; counter &#125;&#125;&lt;/p&gt;</span><br><span class="line">  &lt;button @click=<span class="string">"add"</span>&gt;点击&lt;/button&gt; //绑定事件的位置 add就是方法名 也可以写成add()括号里面可以传递参数</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="built_in">export</span> default &#123;</span><br><span class="line">    name: <span class="string">"app"</span>,</span><br><span class="line">    <span class="function"><span class="title">data</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> &#123;</span><br><span class="line">            // 初始次数</span><br><span class="line">            counter:0</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods:&#123;                   //这是方法书写的位置，很重要不要写错了位置</span><br><span class="line">        add:<span class="function"><span class="title">function</span></span>()&#123;         //这是出发了事件后要调用的方法</span><br><span class="line">            // 这里的this指向当前的vue实例</span><br><span class="line">            this.counter++      //注意这个this,当你需要使用data里面定义的变量的时候你就需要在前面添加this</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">```         </span><br><span class="line">常用的三种事件修饰符</span><br><span class="line">``` bash</span><br><span class="line">1 阻止冒泡事件</span><br><span class="line">&lt;div @click.stop=<span class="string">"fn2"</span>&gt;&lt;/div&gt;</span><br><span class="line">2捕获事件</span><br><span class="line">&lt;div class=<span class="string">"div2"</span> @click.capture=<span class="string">"fn2"</span>&gt;&lt;/div</span><br><span class="line">3阻止默认时间</span><br><span class="line">&lt;div class=<span class="string">"div2"</span> @click.prevent=<span class="string">"fn2"</span>&gt;&lt;/div&gt;</span><br><span class="line">```        </span><br><span class="line"></span><br><span class="line"><span class="comment">## 2。4 监听数据变化</span></span><br><span class="line">在vue中通过侦听器来监听数据变化</span><br><span class="line">``` bash</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="built_in">export</span> default &#123;</span><br><span class="line">    name: <span class="string">'app'</span>,</span><br><span class="line">    data: <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">      <span class="built_in">return</span> &#123;</span><br><span class="line">        count: 1,</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      add: <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        this.count++;              //运行的时机，当data的数据发生改变时运行</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;                         //侦听器书写的位置</span><br><span class="line">      <span class="function"><span class="title">count</span></span>() &#123;                      //监听的对象 一般是data里面的数据</span><br><span class="line">        console.log(<span class="string">'count发生了变化'</span>);</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">``` bash</span><br><span class="line">我们还可以获得前一次的数据和现在的数据</span><br><span class="line">watch:&#123;</span><br><span class="line">    inputValue(value,oldValue) &#123;    // 第一个参数为新值，第二个参数为旧值，不能调换顺序</span><br><span class="line">        console.log(`新值：<span class="variable">$&#123;value&#125;</span>`);</span><br><span class="line">        console.log(`旧值：<span class="variable">$&#123;oldValue&#125;</span>`);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line">浏览器第一次渲染页面的时候是不会触发侦听器的，我们我可以使用 handler方法和immediate属性来使监听初次渲染的数据</span><br><span class="line">```bash</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="built_in">export</span> default &#123;</span><br><span class="line">    name: <span class="string">'app'</span>,</span><br><span class="line">    watch: &#123;</span><br><span class="line">      firstName: &#123;</span><br><span class="line">        handler: <span class="keyword">function</span> (newName, oldName) &#123;</span><br><span class="line">          this.fullName = newName + <span class="string">' '</span> + this.lastName;</span><br><span class="line">        &#125;,</span><br><span class="line">        immediate: <span class="literal">true</span>,        //当immediate属性值为<span class="literal">true</span>时，第一次渲染就可以侦听</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="第三章-vue-template"><a href="#第三章-vue-template" class="headerlink" title="第三章 vue template"></a>第三章 vue template</h2><h3 id="3-1-html属性渲染语法"><a href="#3-1-html属性渲染语法" class="headerlink" title="3.1 html属性渲染语法"></a>3.1 html属性渲染语法</h3><p>标签是有属性的，我们可以通过属性绑定来使标签属性的值发生动态变化<br>动态绑定 v-bind </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">        &lt;img src=<span class="string">"#"</span> v-bind:alt=<span class="string">"imgText"</span>&gt; //alt属性表示当图片加载不出来时，有一个文字去说明图片是什么内容。用v-bind绑定此属性后，动态</span><br><span class="line">                                           输入此内容</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="built_in">export</span> default &#123;</span><br><span class="line">    name: <span class="string">"app"</span>,</span><br><span class="line">    // 数据</span><br><span class="line">    <span class="function"><span class="title">data</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> &#123;</span><br><span class="line">            imgText:<span class="string">'周杰伦演唱会图片'</span></span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+</div>
+
+
+    <div class="post-guide">
+        <div class="item left">
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2020/07/24/hello-world/">
+                hello-world
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+
+	<div id="vcomments"></div>
+
+
+<script>
+	
+		// 评论
+		new Valine({
+			av: AV,
+			el: '#vcomments',
+			notify: false,
+			verify: false,
+			path: window.location.pathname,
+			appId: '',
+			appKey: '',
+			placeholder: '请输入评论',
+			avatar: 'retro',
+			recordIP: false
+		})
+	
+	
+</script>
+	</div>
+	<div id="footer">
+	<p>
+	©2019-<span id="footerYear"></span> 
+	<a href="/">John Doe</a> 
+	
+	
+		|
+		<span id="busuanzi_container_site_pv">
+			pv
+			<span id="busuanzi_value_site_pv"></span>
+		</span>
+		|
+		<span id="busuanzi_container_site_uv"> 
+			uv
+			<span id="busuanzi_value_site_uv"></span>
+		</span>
+	
+	<br>
+	Theme <a href="//github.com/wujun234/hexo-theme-tree" target="_blank">Tree</a>
+	by <a href="//github.com/wujun234" target="_blank">WuJun</a>
+	Powered by <a href="//hexo.io" target="_blank">Hexo</a>
+	</p>
+</div>
+<script type="text/javascript"> 
+	document.getElementById('footerYear').innerHTML = new Date().getFullYear() + '';
+</script>
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+</body>
+</html>
