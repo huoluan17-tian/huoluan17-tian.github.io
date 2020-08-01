@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+	<!-- title -->
+	
+	<title>
+	
+		Vuex | 
+	 
+	Hexo
+	</title>
+	
+	<!-- keywords,description -->
+	 
+
+	<!-- favicon -->
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+  
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+	
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/darcula.min.css">
+
+
+	
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+	
+		
+<script src="https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script>
+
+		
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+	
+	
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+	<header id="header">
+    <a id="title" href="/" class="logo">Hexo</a>
+
+	<ul id="menu">
+		<li class="menu-item">
+			<a href="/about" class="menu-item-link">ABOUT</a>
+		</li>
+		
+		<li class="menu-item">
+			<a href="https://github.com/wujun234/uid-generator-spring-boot-starter" class="menu-item-link" target="_blank">
+				UidGenerator
+			</a>
+		</li>
+		<li class="menu-item">
+			<a href="https://github.com/wujun234" class="menu-item-link" target="_blank">
+				<i class="fa fa-github fa-2x"></i>
+			</a>
+		</li>
+	</ul>
+</header>
+
+	
+<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="text" placeholder="search...">
+		<div id="tree">
+			
+
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/28/Vue/">
+										Vue
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file active">
+									<a href="/2020/08/01/Vuex/">
+										Vuex
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/24/hello-world/">
+										hello-world
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<!-- 引入正文 -->
+	<div id="content">
+		<h1 id="article-title">
+
+	Vuex
+</h1>
+<div class="article-meta">
+	
+	<span>John Doe</span>
+	<span>2020-08-01 14:13:03</span>
+    
+		<div id="article-categories">
+            
+		</div>
+    
+</div>
+
+<div id="article-content">
+	<h2 id="第一章Vuex入门"><a href="#第一章Vuex入门" class="headerlink" title="第一章Vuex入门"></a>第一章Vuex入门</h2><h3 id="1-1Vuex介绍"><a href="#1-1Vuex介绍" class="headerlink" title="1.1Vuex介绍"></a>1.1Vuex介绍</h3><p>什么是vuex？<br>它是vue团队提供的状态管理模式，简单来说就是针对vue.js提供的数据驱动解决方案。<br>vue是双向绑定，vuex是单向绑定的，一般来说单向绑定更安全<br>vuex为什么非常重要？<br>它可以使vue开发大型复杂的产品变得容易。<br>安装vuex</p>
+<pre><code class="bash">npm install vuex --save
+yarn add vuex
+cnpm install -save vuex</code></pre>
+<p>配置vuex</p>
+<pre><code class="bash">1 创建一个store文件夹，然后在里面创建一个index.js 内容如下
+import Vue from <span class="string">'vue'</span>
+import Vuex from <span class="string">'vuex'</span>;
+
+Vue.use(Vuex);
+
+<span class="built_in">export</span> default new Vuex.Store({
+    state:{}
+})
+
+2 找到vue工程的main.js文件 将store导入
+import store from <span class="string">'./store'</span>;
+
+// Vue实例化这里把 store 加入进去
+new Vue({
+  router,
+  store,
+  render: h =&gt; h(App)
+}).<span class="variable">$mount</span>(<span class="string">'#app'</span>);</code></pre>
+<p>创建全新工程：</p>
+<pre><code class="bash">安装好vue cli
+npm install -g @vue/cli-service-global</code></pre>
+<p>创建包含vuex的新工程</p>
+<pre><code class="bash">打开终端软件（如果是window电脑，请使用 git-bash 软件）
+在终端里进入你的常用编程目录，比如 <span class="built_in">cd</span> /d/work
+继续执行命令 vue create hello-world，创建一个hello-world 工程
+按回车键后，进入选择页面（可以用键盘的上下键进行移动，按空格键选中）
+选择Manually select features，并按回车键
+选择：Babel、Router、Vuex、Linter/Formatter，并按回车键
+一直按回车键
+等待下载完成后，就成功了</code></pre>
+<p>vue.config.js配置</p>
+<pre><code class="bash">在工程目录下创建vue.config.js文件，然后输入配置
+module.exports = {
+  devServer: {
+    disableHostCheck: <span class="literal">true</span>,
+    host: <span class="string">"0.0.0.0"</span>
+  }
+};</code></pre>
+<p>##第二章 vuex核心技术<br>###2.1 state/muation/action<br>vuex比较复杂，要先在使用框架的过程中加深对框架的理解<br>定义vue store:我们接下来说的store 都是指Vuex的store文件</p>
+<p>state:用来存储数据，表示数据在vuex中的存储状态，可以看成一个全局（到处都可以访问到）的大json对象<br>编写state<br>例子：编写一个count变量来纪录数据</p>
+<pre><code class="bash"><span class="built_in">export</span> default new Vuex.Store({
+  state: {
+    count: 0
+  }
+});</code></pre>
+<p>muation:作用就是修改state状态<br>muation是一个函数，可以接收两个参数 ：state 当前上下文的state实例，可以通过这个参数修改state的值<br>                                payload 接受外部传入的对象，需要和调用方约定好数据类型，也可以不传参数<br> 例子</p>
+<pre><code class="bash"><span class="built_in">export</span> default new Vuex.Store({
+  state: {
+    count: 0
+  },
+  mutations: {
+    increment(state) {
+      state.count++;               //用于count的自增
+    },
+    decrement(state) {
+      state.count--;              //用于count的自减
+    }
+  }
+});</code></pre>
+<p>Action :如果想着vue中修改state的值，只能通过action触发muation函数来进行修改</p>
+<pre><code class="bash"><span class="built_in">export</span> default new Vuex.Store({
+  state: {
+    count: 0
+  },
+  actions: {
+    increment: ({ commit }) =&gt; commit(<span class="string">'increment'</span>),
+    decrement: ({ commit }) =&gt; commit(<span class="string">'decrement'</span>)   //也可以定义多个参数 
+                                                       increment: ({ state,commit,dispatch }) =&gt; commit(<span class="string">"increment"</span>)
+  },
+  mutations: {
+    increment(state) {
+      state.count++;
+    },
+    decrement(state) {
+      state.count--;
+    }
+  }
+});</code></pre>
+<p>action是一个函数 它有两个参数<br>第一个参数context对象 包含了以下属性和方法</p>
+<pre><code class="bash">{
+  state, // 等同于 `store.state`，若在模块中则为局部状态
+    rootState, // 等同于 `store.state`，只存在于模块中，
+    commit, // 等同于 `store.commit`
+    dispatch, // 等同于 `store.dispatch`
+    getters, // 等同于 `store.getters`
+    rootGetters; // 等同于 `store.getters`，只存在于模块中
+}</code></pre>
+<p>第二个参数是用来接收外部传递的参数</p>
+<p>commit：它是个函数，作用就是把数据提交到muation中，也有2个参数<br>第一个参数是muation函数的名称<br>第二个是自定义的对象</p>
+<pre><code class="bash">actions: {
+  increment: ({ commit }) =&gt; commit(<span class="string">'increment'</span>);    //可以把对象传递给muation
+}</code></pre>
+<p>运用vuex store<br>只要我们定义好state和action我们</p>
+
+</div>
+
+
+    <div class="post-guide">
+        <div class="item left">
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2020/07/28/Vue/">
+                Vue
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+
+	<div id="vcomments"></div>
+
+
+<script>
+	
+		// 评论
+		new Valine({
+			av: AV,
+			el: '#vcomments',
+			notify: false,
+			verify: false,
+			path: window.location.pathname,
+			appId: '',
+			appKey: '',
+			placeholder: '请输入评论',
+			avatar: 'retro',
+			recordIP: false
+		})
+	
+	
+</script>
+	</div>
+	<div id="footer">
+	<p>
+	©2019-<span id="footerYear"></span> 
+	<a href="/">John Doe</a> 
+	
+	
+		|
+		<span id="busuanzi_container_site_pv">
+			pv
+			<span id="busuanzi_value_site_pv"></span>
+		</span>
+		|
+		<span id="busuanzi_container_site_uv"> 
+			uv
+			<span id="busuanzi_value_site_uv"></span>
+		</span>
+	
+	<br>
+	Theme <a href="//github.com/wujun234/hexo-theme-tree" target="_blank">Tree</a>
+	by <a href="//github.com/wujun234" target="_blank">WuJun</a>
+	Powered by <a href="//hexo.io" target="_blank">Hexo</a>
+	</p>
+</div>
+<script type="text/javascript"> 
+	document.getElementById('footerYear').innerHTML = new Date().getFullYear() + '';
+</script>
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+</body>
+</html>
