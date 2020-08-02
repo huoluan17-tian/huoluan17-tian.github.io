@@ -91,18 +91,18 @@
 
 			
 							<ul>
-								<li class="file active">
-									<a href="/2020/08/01/Vuex/">
-										Vuex
+								<li class="file">
+									<a href="/2020/07/28/Vue/">
+										Vue
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
 							</ul>
 			
 							<ul>
-								<li class="file">
-									<a href="/2020/07/28/Vue/">
-										Vue
+								<li class="file active">
+									<a href="/2020/08/01/Vuex/">
+										Vuex
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -183,8 +183,7 @@ module.exports = {
     host: <span class="string">"0.0.0.0"</span>
   }
 };</code></pre>
-<p>##第二章 vuex核心技术</p>
-<p>###2.1 state/muation/action<br>vuex比较复杂，要先在使用框架的过程中加深对框架的理解<br>定义vue store:我们接下来说的store 都是指Vuex的store文件</p>
+<h2 id="第二章vuex的核心技术"><a href="#第二章vuex的核心技术" class="headerlink" title="第二章vuex的核心技术"></a>第二章vuex的核心技术</h2><h3 id="2-1-state-muation-action"><a href="#2-1-state-muation-action" class="headerlink" title="2.1 state/muation/action"></a>2.1 state/muation/action</h3><p>vuex比较复杂，要先在使用框架的过程中加深对框架的理解<br>定义vue store:我们接下来说的store 都是指Vuex的store文件</p>
 <p>state:用来存储数据，表示数据在vuex中的存储状态，可以看成一个全局（到处都可以访问到）的大json对象<br>编写state<br>例子：编写一个count变量来纪录数据</p>
 <pre><code class="bash"><span class="built_in">export</span> default new Vuex.Store({
   state: {
