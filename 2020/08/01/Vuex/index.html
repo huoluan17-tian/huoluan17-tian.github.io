@@ -91,18 +91,18 @@
 
 			
 							<ul>
-								<li class="file">
-									<a href="/2020/07/28/Vue/">
-										Vue
+								<li class="file active">
+									<a href="/2020/08/01/Vuex/">
+										Vuex
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
 							</ul>
 			
 							<ul>
-								<li class="file active">
-									<a href="/2020/08/01/Vuex/">
-										Vuex
+								<li class="file">
+									<a href="/2020/07/28/Vue/">
+										Vue
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -140,79 +140,267 @@
 
 <div id="article-content">
 	<h2 id="第一章Vuex入门"><a href="#第一章Vuex入门" class="headerlink" title="第一章Vuex入门"></a>第一章Vuex入门</h2><h3 id="1-1Vuex介绍"><a href="#1-1Vuex介绍" class="headerlink" title="1.1Vuex介绍"></a>1.1Vuex介绍</h3><p>什么是vuex？<br>它是vue团队提供的状态管理模式，简单来说就是针对vue.js提供的数据驱动解决方案。<br>vue是双向绑定，vuex是单向绑定的，一般来说单向绑定更安全<br>vuex为什么非常重要？<br>它可以使vue开发大型复杂的产品变得容易。<br>安装vuex</p>
-<pre><code class="bash">npm install vuex --save
-yarn add vuex
-cnpm install -save vuex</code></pre>
-<p>配置vuex</p>
-<pre><code class="bash">1 创建一个store文件夹，然后在里面创建一个index.js 内容如下
-import Vue from <span class="string">'vue'</span>
-import Vuex from <span class="string">'vuex'</span>;
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br></pre></td><td class="code"><pre><span class="line">npm install vuex --save</span><br><span class="line">yarn add vuex</span><br><span class="line">cnpm install -save vuex</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">配置vuex</span><br><span class="line">``` bash</span><br><span class="line">1 创建一个store文件夹，然后在里面创建一个index.js 内容如下</span><br><span class="line">import Vue from <span class="string">'vue'</span></span><br><span class="line">import Vuex from <span class="string">'vuex'</span>;</span><br><span class="line"></span><br><span class="line">Vue.use(Vuex);</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default new Vuex.Store(&#123;</span><br><span class="line">    state:&#123;&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">2 找到vue工程的main.js文件 将store导入</span><br><span class="line">import store from <span class="string">'./store'</span>;</span><br><span class="line"></span><br><span class="line">// Vue实例化这里把 store 加入进去</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  router,</span><br><span class="line">  store,</span><br><span class="line">  render: h =&gt; h(App)</span><br><span class="line">&#125;).<span class="variable">$mount</span>(<span class="string">'#app'</span>);</span><br><span class="line">``` </span><br><span class="line">创建全新工程：</span><br><span class="line">``` bash</span><br><span class="line">安装好vue cli</span><br><span class="line">npm install -g @vue/cli-service-global</span><br><span class="line">``` </span><br><span class="line">创建包含vuex的新工程</span><br><span class="line">``` bash</span><br><span class="line">打开终端软件（如果是window电脑，请使用 git-bash 软件）</span><br><span class="line">在终端里进入你的常用编程目录，比如 <span class="built_in">cd</span> /d/work</span><br><span class="line">继续执行命令 vue create hello-world，创建一个hello-world 工程</span><br><span class="line">按回车键后，进入选择页面（可以用键盘的上下键进行移动，按空格键选中）</span><br><span class="line">选择Manually select features，并按回车键</span><br><span class="line">选择：Babel、Router、Vuex、Linter/Formatter，并按回车键</span><br><span class="line">一直按回车键</span><br><span class="line">等待下载完成后，就成功了</span><br><span class="line">``` </span><br><span class="line">vue.config.js配置</span><br><span class="line">``` bash</span><br><span class="line">在工程目录下创建vue.config.js文件，然后输入配置</span><br><span class="line">module.exports = &#123;</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    disableHostCheck: <span class="literal">true</span>,</span><br><span class="line">    host: <span class="string">"0.0.0.0"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="comment">## 第二章vuex的核心技术</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### 2.1 state/muation/action</span></span><br><span class="line">vuex比较复杂，要先在使用框架的过程中加深对框架的理解</span><br><span class="line">定义vue store:我们接下来说的store 都是指Vuex的store文件</span><br><span class="line"></span><br><span class="line">state:用来存储数据，表示数据在vuex中的存储状态，可以看成一个全局（到处都可以访问到）的大json对象</span><br><span class="line">编写state</span><br><span class="line">例子：编写一个count变量来纪录数据</span><br><span class="line">``` bash</span><br><span class="line"><span class="built_in">export</span> default new Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    count: 0</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">``` </span><br><span class="line">muation:作用就是修改state状态</span><br><span class="line">muation是一个函数，可以接收两个参数 ：state 当前上下文的state实例，可以通过这个参数修改state的值</span><br><span class="line">                                payload 接受外部传入的对象，需要和调用方约定好数据类型，也可以不传参数</span><br><span class="line"> 例子</span><br><span class="line">``` bash</span><br><span class="line"><span class="built_in">export</span> default new Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    count: 0</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    increment(state) &#123;</span><br><span class="line">      state.count++;               //用于count的自增</span><br><span class="line">    &#125;,</span><br><span class="line">    decrement(state) &#123;</span><br><span class="line">      state.count--;              //用于count的自减</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">``` </span><br><span class="line">Action :如果想着vue中修改state的值，只能通过action触发muation函数来进行修改</span><br><span class="line">``` bash</span><br><span class="line"><span class="built_in">export</span> default new Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    count: 0</span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    increment: (&#123; commit &#125;) =&gt; commit(<span class="string">'increment'</span>),</span><br><span class="line">    decrement: (&#123; commit &#125;) =&gt; commit(<span class="string">'decrement'</span>)   //也可以定义多个参数 </span><br><span class="line">                                                       increment: (&#123; state,commit,dispatch &#125;) =&gt; commit(<span class="string">"increment"</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    increment(state) &#123;</span><br><span class="line">      state.count++;</span><br><span class="line">    &#125;,</span><br><span class="line">    decrement(state) &#123;</span><br><span class="line">      state.count--;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">``` </span><br><span class="line">action是一个函数 它有两个参数 </span><br><span class="line">第一个参数context对象 包含了以下属性和方法</span><br><span class="line">``` bash</span><br><span class="line">&#123;</span><br><span class="line">  state, // 等同于 `store.state`，若在模块中则为局部状态</span><br><span class="line">    rootState, // 等同于 `store.state`，只存在于模块中，</span><br><span class="line">    commit, // 等同于 `store.commit`</span><br><span class="line">    dispatch, // 等同于 `store.dispatch`</span><br><span class="line">    getters, // 等同于 `store.getters`</span><br><span class="line">    rootGetters; // 等同于 `store.getters`，只存在于模块中</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line">第二个参数是用来接收外部传递的参数</span><br><span class="line"></span><br><span class="line">commit：它是个函数，作用就是把数据提交到muation中，也有2个参数</span><br><span class="line">第一个参数是muation函数的名称 </span><br><span class="line">第二个是自定义的对象</span><br><span class="line">``` bash</span><br><span class="line">actions: &#123;</span><br><span class="line">  increment: (&#123; commit &#125;) =&gt; commit(<span class="string">'increment'</span>);    //可以把对象传递给muation</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line">运用vuex store</span><br><span class="line">只要我们定义好state和action我们就可以在任意vue文件中得到数据和执行数据变化</span><br><span class="line"></span><br><span class="line">获取state</span><br><span class="line">我们可以通过<span class="variable">$store</span>.state.count来获取state中的count值 state只支持单向绑定 muation更新了state的状态之后，vue的值也会更新</span><br><span class="line">例子 </span><br><span class="line">``` bash</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    Clicked: &#123;&#123; <span class="variable">$store</span>.state.count &#125;&#125; <span class="built_in">times</span></span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">``` </span><br><span class="line">mapState这个函数可以动态的将state和compute绑定</span><br><span class="line"></span><br><span class="line">counter.vue</span><br><span class="line">``` bash</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    Clicked: &#123;&#123; count &#125;&#125; <span class="built_in">times</span></span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  // 导入 mapState 函数</span><br><span class="line">  import &#123; mapState &#125; from <span class="string">'vuex'</span>;      </span><br><span class="line"></span><br><span class="line">  <span class="built_in">export</span> default &#123;</span><br><span class="line">    computed: &#123;</span><br><span class="line">      ...mapState(&#123;</span><br><span class="line">        // 箭头函数可使代码更简练</span><br><span class="line">        count: state =&gt; state.count</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;            //根据count的值变化而刷新页面而不是只根据state的状态</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">执行store的action</span><br><span class="line">``` bash</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    Clicked: &#123;&#123; count &#125;&#125; <span class="built_in">times</span></span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;button @click=<span class="string">"increment"</span>&gt;+&lt;/button&gt;</span><br><span class="line">      &lt;button @click=<span class="string">"decrement"</span>&gt;-&lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  // 导入 mapState mapActions 函数</span><br><span class="line">  import &#123; mapState, mapActions &#125; from <span class="string">'vuex'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">export</span> default &#123;</span><br><span class="line">    computed: &#123;</span><br><span class="line">      ...mapState(&#123;</span><br><span class="line">        count: state =&gt; state.count</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123; ...mapActions([<span class="string">'increment'</span>, <span class="string">'decrement'</span>]) &#125;  //把store的action绑定到了vue的methods对象中</span><br><span class="line">  &#125;;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="comment">###2.2getter</span></span><br><span class="line">vuex的gtter函数类似于computed函数的作用，它会将返回值根据依赖缓存起来，只有当依赖发生改变时，值才会被重新计算</span><br><span class="line">定义getter</span><br><span class="line">``` bash</span><br><span class="line">getters: &#123;</span><br><span class="line">    evenOrOdd: state =&gt; (state.count % 2 === 0 ? <span class="string">"偶数"</span> : <span class="string">"奇数"</span>)   //state作为第一个参数 位置 </span><br><span class="line">                                                                    放在store中和state mutation action并列</span><br><span class="line">  &#125;</span><br><span class="line">``` </span><br><span class="line">使用getter，在组件中使用</span><br><span class="line">``` bash</span><br><span class="line">import &#123; mapGetters &#125; from <span class="string">'vuex'</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default &#123;</span><br><span class="line">  // ...</span><br><span class="line">  computed: &#123;</span><br><span class="line">  // 使用对象展开运算符将 getter 混入 computed 对象中</span><br><span class="line">    ...mapGetters([</span><br><span class="line">      <span class="string">'evenOrOdd'</span></span><br><span class="line">    ])</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line"><span class="comment">###2.3 vuex request</span></span><br><span class="line">我们知道action是用来接受数据并处理逻辑的地方。当vuex需要从远处获取数据时即action接受外部参数然后执行网络请求需要添加async关键字</span><br><span class="line"></span><br><span class="line">api</span><br><span class="line">``` bash</span><br><span class="line">https://www.fastmock.site/mock/a9b15cd4db90d4e03ed76cd3c76d9197/f6/users</span><br><span class="line"></span><br><span class="line">这个api返回的数据</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"data"</span>: &#123;</span><br><span class="line">    <span class="string">"users"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"Richard Harris"</span>,</span><br><span class="line">        <span class="string">"email"</span>: <span class="string">"k.yyziq@sdewmv.net"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line">书写store</span><br><span class="line">state</span><br><span class="line">``` bash</span><br><span class="line">import Vue from <span class="string">"vue"</span>;</span><br><span class="line">import Vuex from <span class="string">"vuex"</span>;</span><br><span class="line"></span><br><span class="line">Vue.use(Vuex);</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default new Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    users: []</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">``` </span><br><span class="line">mutation</span><br><span class="line">``` bash</span><br><span class="line">import Vue from <span class="string">"vue"</span>;</span><br><span class="line">import Vuex from <span class="string">"vuex"</span>;</span><br><span class="line"></span><br><span class="line">Vue.use(Vuex);</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default new Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    users: []</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    load(state, payload) &#123;           //定义一个函数load来更新user</span><br><span class="line">      state.users = payload;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">``` </span><br><span class="line">action :因为网络请求是一个异步行为，所以我们需要使用await/async。action函数声明上添加async关键字，执行request请求也需要添加await关键字</span><br><span class="line">做网络请求时一般使用axios框架</span><br><span class="line">``` bash</span><br><span class="line">import axios from <span class="string">"axios"</span>;</span><br><span class="line"></span><br><span class="line">const response = await axios.get(                //await关键字</span><br><span class="line">        <span class="string">"https://www.fastmock.site/mock/a9b15cd4db90d4e03ed76cd3c76d9197/f6/users"</span></span><br><span class="line">      );</span><br><span class="line">console.log(response.data);      //可以获取服务器的内容</span><br></pre></td></tr></table></figure>
+<p>api的返回数据</p>
+<pre><code class="bash">{
+  <span class="string">"data"</span>: {
+    <span class="string">"users"</span>: [
+      {
+        <span class="string">"name"</span>: <span class="string">"Richard Harris"</span>,
+        <span class="string">"email"</span>: <span class="string">"k.yyziq@sdewmv.net"</span>
+      }
+    ]
+  }
+}
+
+console.log(response.data.data.users);  //获取user api的返回值</code></pre>
+<p>在action中运用axios   例子</p>
+<pre><code class="bash">import Vue from <span class="string">"vue"</span>;
+import Vuex from <span class="string">"vuex"</span>;
+import axios from <span class="string">"axios"</span>;
 
 Vue.use(Vuex);
 
 <span class="built_in">export</span> default new Vuex.Store({
-    state:{}
-})
-
-2 找到vue工程的main.js文件 将store导入
-import store from <span class="string">'./store'</span>;
-
-// Vue实例化这里把 store 加入进去
-new Vue({
-  router,
-  store,
-  render: h =&gt; h(App)
-}).<span class="variable">$mount</span>(<span class="string">'#app'</span>);</code></pre>
-<p>创建全新工程：</p>
-<pre><code class="bash">安装好vue cli
-npm install -g @vue/cli-service-global</code></pre>
-<p>创建包含vuex的新工程</p>
-<pre><code class="bash">打开终端软件（如果是window电脑，请使用 git-bash 软件）
-在终端里进入你的常用编程目录，比如 <span class="built_in">cd</span> /d/work
-继续执行命令 vue create hello-world，创建一个hello-world 工程
-按回车键后，进入选择页面（可以用键盘的上下键进行移动，按空格键选中）
-选择Manually select features，并按回车键
-选择：Babel、Router、Vuex、Linter/Formatter，并按回车键
-一直按回车键
-等待下载完成后，就成功了</code></pre>
-<p>vue.config.js配置</p>
-<pre><code class="bash">在工程目录下创建vue.config.js文件，然后输入配置
-module.exports = {
-  devServer: {
-    disableHostCheck: <span class="literal">true</span>,
-    host: <span class="string">"0.0.0.0"</span>
-  }
-};</code></pre>
-<h2 id="第二章vuex的核心技术"><a href="#第二章vuex的核心技术" class="headerlink" title="第二章vuex的核心技术"></a>第二章vuex的核心技术</h2><h3 id="2-1-state-muation-action"><a href="#2-1-state-muation-action" class="headerlink" title="2.1 state/muation/action"></a>2.1 state/muation/action</h3><p>vuex比较复杂，要先在使用框架的过程中加深对框架的理解<br>定义vue store:我们接下来说的store 都是指Vuex的store文件</p>
-<p>state:用来存储数据，表示数据在vuex中的存储状态，可以看成一个全局（到处都可以访问到）的大json对象<br>编写state<br>例子：编写一个count变量来纪录数据</p>
-<pre><code class="bash"><span class="built_in">export</span> default new Vuex.Store({
   state: {
-    count: 0
-  }
-});</code></pre>
-<p>muation:作用就是修改state状态<br>muation是一个函数，可以接收两个参数 ：state 当前上下文的state实例，可以通过这个参数修改state的值<br>                                payload 接受外部传入的对象，需要和调用方约定好数据类型，也可以不传参数<br> 例子</p>
-<pre><code class="bash"><span class="built_in">export</span> default new Vuex.Store({
-  state: {
-    count: 0
+    users: []
+  },
+  actions: {
+    load: async ({ commit }) =&gt; {
+      const response = await axios.get(
+        <span class="string">"https://www.fastmock.site/mock/a9b15cd4db90d4e03ed76cd3c76d9197/f6/users"</span>
+      );
+      commit(<span class="string">"load"</span>, response.data.data.users);
+    }
   },
   mutations: {
-    increment(state) {
-      state.count++;               //用于count的自增
-    },
-    decrement(state) {
-      state.count--;              //用于count的自减
+    load(state, payload) {
+      state.users = payload;
     }
   }
 });</code></pre>
-<p>Action :如果想着vue中修改state的值，只能通过action触发muation函数来进行修改</p>
-<pre><code class="bash"><span class="built_in">export</span> default new Vuex.Store({
+<p>运用：在user.vue中添加store的依赖和配置</p>
+<pre><code class="bash">&lt;template&gt;
+  &lt;div&gt;
+    &lt;ul v-for=<span class="string">"user in users"</span> :key=<span class="string">"user.name"</span>&gt;
+      &lt;li&gt;
+        &lt;p&gt;
+          &lt;label&gt;用户名&lt;/label&gt;:
+          &lt;span&gt;{{user.name}}&lt;/span&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+          &lt;label&gt;邮箱&lt;/label&gt;:
+          &lt;span&gt;{{user.email}}&lt;/span&gt;
+        &lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import { mapState, mapActions } from <span class="string">"vuex"</span>;
+
+<span class="built_in">export</span> default {
+  async <span class="function"><span class="title">mounted</span></span>() {
+    await this.load();
+  },
+  computed: {
+    ...mapState({
+      users: state =&gt; state.users
+    })
+  },
+  methods: { ...mapActions([<span class="string">"load"</span>]) }
+};
+&lt;/script&gt;</code></pre>
+<p>注意点 ：vuex进行远程数据操作时的await/async关键字设置<br>       养成按顺序编写store的习惯</p>
+<h3 id="2-4-vuex表单"><a href="#2-4-vuex表单" class="headerlink" title="2.4 vuex表单"></a>2.4 vuex表单</h3><p>通过功能来熟悉通过传递参数去请求数据<br>api url</p>
+<pre><code class="bash">https://www.fastmock.site/mock/a9b15cd4db90d4e03ed76cd3c76d9197/f6/login</code></pre>
+<p>api methods:post<br>api 请求参数 </p>
+<pre><code class="bash">{
+ <span class="string">"username"</span>: <span class="string">"string"</span>,
+ <span class="string">"password"</span>: <span class="string">"string"</span>
+}</code></pre>
+<p>返回模型</p>
+<pre><code class="bash">{
+  <span class="string">"success"</span>: boolean,
+  <span class="string">"data"</span>: {
+    <span class="string">"username"</span>: <span class="string">"string"</span>,
+    <span class="string">"email"</span>: <span class="string">"string"</span>
+  }
+}</code></pre>
+<p>登录成功<br>测试参数</p>
+<pre><code class="bash">{
+ <span class="string">"username"</span>: <span class="string">"admin"</span>,
+ <span class="string">"password"</span>: <span class="string">"123456"</span>
+}</code></pre>
+<p>提交参数后返回的结果</p>
+<pre><code class="bash">{
+  <span class="string">"success"</span>: <span class="literal">true</span>,
+  <span class="string">"data"</span>: {
+    <span class="string">"username"</span>: <span class="string">"admin"</span>,
+    <span class="string">"email"</span>: <span class="string">"r.owukoelkl@scrdunktvw.kn"</span>
+  }
+}</code></pre>
+<p>登录失败<br>如果传递的参数是有问题的，返回的结果是</p>
+<pre><code class="bash">{
+  <span class="string">"success"</span>: <span class="literal">true</span>,
+  <span class="string">"data"</span>: {
+    <span class="string">"username"</span>: <span class="string">"admin"</span>,
+    <span class="string">"email"</span>: <span class="string">"r.owukoelkl@scrdunktvw.kn"</span>
+  }
+}</code></pre>
+<p>注意点：一定要正确识别api的约定和定义</p>
+<p>store的定义：按照s（state）m（mutation）a（action）的顺序来<br>state:将user作为state的属性来定义</p>
+<pre><code class="bash">import Vue from <span class="string">"vue"</span>;
+import Vuex from <span class="string">"vuex"</span>;
+
+Vue.use(Vuex);
+
+<span class="built_in">export</span> default new Vuex.Store({
+  state: {
+    user: {}
+  }
+});</code></pre>
+<p>mutation：定义一个函数来更新state</p>
+<pre><code class="bash">import Vue from <span class="string">"vue"</span>;
+import Vuex from <span class="string">"vuex"</span>;
+
+Vue.use(Vuex);
+
+<span class="built_in">export</span> default new Vuex.Store({
+  state: {
+    user: {}
+  },
+  mutations: {
+    setUser(state, payload) {
+      state.user = payload;
+    }
+  }
+});</code></pre>
+<p>action:由于api的post参数，所以我们使用axios.post</p>
+<pre><code class="bash">const response = await axios.post(<span class="string">'api...'</span>, {
+    username: <span class="string">'admin'</span>,
+    password: <span class="string">'123456'</span>
+});</code></pre>
+<p>完整的store代码</p>
+<pre><code class="bash">import Vue from <span class="string">"vue"</span>;
+import Vuex from <span class="string">"vuex"</span>;
+import axios from <span class="string">"axios"</span>;
+
+Vue.use(Vuex);
+
+<span class="built_in">export</span> default new Vuex.Store({
+  state: {
+    user: {}
+  },
+  mutations: {
+    setUser(state, payload) {
+      state.user = payload;
+    }
+  },
+  actions: {
+    login: async ({ commit }, param) =&gt; {
+      // 执行远程请求
+      const response = await axios.post(
+        <span class="string">"https://www.fastmock.site/mock/a9b15cd4db90d4e03ed76cd3c76d9197/f6/login"</span>,
+        {
+          username: param.username,
+          password: param.password
+        }
+      );
+      <span class="keyword">if</span> (response.data.success) {
+        commit(<span class="string">"setUser"</span>, response.data.data);
+      }
+    }
+  }
+});</code></pre>
+<p>在组件中使用</p>
+<pre><code class="bash">&lt;template&gt;
+  &lt;div&gt;
+    &lt;div&gt;
+      &lt;label&gt;用户名&lt;/label&gt;
+      &lt;input <span class="built_in">type</span>=<span class="string">"text"</span> v-model=<span class="string">"username"</span> /&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;label&gt;密码&lt;/label&gt;
+      &lt;input <span class="built_in">type</span>=<span class="string">"password"</span> v-model=<span class="string">"password"</span> /&gt;
+    &lt;/div&gt;
+    &lt;button @click=<span class="string">"onLogin"</span>&gt;登录&lt;/button&gt;
+    &lt;div v-if=<span class="string">"loginError"</span>&gt;登录失败&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  import { mapState, mapActions } from <span class="string">"vuex"</span>;
+
+  <span class="built_in">export</span> default {
+    <span class="function"><span class="title">data</span></span>() {
+      <span class="built_in">return</span> {
+        username: <span class="string">""</span>,
+        password: <span class="string">""</span>,
+        loginError: <span class="literal">false</span>
+      };
+    },
+    computed: {
+      ...mapState({
+        user: state =&gt; state.user
+      })
+    },
+    methods: {
+      ...mapActions([<span class="string">"login"</span>]),
+      async <span class="function"><span class="title">onLogin</span></span>() {
+        // 执行 store 的登录 action
+        await this.login({
+          username: this.username,
+          password: this.password
+        });
+
+        <span class="keyword">if</span> (this.user &amp;&amp; this.user.username) {
+          // 登录成功,随便跳转一下
+          window.location.href = <span class="string">"https://m.baidu.com"</span>;
+        } <span class="keyword">else</span> {
+          // 登录失败
+          this.loginError = <span class="literal">true</span>;
+        }
+      }
+    }
+  };
+&lt;/script&gt;</code></pre>
+<h2 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h2><h3 id="3-1-配置模块"><a href="#3-1-配置模块" class="headerlink" title="3.1 配置模块"></a>3.1 配置模块</h3><p>对于小应用我们可以把代码写在一个index.js文件中，但是企业级项目是非常复杂的，所以我们会使用模块来维护store<br>配置vuex模块：就是把一个store分割为多个js文件，每个文件就是一个模块，每个模块都有自己的smag，甚至模块还可以嵌套子模块</p>
+<p>多个模块在一个文件里</p>
+<pre><code class="bash">const moduleA = {
+  state: { ... },
+  mutations: { ... },
+  actions: { ... },
+  getters: { ... }
+}
+
+const moduleB = {
+  state: { ... },
+  mutations: { ... },
+  actions: { ... }
+}
+
+const store = new Vuex.Store({
+  modules: {
+    a: moduleA,
+    b: moduleB
+  }
+})
+
+如果我们想获取一个模块，我们可以
+store.state.a; // -&gt; moduleA 的状态
+store.state.b; // -&gt; moduleB 的状态
+</code></pre>
+<p>分拆模块文件<br>count.js</p>
+<pre><code class="bash"><span class="built_in">export</span> default {
+  namespaced: <span class="literal">true</span>,  //开启命名空间，使同名action也没有影响
   state: {
     count: 0
   },
   actions: {
-    increment: ({ commit }) =&gt; commit(<span class="string">'increment'</span>),
-    decrement: ({ commit }) =&gt; commit(<span class="string">'decrement'</span>)   //也可以定义多个参数 
-                                                       increment: ({ state,commit,dispatch }) =&gt; commit(<span class="string">"increment"</span>)
+    increment: ({ commit }) =&gt; commit(<span class="string">"increment"</span>),
+    decrement: ({ commit }) =&gt; commit(<span class="string">"decrement"</span>)
   },
   mutations: {
     increment(state) {
@@ -222,22 +410,216 @@ module.exports = {
       state.count--;
     }
   }
+};</code></pre>
+<p>集成module</p>
+<pre><code class="bash">import Vue from <span class="string">"vue"</span>;
+import Vuex from <span class="string">"vuex"</span>;
+Vue.use(Vuex);
+
+import count from <span class="string">"./count"</span>;
+
+<span class="built_in">export</span> default new Vuex.Store({
+  modules: {
+    count:count                         //module对象里面添加的属性名称就是module的名称
+  }
+});
+</code></pre>
+<p>vue中使用module store<br>vuex提供一个createNamespacedHelpers函数来创建指定namespace下的module引用。<br>createNamespacedHelpers这个函数接受的参数名称就是module的名称。</p>
+<pre><code class="bash">import { createNamespacedHelpers } from <span class="string">"vuex"</span>;
+// 创建 count 模块的引用
+const { mapState, mapActions } = createNamespacedHelpers(<span class="string">"count"</span>);
+
+<span class="built_in">export</span> default {
+  computed: {
+    ...mapState({
+      count: state =&gt; state.count
+    })
+  },
+  methods: { ...mapActions([<span class="string">"increment"</span>, <span class="string">"decrement"</span>]) }
+};</code></pre>
+<p>也可以使用多个模块</p>
+<pre><code class="bash">const { mapState, mapActions } = createNamespacedHelpers(<span class="string">"count"</span>);                             //引用count
+
+const { mapState:demoMapState, mapActions:demoMapActions} = createNamespacedHelpers(<span class="string">"demo"</span>);  //引用demo
+
+
+<span class="built_in">export</span> default {
+  computed: {
+    ...mapState({
+      count: state =&gt; state.count
+    }),
+     ...demoMapState({
+      demoCount: state =&gt; state.count
+    })
+  },
+  methods: { ...mapActions([<span class="string">"increment"</span>, <span class="string">"decrement"</span>]) }
+};</code></pre>
+<h3 id="3-2-多模块（一）"><a href="#3-2-多模块（一）" class="headerlink" title="3.2 多模块（一）"></a>3.2 多模块（一）</h3><p>我们用一个将上面添加到购物车的例子来方便理解<br>api</p>
+<pre><code class="bash">1 products
+request
+
+GET https://www.fastmock.site/mock/a9b15cd4db90d4e03ed76cd3c76d9197/f6/products 
+Accept: application/json, */*
+Content-Type: application/json
+
+response
+[{
+    id:<span class="string">"int"</span>,// 主键
+    title:<span class="string">"string"</span>,// 商品名称
+    price:<span class="string">"number"</span> // 商品价格
+}]
+
+2  cart 
+request 
+
+POST https://www.fastmock.site/mock/a9b15cd4db90d4e03ed76cd3c76d9197/f6/buyproducts 
+Accept: application/json, */*
+Content-Type: application/json
+Body:
+{
+  <span class="string">"products"</span>:[
+    {
+        id:<span class="string">""</span>
+    }
+  ]
+}
+
+response
+{
+  <span class="string">"success"</span>: <span class="literal">false</span>
+}</code></pre>
+<p>API开发<br>当项目复杂时，我们可以把api封装在api文件中，可以在src目录下面创建一个api文件夹，然后在文件夹下面创建不同的文件<br>如 例子中 我们就创建product.js、cart.js 这两个文件来存放商品和购物车数据<br>product.js</p>
+<pre><code class="bash">import axios from <span class="string">"axios"</span>;
+
+<span class="built_in">export</span> default {
+  async <span class="function"><span class="title">getProducts</span></span>() {
+    const response = await axios.get(
+      <span class="string">"https://www.fastmock.site/mock/a9b15cd4db90d4e03ed76cd3c76d9197/f6/products"</span>
+    );
+    <span class="built_in">return</span> response.data;
+  }
+};</code></pre>
+<p>cart.js</p>
+<pre><code class="bash">import axios from <span class="string">"axios"</span>;
+
+<span class="built_in">export</span> default {
+  async buyProducts(products) {
+    const response = await axios.post(
+      <span class="string">"https://www.fastmock.site/mock/a9b15cd4db90d4e03ed76cd3c76d9197/f6/buyproducts"</span>,
+      {
+        products
+      }
+    );
+    <span class="built_in">return</span> response.data;
+  }
+};</code></pre>
+<h3 id="3-3-多模块（二）"><a href="#3-3-多模块（二）" class="headerlink" title="3.3 多模块（二）"></a>3.3 多模块（二）</h3><p>一般我们都把module store都存放在src/store/modules这个目录下<br> product state  定义一个all数组存放数据</p>
+<pre><code class="bash"><span class="built_in">export</span> default {
+  namespaced: <span class="literal">true</span>,
+  state: {
+    all: []
+  }
+};</code></pre>
+<p>product mutation 定义一个setproducts方法使加载所有商品是触发修改状态</p>
+<pre><code class="bash"><span class="built_in">export</span> default {
+  namespaced: <span class="literal">true</span>,
+  state: {
+    all: []
+  },
+
+  mutations: {
+    setProducts(state, products) {
+      //更新所有的商品
+      state.all = products;
+    }
+  }
+};</code></pre>
+<p>product actions 需要一个getAllProducts方法来加载所有的商品数据</p>
+<pre><code class="bash">// 加载 api
+import productApi from <span class="string">"../../api/product"</span>;
+
+<span class="built_in">export</span> default {
+  namespaced: <span class="literal">true</span>,
+  state: {
+    all: []
+  },
+  mutations: {
+    setProducts(state, products) {
+      state.all = products;
+    }
+  },
+  actions: {
+    async getAllProducts({ commit }) {
+      // 加载所有商品记录
+      const products = await productApi.getProducts();
+      // 触发数据状态变化
+      commit(<span class="string">"setProducts"</span>, products);
+    }
+  }
+};</code></pre>
+<p>store集成</p>
+<pre><code class="bash">import Vue from <span class="string">"vue"</span>;
+import Vuex from <span class="string">"vuex"</span>;
+import product from <span class="string">"./modules/product"</span>;
+
+Vue.use(Vuex);
+
+<span class="built_in">export</span> default new Vuex.Store({
+  modules: {
+    product
+  }
 });</code></pre>
-<p>action是一个函数 它有两个参数<br>第一个参数context对象 包含了以下属性和方法</p>
-<pre><code class="bash">{
-  state, // 等同于 `store.state`，若在模块中则为局部状态
-    rootState, // 等同于 `store.state`，只存在于模块中，
-    commit, // 等同于 `store.commit`
-    dispatch, // 等同于 `store.dispatch`
-    getters, // 等同于 `store.getters`
-    rootGetters; // 等同于 `store.getters`，只存在于模块中
-}</code></pre>
-<p>第二个参数是用来接收外部传递的参数</p>
-<p>commit：它是个函数，作用就是把数据提交到muation中，也有2个参数<br>第一个参数是muation函数的名称<br>第二个是自定义的对象</p>
-<pre><code class="bash">actions: {
-  increment: ({ commit }) =&gt; commit(<span class="string">'increment'</span>);    //可以把对象传递给muation
-}</code></pre>
-<p>运用vuex store<br>只要我们定义好state和action我们</p>
+<h3 id="3-4-多模块（三）"><a href="#3-4-多模块（三）" class="headerlink" title="3.4 多模块（三）"></a>3.4 多模块（三）</h3><p>cart state<br>可以定义一个items数组 每个item对象可以是<br>还需要一个checkoutStatus属性来存储购买状态</p>
+<pre><code class="bash"><span class="built_in">export</span> default {
+  namespaced: <span class="literal">true</span>,
+  state: {
+    items: [],
+    checkoutStatus: null
+  }
+};</code></pre>
+<p>cart mutation  可以分解出多个数据状态更新的mutation<br>添加到购物车</p>
+<pre><code class="bash"><span class="built_in">export</span> default {
+  mutations: {
+    // 接收商品id，完成添加商品到购物车
+    pushProductToCart(state, { id }) {
+      // 添加一条商品购买记录
+      state.items.push({
+        id,
+        quantity: 1
+      });
+    }
+  }
+};</code></pre>
+<p>添加购物车商品数量</p>
+<pre><code class="bash"><span class="built_in">export</span> default {
+  mutations: {
+    // 接收商品id，完成购物车商品数量+1
+    incrementItemQuantity(state, { id }) {
+      // 根据 id，找出对应的 item 记录
+      const cartItem = state.items.find(item =&gt; item.id === id);
+      // 购买数量+1
+      cartItem.quantity++;
+    }
+  }
+};</code></pre>
+<p>更新全部购物车商品：可以用于清空购物车或者从其他地方获取购物车</p>
+<pre><code class="bash"><span class="built_in">export</span> default {
+  mutations: {
+    // 全量更新购物车商品
+    setCartItems(state, { items }) {
+      state.items = items;
+    }
+  }
+};</code></pre>
+<p>更新购物车状态</p>
+<pre><code class="bash"><span class="built_in">export</span> default {
+  mutations: {
+    setCheckoutStatus(state, status) {
+      state.checkoutStatus = status;
+    }
+  }
+};</code></pre>
+<p>cart actions</p>
 
 </div>
 
