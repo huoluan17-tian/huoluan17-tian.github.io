@@ -91,18 +91,18 @@
 
 			
 							<ul>
-								<li class="file active">
-									<a href="/2020/08/01/Vuex/">
-										Vuex
+								<li class="file">
+									<a href="/2020/07/28/Vue/">
+										Vue
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
 							</ul>
 			
 							<ul>
-								<li class="file">
-									<a href="/2020/07/28/Vue/">
-										Vue
+								<li class="file active">
+									<a href="/2020/08/01/Vuex/">
+										Vuex
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -832,7 +832,172 @@ Vue.use(Vuex);
     }
   }
 };</code></pre>
-<p>cart actions</p>
+<p>cart actions<br>如何在当前模块调用其他模块？可以通过指定命名空间来调用<br>例如 调用product store的mutation方法</p>
+<pre><code class="bash">commit(
+  <span class="string">"products/decrementProductInventory"</span>,  //命名空间/mutation函数的名称
+  { id: product.id },                    //decrementProductInventory函数的第二个参数
+  { root: <span class="literal">true</span> }                         //设置在全局变量空间内分发
+);</code></pre>
+<p>调用product模块的getAllProducts这个action</p>
+<pre><code class="bash"><span class="built_in">export</span> default {
+  actions: {
+    async demo({ state, commit,dispatch }) {
+      // 触发 product module的 getAllProducts 这个 action
+      dispatch(<span class="string">'product/getAllProducts'</span>, null, { root: <span class="literal">true</span> })
+    }
+  }
+}</code></pre>
+<p>添加到购物车</p>
+<pre><code class="bash"><span class="built_in">export</span> default {
+  actions: {
+    addProductToCart({ state, commit }, product) {
+      // 重制购物车状态
+      commit(<span class="string">"setCheckoutStatus"</span>, null);
+
+      <span class="keyword">if</span> (product.inventory &lt;= 0) {
+        // 如果商品库存没有了则不用继续执行了，直接返回
+        <span class="built_in">return</span>;
+      }
+      // 查找购物车商品
+      const cartItem = state.items.find(item =&gt; item.id === product.id);
+      // 判断购物车里没有商品，则执行添加商品，否则执行添加数量
+      <span class="keyword">if</span> (!cartItem) {
+        commit(<span class="string">"pushProductToCart"</span>, { id: product.id });
+      } <span class="keyword">else</span> {
+        commit(<span class="string">"incrementItemQuantity"</span>, cartItem);
+      }
+      // 执行商品的库存减法，确保商品不会超卖
+      commit(
+        <span class="string">"products/decrementProductInventory"</span>,
+        { id: product.id },
+        { root: <span class="literal">true</span> }
+      );
+    }
+  }
+};</code></pre>
+<p>store 集成</p>
+<pre><code class="bash">import Vue from <span class="string">"vue"</span>;
+import Vuex from <span class="string">"vuex"</span>;
+import cart from <span class="string">"./modules/cart"</span>;
+
+Vue.use(Vuex);
+
+<span class="built_in">export</span> default new Vuex.Store({
+  modules: {
+    cart
+  }
+});</code></pre>
+<h3 id="3-5-多模块（四）"><a href="#3-5-多模块（四）" class="headerlink" title="3.5 多模块（四）"></a>3.5 多模块（四）</h3><p>商品组件</p>
+<pre><code class="bash">&lt;template&gt;
+  &lt;ul&gt;
+    &lt;li v-for=<span class="string">"product in products"</span> :key=<span class="string">"product.id"</span>&gt;
+      {{ product.title }} - {{ product.price }}
+      &lt;br /&gt;
+      &lt;button :disabled=<span class="string">"!product.inventory"</span> @click=<span class="string">"addProductToCart(product)"</span>&gt;
+        Add to cart
+      &lt;/button&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  import { createNamespacedHelpers } from <span class="string">"vuex"</span>;
+
+  const {
+    mapState: productMapState,
+    mapActions: productMapActions
+  } = createNamespacedHelpers(<span class="string">"product"</span>);
+  const { mapActions: cartMapActions } = createNamespacedHelpers(<span class="string">"cart"</span>);
+
+  <span class="built_in">export</span> default {
+    computed: {
+      ...productMapState({
+        products: state =&gt; state.all
+      })
+    },
+    methods: {
+      ...cartMapActions([<span class="string">"addProductToCart"</span>]),
+      ...productMapActions([<span class="string">"getAllProducts"</span>])
+    },
+    <span class="function"><span class="title">created</span></span>() {
+      this.getAllProducts();
+    }
+  };
+&lt;/script&gt;</code></pre>
+<p>购物车组件</p>
+<pre><code class="bash">&lt;template&gt;
+  &lt;div class=<span class="string">"cart"</span>&gt;
+    &lt;h2&gt;Your Cart&lt;/h2&gt;
+    &lt;p v-show=<span class="string">"!cartProducts.length"</span>&gt;
+      &lt;i&gt;Please add some products to cart.&lt;/i&gt;
+    &lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li v-for=<span class="string">"product in cartProducts"</span> :key=<span class="string">"product.id"</span>&gt;
+        {{ product.title }} - {{ product.price }} x {{ product.quantity }}
+      &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;p&gt;
+      &lt;button :disabled=<span class="string">"!cartProducts.length"</span> @click=<span class="string">"checkout(cartProducts)"</span>&gt;
+        Checkout
+      &lt;/button&gt;
+    &lt;/p&gt;
+    &lt;p v-show=<span class="string">"checkoutStatus"</span>&gt;Checkout {{ checkoutStatus }}.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  import { createNamespacedHelpers } from <span class="string">"vuex"</span>;
+
+  const { mapState, mapActions } = createNamespacedHelpers(<span class="string">"cart"</span>);
+  const { mapState: productMapState } = createNamespacedHelpers(<span class="string">"product"</span>);
+
+  <span class="built_in">export</span> default {
+    computed: {
+      ...mapState({
+        items: state =&gt; state.items,
+        checkoutStatus: state =&gt; state.checkoutStatus
+      }),
+      ...productMapState({
+        allProducts: state =&gt; state.all
+      }),
+      <span class="function"><span class="title">cartProducts</span></span>() {
+        // 遍历 items，并修改数据
+        <span class="built_in">return</span> this.items.map(({ id, quantity }) =&gt; {
+          const product = this.allProducts.find(product =&gt; product.id === id);
+          // 通过 <span class="built_in">return</span> 修改原始数据，把product 的名称和价格赋值给对象
+          <span class="built_in">return</span> {
+            id,
+            title: product.title,
+            price: product.price,
+            quantity
+          };
+        });
+      }
+    },
+    methods: {
+      ...mapActions([<span class="string">"checkout"</span>])
+    }
+  };
+&lt;/script&gt;</code></pre>
+<p>store集成</p>
+<pre><code class="bash">&lt;template&gt;
+  &lt;div id=<span class="string">"app"</span>&gt;
+    &lt;h1&gt;Shopping Cart Example&lt;/h1&gt;
+    &lt;hr&gt;
+    &lt;h2&gt;Products&lt;/h2&gt;
+    &lt;ProductList/&gt;
+    &lt;hr&gt;
+    &lt;ShoppingCart/&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import ProductList from <span class="string">'./components/ProductList.vue'</span>
+import ShoppingCart from <span class="string">'./components/ShoppingCart.vue'</span>
+<span class="built_in">export</span> default {
+  components: { ProductList,ShoppingCart }
+}
+&lt;/script&gt;</code></pre>
 
 </div>
 
