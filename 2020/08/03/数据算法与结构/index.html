@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+	<!-- title -->
+	
+	<title>
+	
+		数据算法与结构 | 
+	 
+	Hexo
+	</title>
+	
+	<!-- keywords,description -->
+	 
+
+	<!-- favicon -->
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+  
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+	
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/darcula.min.css">
+
+
+	
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+	
+		
+<script src="https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script>
+
+		
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+	
+	
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+	<header id="header">
+    <a id="title" href="/" class="logo">Hexo</a>
+
+	<ul id="menu">
+		<li class="menu-item">
+			<a href="/about" class="menu-item-link">ABOUT</a>
+		</li>
+		
+		<li class="menu-item">
+			<a href="https://github.com/wujun234/uid-generator-spring-boot-starter" class="menu-item-link" target="_blank">
+				UidGenerator
+			</a>
+		</li>
+		<li class="menu-item">
+			<a href="https://github.com/wujun234" class="menu-item-link" target="_blank">
+				<i class="fa fa-github fa-2x"></i>
+			</a>
+		</li>
+	</ul>
+</header>
+
+	
+<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="text" placeholder="search...">
+		<div id="tree">
+			
+
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/28/Vue/">
+										Vue
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/08/01/Vuex/">
+										Vuex
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/24/hello-world/">
+										hello-world
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file active">
+									<a href="/2020/08/03/%E6%95%B0%E6%8D%AE%E7%AE%97%E6%B3%95%E4%B8%8E%E7%BB%93%E6%9E%84/">
+										数据算法与结构
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/08/03/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8/">
+										正则表达式入门
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<!-- 引入正文 -->
+	<div id="content">
+		<h1 id="article-title">
+
+	数据算法与结构
+</h1>
+<div class="article-meta">
+	
+	<span>John Doe</span>
+	<span>2020-08-03 14:25:19</span>
+    
+		<div id="article-categories">
+            
+		</div>
+    
+</div>
+
+<div id="article-content">
+	<h2 id="第一章复杂度"><a href="#第一章复杂度" class="headerlink" title="第一章复杂度"></a>第一章复杂度</h2><h3 id="1-1-大O记法"><a href="#1-1-大O记法" class="headerlink" title="1.1 大O记法"></a>1.1 大O记法</h3><p>我们都知道大部分程序基本都在处理 获取 查询 操作和返回数据相关的逻辑，我们数据的结构和算法就是为了更快，更省的进行数据处理。<br>更快（时间少）：时间复杂度<br>更省（内存少）：空间复杂度</p>
+<p>为什么需要复杂度？如果只用开始时间和结束时间之间的差额和内存使用情况来看会有什么弊端？<br>1 测试结果大大依赖硬件条件<br>2 测试结果需要事后计算<br>3 测试结果受到原始数据特性影响大<br>所以我们需要一个不需要具体的测试环境就可以粗略估计算法执行效率的方法这就是复杂度又叫大0记法</p>
+<p>大O记法是算法的基石和精髓，只有学好大O记法，我们才能掌握好数据的结构和算法</p>
+<h3 id="1-2-时间复杂度"><a href="#1-2-时间复杂度" class="headerlink" title="1.2 时间复杂度"></a>1.2 时间复杂度</h3><p>如何计算时间复杂度？<br>我们把步数作为时间复杂度的单位：数组每次索引值的读取就算作一步 unit_time<br>常数时间  O（1）例子 计算机获取数组的某一个值<br>对数时间  O（log（N））<br>线性时间  O（N） 一般一个for循环会被视为N<br>指数时间  O（N^2）for循环嵌套一个for循环</p>
+<p>一般来说 指数&gt;线性&gt;对数&gt;常数</p>
+<h3 id="1-3-空间复杂度"><a href="#1-3-空间复杂度" class="headerlink" title="1.3 空间复杂度"></a>1.3 空间复杂度</h3><p>以基础数据类型值作为空间复杂度的一个单位<br>一般来说我们不考虑空间复杂度，除非参与嵌入式开发或者单片机的编程开发。因为我们内存空间提升非常快 在价格不变情况下，每隔18到24个月，同样<br>大小的芯片数据储存量就能翻一倍</p>
+<h3 id="1-4-二分法查找数据"><a href="#1-4-二分法查找数据" class="headerlink" title="1.4 二分法查找数据"></a>1.4 二分法查找数据</h3><p>如果查找一个有序数组中的某一个数字，我们有两种方法：直接遍历查找和使用二分法<br>直接遍历：一个for循环 空间复杂度 O（N）<br>二分法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public static int find(int[] array, int aim) &#123;</span><br><span class="line">    // 初始化left = 最左侧, right = 最右侧</span><br><span class="line">    int left = 0;</span><br><span class="line">    int right = array.length - 1;</span><br><span class="line"></span><br><span class="line">    // 当left &gt; right则表示遍历完成</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        // 获取中间的值</span><br><span class="line">        int middle = (left + right) / 2;</span><br><span class="line">        int middleValue = array[middle];</span><br><span class="line">        <span class="keyword">if</span> (middleValue == aim) &#123;</span><br><span class="line">            // 已经找到目标</span><br><span class="line">            <span class="built_in">return</span> middle;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (middleValue &lt; aim) &#123;</span><br><span class="line">            // 目标在middle的右侧，重置left</span><br><span class="line">            left = middle + 1;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            // 目标在middle的左侧，重置right</span><br><span class="line">            right = middle - 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当数组长度越大时，二分法的性能提升越明显 例如有100万个数字 直接遍历需要100万次而二分法只需要19.93次</p>
+<h3 id="1-5-判断重复问题"><a href="#1-5-判断重复问题" class="headerlink" title="1.5 判断重复问题"></a>1.5 判断重复问题</h3><p>假设一个数组里面有数字（0到10）重复了，如果要求你把它找出来我们也有两种方法：直接遍历判断和表记法<br>直接遍历2次，看第一个数字是否和后面数字相同，然后看第二个，第三个，<br>空间复杂度为O（N^2）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static ArrayList&lt;Integer&gt; repeat(int[] array) &#123;</span><br><span class="line">    ArrayList&lt;Integer&gt; result = new ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span>(int i = 0; i &lt; array.length; i++)&#123;</span><br><span class="line">        // 以此判断i位置元素和后面j位置元素是否相等</span><br><span class="line">        <span class="keyword">for</span>(int j = i + 1; j &lt; array.length; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(array[i] == array[j])&#123;</span><br><span class="line">                result.add(array[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>标记法：我们可以找一个空的11个位置的数组b，遍历原数组a，a出现一个值，就将b对应索引位置的值由0变为1，<br>       当a后面再次出现这个值时，b对应索引位置的值已经是1了，表示已经重复<br>时间复杂度O（N）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static ArrayList&lt;Integer&gt; repeat(int[] array) &#123;</span><br><span class="line">    ArrayList&lt;Integer&gt; result = new ArrayList&lt;&gt;();</span><br><span class="line">    int[] exists = new int[11];</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; array.length; i++) &#123;</span><br><span class="line">        int value = array[i];</span><br><span class="line">        // 如果当前位置已经为1，则表示重复</span><br><span class="line">        <span class="keyword">if</span> (exists[value] == 1) &#123;</span><br><span class="line">            result.add(value);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            // 否则将当前位置设置为1</span><br><span class="line">            exists[value] = 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>##第二章 数组</p>
+<p>###2.1  计算机内存管理</p>
+
+</div>
+
+
+    <div class="post-guide">
+        <div class="item left">
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2020/08/03/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8/">
+                正则表达式入门
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+
+	<div id="vcomments"></div>
+
+
+<script>
+	
+		// 评论
+		new Valine({
+			av: AV,
+			el: '#vcomments',
+			notify: false,
+			verify: false,
+			path: window.location.pathname,
+			appId: '',
+			appKey: '',
+			placeholder: '请输入评论',
+			avatar: 'retro',
+			recordIP: false
+		})
+	
+	
+</script>
+	</div>
+	<div id="footer">
+	<p>
+	©2019-<span id="footerYear"></span> 
+	<a href="/">John Doe</a> 
+	
+	
+		|
+		<span id="busuanzi_container_site_pv">
+			pv
+			<span id="busuanzi_value_site_pv"></span>
+		</span>
+		|
+		<span id="busuanzi_container_site_uv"> 
+			uv
+			<span id="busuanzi_value_site_uv"></span>
+		</span>
+	
+	<br>
+	Theme <a href="//github.com/wujun234/hexo-theme-tree" target="_blank">Tree</a>
+	by <a href="//github.com/wujun234" target="_blank">WuJun</a>
+	Powered by <a href="//hexo.io" target="_blank">Hexo</a>
+	</p>
+</div>
+<script type="text/javascript"> 
+	document.getElementById('footerYear').innerHTML = new Date().getFullYear() + '';
+</script>
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+</body>
+</html>
