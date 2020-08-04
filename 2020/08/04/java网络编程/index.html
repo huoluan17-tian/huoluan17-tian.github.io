@@ -9,7 +9,7 @@
 	
 	<title>
 	
-		Hello World | 
+		java网络编程 | 
 	 
 	Hexo
 	</title>
@@ -109,7 +109,7 @@
 							</ul>
 			
 							<ul>
-								<li class="file active">
+								<li class="file">
 									<a href="/2020/07/24/hello-world/">
 										hello-world
 									</a>
@@ -118,7 +118,7 @@
 							</ul>
 			
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2020/08/04/java%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
 										java网络编程
 									</a>
@@ -152,12 +152,12 @@
 	<div id="content">
 		<h1 id="article-title">
 
-	hello-world
+	java网络编程
 </h1>
 <div class="article-meta">
 	
 	<span>John Doe</span>
-	<span>2020-07-24 10:34:57</span>
+	<span>2020-08-04 13:47:29</span>
     
 		<div id="article-categories">
             
@@ -166,19 +166,10 @@
 </div>
 
 <div id="article-content">
-	<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+	<h2 id="第一章-Http协议原理"><a href="#第一章-Http协议原理" class="headerlink" title="第一章 Http协议原理"></a>第一章 Http协议原理</h2><h3 id="1-1-协议"><a href="#1-1-协议" class="headerlink" title="1.1 协议"></a>1.1 协议</h3><p>网络协议：通信计算机双方必须遵守的一组约定</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">               http                 https</span><br><span class="line">端口            80                   443</span><br><span class="line">数据传输        明文传输              加密传输</span><br><span class="line">真假网站识别     很容易被复制           使用证书，很难被复制</span><br><span class="line">浏览器显示区别   浏览器显示问号，         浏览器显示小锁，提示安全</span><br><span class="line">               提示不安全。</span><br><span class="line"></span><br><span class="line">门槛           不需要证书              需要gworg机构发布证书，需要一定的成本</span><br><span class="line">安全性          很容易被劫持，           加密安全，很难劫持，交易数据加密</span><br><span class="line">               跳转到其他网站</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<h3 id="1-2-url"><a href="#1-2-url" class="headerlink" title="1.2 url"></a>1.2 url</h3><p>地址栏输入的地址（网址）：URL（Uniform Resource Locator）统一资源定位符<br><a href="https://www.douban.com/gallery/topic/116390/?from=hot_topic_note&amp;sort=new" target="_blank" rel="noopener">https://www.douban.com/gallery/topic/116390/?from=hot_topic_note&amp;sort=new</a><br>协议类型与域名之间：//<br>路径/<br>路径与参数之间?分割  多个参数&amp;分割<br>参数用“参数名=参数值”的形式表示key=value<br>端口：HTTP默认80<br>          HTTPS默认443<br>路径的两种途径：相对途径 不是以斜杠/开头的路径   平时要写以斜杠/开头的绝对路径<br>                             默认路径 输入网址时服务器返回的默认页面</p>
 
 </div>
 
@@ -186,13 +177,13 @@
     <div class="post-guide">
         <div class="item left">
             
-              <a href="/2020/07/28/Vue/">
-                  <i class="fa fa-angle-left" aria-hidden="true"></i>
-                  Vue
-              </a>
-            
         </div>
         <div class="item right">
+            
+              <a href="/2020/08/03/%E6%95%B0%E6%8D%AE%E7%AE%97%E6%B3%95%E4%B8%8E%E7%BB%93%E6%9E%84/">
+                数据算法与结构
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
             
         </div>
     </div>
