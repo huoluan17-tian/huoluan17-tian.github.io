@@ -92,8 +92,8 @@
 			
 							<ul>
 								<li class="file">
-									<a href="/2020/07/28/Vue/">
-										Vue
+									<a href="/2020/08/01/Vuex/">
+										Vuex
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -101,8 +101,8 @@
 			
 							<ul>
 								<li class="file">
-									<a href="/2020/08/01/Vuex/">
-										Vuex
+									<a href="/2020/07/28/Vue/">
+										Vue
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -256,6 +256,161 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">import com.alibaba.excel.EasyExcel;</span><br><span class="line">import com.alibaba.fastjson.JSON;</span><br><span class="line">import java.io.File;</span><br><span class="line">import java.io.FileOutputStream;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Map;</span><br><span class="line">import okhttp3.OkHttpClient;</span><br><span class="line">import okhttp3.Request;</span><br><span class="line">import okhttp3.Response;</span><br><span class="line"></span><br><span class="line">public class ExcelAsker &#123;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * 根据输入的url，读取页面内容并返回</span><br><span class="line">   */</span><br><span class="line">  public byte[] getFile(String url) &#123;</span><br><span class="line">    // okHttpClient 实例</span><br><span class="line">    OkHttpClient okHttpClient = new OkHttpClient();</span><br><span class="line">    // 定义一个request</span><br><span class="line">    Request request = new Request.Builder().url(url).build();</span><br><span class="line">    byte[] bytes = null;</span><br><span class="line">    try &#123;</span><br><span class="line">      // 执行请求</span><br><span class="line">      Response response = okHttpClient.newCall(request).execute();</span><br><span class="line">      bytes = response.body().bytes();</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">      // 抓取异常</span><br><span class="line">      System.out.println(<span class="string">"request "</span> + url + <span class="string">" error . "</span>);</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> bytes;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    String url = <span class="string">"https://style.youkeda.com/img/ham/course/py2/xzq_201907.xlsx"</span>;</span><br><span class="line">    ExcelAsker asker = new ExcelAsker();</span><br><span class="line">    byte[] data = asker.getFile(url);</span><br><span class="line"></span><br><span class="line">    try &#123;</span><br><span class="line">      File file = new File(<span class="string">"xzq_201907.xlsx"</span>);</span><br><span class="line"></span><br><span class="line">      FileOutputStream fos = new FileOutputStream(file);</span><br><span class="line">      fos.write(data);</span><br><span class="line"></span><br><span class="line">      fos.flush();</span><br><span class="line">      fos.close();</span><br><span class="line"></span><br><span class="line">      System.out.println(<span class="string">"下载成功"</span>);</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    List&lt;Map&lt;Integer, String&gt;&gt; sheetDatas = EasyExcel.read(<span class="string">"xzq_201907.xlsx"</span>).sheet(0).doReadSync();</span><br><span class="line">    <span class="keyword">for</span> (Map&lt;Integer, String&gt; rowData : sheetDatas) &#123;</span><br><span class="line">      <span class="keyword">for</span> (Integer index : rowData.keySet()) &#123;</span><br><span class="line">        System.out.print(<span class="string">"列号："</span> + index + <span class="string">"，列值："</span> + rowData.get(index) + <span class="string">"。"</span>);    </span><br><span class="line">      &#125;  </span><br><span class="line">      System.out.println(<span class="string">""</span>);  </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>注意点：System.out.print（）输出后不自动换行<br>自动转换为类<br>当excel文件的列的意义不明或者列经常变化时，我们使用map表示每一列的数据，但如果我们知道每一列的意义，我们就可以使用自定义类</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import com.alibaba.excel.EasyExcel;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">// 读取第一个sheet</span><br><span class="line">List&lt;DemoData&gt; sheetDatas = EasyExcel.read(<span class="string">"xzq_201907.xlsx"</span>).head(DemoData.class).sheet(0).doReadSync();</span><br><span class="line">           //.head(DemoData.class) DemoData就是自定义的类  List&lt;DemoData&gt;表示把每一行都转换为DemoData实例对象，放入集合list中</span><br></pre></td></tr></table></figure>
+
+<h2 id="第六章cookie和session"><a href="#第六章cookie和session" class="headerlink" title="第六章cookie和session"></a>第六章cookie和session</h2><p>###6.1 cookie<br>如果有些内容需要登录之后才能获取，那么我们就需要学习headers 中的cookie的内容了<br>找到cookie<br>1登录前按f12打开开发者工具，选择network   headers<br>2登录  在开发者工具中找到mine文件 或其他与浏览器地址相同的url请求<br>3 找到cookie  copy下来 放入文件cookie.txt中<br>例子：将cookie信息字符串转化为map类型</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">首先需要一个工具类</span><br><span class="line">import java.io.FileReader;</span><br><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 读文件工具类</span><br><span class="line"> */</span><br><span class="line">public class ReadFileTool &#123;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * 读取指定文件的内容</span><br><span class="line">   */</span><br><span class="line">  public static String readContent(String fileName) &#123;</span><br><span class="line">    FileReader fr = null;</span><br><span class="line">    StringBuilder strBuilder = new StringBuilder();</span><br><span class="line">    try &#123;</span><br><span class="line">      fr = new FileReader(fileName);</span><br><span class="line">      int ch = 0;</span><br><span class="line">      <span class="keyword">while</span> ((ch = fr.read()) != -1) &#123;</span><br><span class="line">        strBuilder.append((char) ch);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">      try &#123;</span><br><span class="line">        <span class="keyword">if</span> (fr != null) &#123;</span><br><span class="line">          fr.close();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> strBuilder.toString();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">然后解析cookie字符串</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import okhttp3.Call;</span><br><span class="line">import okhttp3.OkHttpClient;</span><br><span class="line">import okhttp3.Request;</span><br><span class="line">import okhttp3.Response;</span><br><span class="line"></span><br><span class="line">public class PageAsker &#123;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * 根据输入的url，读取页面内容并返回</span><br><span class="line">   */</span><br><span class="line">  public String getContent(String url) &#123;</span><br><span class="line">    // okHttpClient 实例</span><br><span class="line">    OkHttpClient okHttpClient = new OkHttpClient();</span><br><span class="line">    // 定义一个request</span><br><span class="line">    Request request = new Request.Builder()</span><br><span class="line">        .url(url)</span><br><span class="line">        .addHeader(<span class="string">"User-Agent"</span>, <span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"</span>)</span><br><span class="line">        .addHeader(<span class="string">"Referer"</span>, <span class="string">"https://www.douban.com"</span>)</span><br><span class="line">        .addHeader(<span class="string">"Host"</span>, <span class="string">"www.douban.com"</span>)</span><br><span class="line">        .addHeader(<span class="string">"Cookie"</span>, ReadFileTool.readContent(<span class="string">"cookie.txt"</span>))</span><br><span class="line">        .build();</span><br><span class="line">    // 返回结果字符串</span><br><span class="line">    String result = null;</span><br><span class="line">    try &#123;</span><br><span class="line">      // 执行请求</span><br><span class="line">      Response response = okHttpClient.newCall(request).execute();</span><br><span class="line">      result = response.body().string();</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">      System.out.println(<span class="string">"request "</span> + url + <span class="string">" error . "</span>);</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    String url = <span class="string">"https://www.douban.com/mine"</span>;</span><br><span class="line">    PageAsker asker = new PageAsker();</span><br><span class="line">    String content = asker.getContent(url);</span><br><span class="line"></span><br><span class="line">    System.out.println(content);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6-2-session"><a href="#6-2-session" class="headerlink" title="6.2 session"></a>6.2 session</h3><p>cookie的弊端：cookie字符串是放在客户端浏览器的，且是临时的。登录以后还想以登录状态与服务器通信会比较麻烦<br>session对象可以很好的解决这个问题</p>
+<p>收集信息<br>1 登陆前打开开发者工具 勾选preserve log选项 选择network headers<br>2 登录 选择登录时最开始出现的文件<br>3 收集到以下信息 ：登录方式Request URL:<br>                执行方式（get 或post）<br>                host<br>                referer<br>                user agent<br>                表单数据 数据名称和数据值 form data<br>代码示例                </p>
+<pre><code class="bash">import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.FormBody;
+import okhttp3.FormBody.Builder;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+
+public class PageLoginer {
+
+  // 用 CookieJar 实现 cookie 的存储，便于登录后请求其它 URL 可以复用
+  private static final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+      .cookieJar(new <span class="function"><span class="title">CookieJar</span></span>() {
+        private final HashMap&lt;String, List&lt;Cookie&gt;&gt; cookieStore = new HashMap&lt;&gt;();
+
+        @Override
+        public void saveFromResponse(HttpUrl url, List&lt;Cookie&gt; cookies) {
+          cookieStore.put(<span class="string">"mtime.com"</span>, cookies);
+          System.out.println(<span class="string">"[saveFromResponse]url.host()="</span> + url.host());
+        }
+
+        @Override
+        public List&lt;Cookie&gt; loadForRequest(HttpUrl url) {
+          System.out.println(<span class="string">"[loadForRequest]url.host()="</span> + url.host());
+          List&lt;Cookie&gt; cookies = cookieStore.get(<span class="string">"mtime.com"</span>);
+          <span class="built_in">return</span> cookies != null ? cookies : new ArrayList&lt;&gt;();
+        }
+      })
+      .build();
+
+  public String postContent(String url, Map&lt;String, String&gt; formData) {
+    //post方式提交的数据
+    Builder builder = new FormBody.Builder();
+    // 放入表单数据
+    <span class="keyword">for</span> (String key : formData.keySet()) {
+      builder.add(key, formData.get(key));
+    }
+    // 构建 FormBody 对象
+    FormBody formBody = builder.build();
+    // 指定 post 方式提交FormBody
+    Request request = new Request.Builder()
+        .url(url)
+        .post(formBody)
+        .addHeader(<span class="string">"User-Agent"</span>,
+            <span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"</span>)
+        .addHeader(<span class="string">"Referer"</span>,
+            <span class="string">"https://passport.mtime.com/member/signin/?redirectUrl=http%3A%2F%2Fwww.mtime.com%2F"</span>)
+        .addHeader(<span class="string">"Host"</span>, <span class="string">"passport.mtime.com"</span>)
+        .build();
+
+    // 返回结果字符串
+    String result = null;
+    try {
+      result = okHttpClient.newCall(request).execute().body().string();
+    } catch (IOException e) {
+      System.out.println(<span class="string">"request "</span> + url + <span class="string">" error . "</span>);
+      e.printStackTrace();
+    }
+    <span class="built_in">return</span> result;
+  }
+
+  public static void main(String[] args) {
+    // 登录页面 url
+    String url = <span class="string">"https://passport.mtime.com/member/signinLogin"</span>;
+    // 登录表单数据
+    Map&lt;String, String&gt; formData = new HashMap();
+    formData.put(<span class="string">"loginEmailText"</span>, <span class="string">"13777467803"</span>);
+    formData.put(<span class="string">"loginPasswordText"</span>, <span class="string">"aa787bc9cc97ba5d27cc042ecffe1489"</span>);
+    formData.put(<span class="string">"isvcode"</span>, <span class="string">"true"</span>);
+    formData.put(<span class="string">"isAutoSign"</span>, <span class="string">"false"</span>);
+
+    PageLoginer asker = new PageLoginer();
+    String content = asker.postContent(url, formData);
+
+    System.out.println(content);
+  }
+}</code></pre>
+<h3 id="6-3复用session"><a href="#6-3复用session" class="headerlink" title="6.3复用session"></a>6.3复用session</h3><p>我们在6.2完成了模拟登录，模拟登录的目的是为了调用必须登录的api,或请求必须登录的网站<br>同时，我们将原来的 OkHttpClient对象进行了重构，重构为类变量private static final OkHttpClient okHttpClient，目的是<br>使用同一个OkHttpClient执行http请求<br>知识点：static 表示类变量，意味着无论 new 出多少个 PageLoginer 对象，PageLoginer.okHttpClient 都只有一个。<br>      final 表示 okHttpClient 一旦第一次 new 出对象后，不能再次 new 新对象 </p>
+<h2 id="第七章-实战SMTP与邮件"><a href="#第七章-实战SMTP与邮件" class="headerlink" title="第七章 实战SMTP与邮件"></a>第七章 实战SMTP与邮件</h2><h3 id="7-1-SMTP"><a href="#7-1-SMTP" class="headerlink" title="7.1   SMTP"></a>7.1   SMTP</h3><p>编写一个定时定期发送邮件的程序</p>
+<p>SMTP（simple mail transfer protocol）协议<br>它是一个简单的基于文本的邮件传输协议，通过这个协议我们可以指定一条邮件消息和一个或者多个邮件接收者，然后进行邮件传输</p>
+<p>类似于https协议   https+网络地址 组成一个访问方式 （https//<a href="http://www.baidu.com）" target="_blank" rel="noopener">www.baidu.com）</a><br>smtp+网络地址也可以组成一个邮件访问方式<br>邮件服务商都有自己的邮件服务器地址 例如 smtp.qq.com<br>                                smtp.163.com    </p>
+<h3 id="7-2-java-mail-邮件发送"><a href="#7-2-java-mail-邮件发送" class="headerlink" title="7.2 java mail 邮件发送"></a>7.2 java mail 邮件发送</h3><p>这节课我们学习如何用代码使邮箱发送邮件 以QQ邮箱为例，我们开启smtp支持<br>1打开qq邮箱，点设置 点账户<br>2往下翻 找到与smtp有关的服务，打开<br>3经过验证之后获得授权码<br> 代码示例</p>
+<pre><code class="bash">1 先添加相关的依赖
+&lt;dependency&gt;
+ &lt;groupId&gt;javax.mail&lt;/groupId&gt;
+ &lt;artifactId&gt;mail&lt;/artifactId&gt;
+ &lt;version&gt;1.4&lt;/version&gt;
+&lt;/dependency&gt;
+
+2 编写代码 固定格式 只需要更改一些传入的信息即可
+
+import java.security.Security;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import com.sun.net.ssl.internal.ssl.Provider;
+
+public class Mail {
+
+  public static void main(String[] args) {
+    try {
+      // 设置SSL连接、邮件环境
+      Security.addProvider(new Provider());
+      final String SSL_FACTORY = <span class="string">"javax.net.ssl.SSLSocketFactory"</span>;
+      Properties props = System.getProperties();
+      props.setProperty(<span class="string">"mail.smtp.host"</span>, <span class="string">"smtp.qq.com"</span>);
+      props.setProperty(<span class="string">"mail.smtp.socketFactory.class"</span>, SSL_FACTORY);
+      props.setProperty(<span class="string">"mail.smtp.socketFactory.fallback"</span>, <span class="string">"false"</span>);
+      props.setProperty(<span class="string">"mail.smtp.port"</span>, <span class="string">""</span>);
+      props.setProperty(<span class="string">"mail.smtp.socketFactory.port"</span>, <span class="string">""</span>);
+      props.setProperty(<span class="string">"mail.smtp.auth"</span>, <span class="string">"true"</span>);
+
+      // 建立邮件会话
+      Session session = Session.getDefaultInstance(props, new <span class="function"><span class="title">Authenticator</span></span>() {
+        // 身份认证
+        protected PasswordAuthentication <span class="function"><span class="title">getPasswordAuthentication</span></span>() {
+          <span class="built_in">return</span> new PasswordAuthentication(<span class="string">""</span>, <span class="string">""</span>); // 账户 授权码
+        }
+      });
+
+      // 建立邮件对象
+      MimeMessage message = new MimeMessage(session);
+      // 设置邮件的发件人、收件人、主题
+      // 附带发件人名字
+      message.setFrom(new InternetAddress(<span class="string">""</span>));
+      message.setRecipients(Message.RecipientType.TO, <span class="string">""</span>);
+
+      // 文本部分
+      message.setContent(<span class="string">""</span>, <span class="string">"text/html;charset=UTF-8"</span>);
+      message.saveChanges();
+      // 发送邮件
+      Transport.send(message);
+      // 打印成功信息
+      System.out.println(<span class="string">"发送成功"</span>);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+}
+</code></pre>
 
 </div>
 
