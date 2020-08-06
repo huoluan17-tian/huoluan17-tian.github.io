@@ -168,8 +168,12 @@
 <div id="article-content">
 	<h2 id="第一章-Spring-入门"><a href="#第一章-Spring-入门" class="headerlink" title="第一章  Spring 入门"></a>第一章  Spring 入门</h2><h3 id="1-1为什么要学spring"><a href="#1-1为什么要学spring" class="headerlink" title="1.1为什么要学spring"></a>1.1为什么要学spring</h3><p>spring是java语言中必须要掌握的框架，它涵盖了java的各个领域，基本上是全能的。</p>
 <p>spring的核心是依赖注入（DI）,spring所有的技术方案都是基于DI发展来的。</p>
-<h3 id="1-2-maven（入门）"><a href="#1-2-maven（入门）" class="headerlink" title="1.2 maven（入门）"></a>1.2 maven（入门）</h3><p><img src="https://style.youkeda.com/img/ham/course/j4/mvn.svg" alt="图片加载失败"></p>
+<h3 id="1-2-maven入门（上）"><a href="#1-2-maven入门（上）" class="headerlink" title="1.2 maven入门（上）"></a>1.2 maven入门（上）</h3><p>maven:一个项目管理和自动化工具<br>注：如果说spring是java必须要学习的框架，那么maven就是必须要掌握的自动化工具。<br>借助maven的中央仓库，我们可以把任意代码分享给别人</p>
+<p>maven使用惯例优于配置的原则，在没有要求定制之前，所有项目都遵循以下结构，如果代码放错位置将无法正确运行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">目录                      目的</span><br><span class="line">$&#123;basedir&#125;                存放pom.xml和所有子目录</span><br><span class="line">$&#123;basedir&#125;/pom.xml        maven 项目的配置文件</span><br><span class="line">$&#123;basedir&#125;/src/main/java  项目java的源代码</span><br><span class="line">$&#123;basedir&#125;/src/main/resources 项目的资源</span><br><span class="line">$&#123;basedir&#125;/src/test/java    项目的测试类</span><br><span class="line">$&#123;basedir&#125;/src/test/resources 测试使用的资源</span><br></pre></td></tr></table></figure>
 
+<p>maven 安装<br>可以参考网上的安装教程<br>maven命令</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>  mvn clean compile</span><br></pre></td></tr></table></figure>
 </div>
 
 
