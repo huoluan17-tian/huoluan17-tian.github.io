@@ -175,8 +175,8 @@
 </div>
 
 <div id="article-content">
-	<p>我们省略到最基本的语法内容，像数据类型，循环，函数，数组等，直接从对象开始。<br>##第一章 对象</p>
-<h3 id="1-1-对象概述"><a href="#1-1-对象概述" class="headerlink" title="1.1  对象概述"></a>1.1  对象概述</h3><p>什么是对象（object）？ 简单来说，对象就是一组键值对（key-value）的集合，是一种无序的复合数据集合。<br><img src="https://document.youkeda.com/P3-4-HTML-CSS/7/1.jpg" alt=""><br>大括号：定义一个对象<br>person:定义的对象被赋值给person，person指向这个对象<br>name:henry 键值对（key:value）键值之间用:隔开<br>一共对象中可以包含多个键值对，每个键值对之间用逗号隔开，最后一个键值对可以不加逗号</p>
+	<p>我们省略到最基本的语法内容，像数据类型，循环，函数，数组等，直接从对象开始。</p>
+<h2 id="第一章-对象"><a href="#第一章-对象" class="headerlink" title="第一章 对象"></a>第一章 对象</h2><h3 id="1-1-对象概述"><a href="#1-1-对象概述" class="headerlink" title="1.1  对象概述"></a>1.1  对象概述</h3><p>什么是对象（object）？ 简单来说，对象就是一组键值对（key-value）的集合，是一种无序的复合数据集合。<br><img src="https://document.youkeda.com/P3-4-HTML-CSS/7/1.jpg" alt=""><br>大括号：定义一个对象<br>person:定义的对象被赋值给person，person指向这个对象<br>name:henry 键值对（key:value）键值之间用:隔开<br>一共对象中可以包含多个键值对，每个键值对之间用逗号隔开，最后一个键值对可以不加逗号</p>
 <p>注意这个person里面保存的是对象的内存地址，而不是对象，我们把这种赋值称为引用，上面的定义对象的方法叫做字面量<br>键名：<br>对象的键名基本都是字符串，可以加或者不加引号</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> person = &#123;</span><br><span class="line">  name: <span class="string">'henry'</span>,</span><br><span class="line">  age: 18</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 和上面的写法意思一样</span><br><span class="line"><span class="built_in">let</span> person = &#123;</span><br><span class="line">  <span class="string">'name'</span>: <span class="string">'henry'</span>,</span><br><span class="line">  <span class="string">'age'</span>: 18</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>方法 ：键名又称为属性，它的键值可以是任何的数据类型，当键值为一个函数时，我们把属性（键名）称为方法</p>
