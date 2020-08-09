@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+	<!-- title -->
+	
+	<title>
+	
+		js基础 | 
+	 
+	Hexo
+	</title>
+	
+	<!-- keywords,description -->
+	 
+
+	<!-- favicon -->
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+  
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+	
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/darcula.min.css">
+
+
+	
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+	
+		
+<script src="https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script>
+
+		
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+	
+	
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+	<header id="header">
+    <a id="title" href="/" class="logo">Hexo</a>
+
+	<ul id="menu">
+		<li class="menu-item">
+			<a href="/about" class="menu-item-link">ABOUT</a>
+		</li>
+		
+		<li class="menu-item">
+			<a href="https://github.com/wujun234/uid-generator-spring-boot-starter" class="menu-item-link" target="_blank">
+				UidGenerator
+			</a>
+		</li>
+		<li class="menu-item">
+			<a href="https://github.com/wujun234" class="menu-item-link" target="_blank">
+				<i class="fa fa-github fa-2x"></i>
+			</a>
+		</li>
+	</ul>
+</header>
+
+	
+<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="text" placeholder="search...">
+		<div id="tree">
+			
+
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/28/Vue/">
+										Vue
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/08/01/Vuex/">
+										Vuex
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/08/04/java%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
+										java网络编程
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file active">
+									<a href="/2020/08/09/js%E5%9F%BA%E7%A1%80/">
+										js基础
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/08/05/%E5%85%A8%E6%A0%88/">
+										全栈
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/08/03/%E6%95%B0%E6%8D%AE%E7%AE%97%E6%B3%95%E4%B8%8E%E7%BB%93%E6%9E%84/">
+										数据算法与结构
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/08/03/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8/">
+										正则表达式入门
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<!-- 引入正文 -->
+	<div id="content">
+		<h1 id="article-title">
+
+	js基础
+</h1>
+<div class="article-meta">
+	
+	<span>John Doe</span>
+	<span>2020-08-09 12:41:35</span>
+    
+		<div id="article-categories">
+            
+		</div>
+    
+</div>
+
+<div id="article-content">
+	<p>我们省略到最基本的语法内容，像数据类型，循环，函数，数组等，直接从对象开始。<br>##第一章 对象</p>
+<h3 id="1-1-对象概述"><a href="#1-1-对象概述" class="headerlink" title="1.1  对象概述"></a>1.1  对象概述</h3><p>什么是对象（object）？ 简单来说，对象就是一组键值对（key-value）的集合，是一种无序的复合数据集合。<br><img src="https://document.youkeda.com/P3-4-HTML-CSS/7/1.jpg" alt=""><br>大括号：定义一个对象<br>person:定义的对象被赋值给person，person指向这个对象<br>name:henry 键值对（key:value）键值之间用:隔开<br>一共对象中可以包含多个键值对，每个键值对之间用逗号隔开，最后一个键值对可以不加逗号</p>
+<p>注意这个person里面保存的是对象的内存地址，而不是对象，我们把这种赋值称为引用，上面的定义对象的方法叫做字面量<br>键名：<br>对象的键名基本都是字符串，可以加或者不加引号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> person = &#123;</span><br><span class="line">  name: <span class="string">'henry'</span>,</span><br><span class="line">  age: 18</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 和上面的写法意思一样</span><br><span class="line"><span class="built_in">let</span> person = &#123;</span><br><span class="line">  <span class="string">'name'</span>: <span class="string">'henry'</span>,</span><br><span class="line">  <span class="string">'age'</span>: 18</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>方法 ：键名又称为属性，它的键值可以是任何的数据类型，当键值为一个函数时，我们把属性（键名）称为方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> person = &#123;</span><br><span class="line">  name: <span class="string">'henry'</span>,</span><br><span class="line">  age: 18,</span><br><span class="line">  run: <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    console.log(<span class="string">'running'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">person.run();</span><br></pre></td></tr></table></figure>
+
+<p>对象的创建: 除了字面量的方法，我们还可以通过构造函数创建新对象。<br>分成两步 ，第一步 创造一个构造函数，构造函数的名称根据大驼峰的方式命名<br>         第二步 通过new创建对象实例<br> 其中构造函数可以声明对象的名称属性方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 第一步：创建构造函数</span><br><span class="line"><span class="keyword">function</span> People(name, age) &#123;</span><br><span class="line">  this.name = name;</span><br><span class="line">  this.age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 第二步：通过 new 创建对象实例</span><br><span class="line"><span class="built_in">let</span> person = new People(<span class="string">'henry'</span>, 18);</span><br><span class="line">console.log(person);</span><br></pre></td></tr></table></figure>
+<p>注意 ：我们先用为people创建了一个构造函数 People，然后用构造函数People创建了对象实例 person.<br>构造函数中的this是函数运行时所在的环境对象，它是在函数体内部自动生成的对象，只能在函数体内部使用。<br>我们用构造函数来创建一个对象实例，那么构造函数的this.name = name;就表示将传入的参数name赋值给对象实例中对应的属性name.</p>
+<h3 id="1-2-自定义属性的属性操作"><a href="#1-2-自定义属性的属性操作" class="headerlink" title="1.2 自定义属性的属性操作"></a>1.2 自定义属性的属性操作</h3><p>调用方法和调用函数的写法是相同的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">person.run();</span><br></pre></td></tr></table></figure>
+<p>属性的读取：js有两种方法读取对象的属性  点运算符和方括号运算符</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> person = &#123;</span><br><span class="line">  name: <span class="string">'henry'</span>,</span><br><span class="line">  age: 18</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(person.name);</span><br><span class="line">console.log(person[<span class="string">'name'</span>]);</span><br></pre></td></tr></table></figure>
+<p>不同的是方括号里面可以是一个变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> person = &#123;</span><br><span class="line">  name: <span class="string">'henry'</span>,</span><br><span class="line">  age: 18</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> variable = <span class="string">'name'</span>;               </span><br><span class="line">console.log(person[variable]);       //可以是变量</span><br><span class="line"></span><br><span class="line">variable = <span class="string">'age'</span>;</span><br><span class="line">console.log(person[variable]);      //可以是变量</span><br></pre></td></tr></table></figure>
+<p>如果对象的属性的值还是一个对象那么我们还是可以使用点运算符或者方括号运算符</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> person = &#123;</span><br><span class="line">  name: <span class="string">'henry'</span>,</span><br><span class="line">  age: 18,</span><br><span class="line">  parents: &#123;                    //大括号里面是一个对象</span><br><span class="line">    papa: <span class="string">'jack'</span>,</span><br><span class="line">    mama: <span class="string">'mary'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(person.parents.papa);</span><br><span class="line">console.log(person[<span class="string">'parents'</span>][<span class="string">'mama'</span>]);  //链式引用</span><br></pre></td></tr></table></figure>
+
+<p>属性的赋值：也可以通过点运算符或者方括号运算符完成</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> person = &#123;</span><br><span class="line">  name: <span class="string">'henry'</span>,</span><br><span class="line">  age: 18</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">person.name = <span class="string">'tom'</span>;          //赋值</span><br><span class="line">person[<span class="string">'age'</span>] = 10</span><br><span class="line"></span><br><span class="line">console.log(person.name);</span><br><span class="line">console.log(person.age);</span><br></pre></td></tr></table></figure>
+
+<p>属性的查看：查看所有的属性可以使用Object.keys方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> person = &#123;</span><br><span class="line">  name: <span class="string">'henry'</span>,</span><br><span class="line">  age: 18</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(Object.keys(person)); // object是基本对象，java中所有的其他的对象都是继承于object对象，即都是object实例</span><br><span class="line">                                   keys是object对象的一个静态方法</span><br></pre></td></tr></table></figure>
+<p>属性的删除和增加<br>删除：使用delete命令 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> person = &#123;</span><br><span class="line">  name: <span class="string">'henry'</span>,</span><br><span class="line">  age: 18</span><br><span class="line">&#125;</span><br><span class="line">delete person.name;</span><br><span class="line">console.log(person);             //&#123; age: 18 &#125;</span><br></pre></td></tr></table></figure>
+<p>添加属性</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> person = &#123;</span><br><span class="line">  name: <span class="string">'henry'</span>,</span><br><span class="line">  age: 18</span><br><span class="line">&#125;</span><br><span class="line">person.gender = <span class="string">'male'</span>;      // &#123; name: <span class="string">'henry'</span>, age: 18, gender: <span class="string">'male'</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-遍历对象属性"><a href="#1-3-遍历对象属性" class="headerlink" title="1.3 遍历对象属性"></a>1.3 遍历对象属性</h3><p>在js中，我们可以通过for…in或者object.keys来实现对象属性的遍历<br>用for…in遍历属性 ：返回的是键名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> person = &#123;</span><br><span class="line">  name: <span class="string">'henry'</span>,</span><br><span class="line">  age: 18,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (var key <span class="keyword">in</span> person) &#123;                   //<span class="keyword">for</span> ...<span class="keyword">in</span></span><br><span class="line">  console.log(<span class="string">'键名：'</span> + key + <span class="string">'；键值：'</span> + person[key]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用Object.keys遍历属性：返回的是一个由对象所有 属性名 组成的数组</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> person = &#123;</span><br><span class="line">  name: <span class="string">'henry'</span>,</span><br><span class="line">  age: 18,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> keys = Object.keys(person);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; keys.length; i++) &#123;</span><br><span class="line">  console.log(<span class="string">'键名：'</span> + keys[i] + <span class="string">'；键值：'</span> + person[keys[i]]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4-对象的继承"><a href="#1-4-对象的继承" class="headerlink" title="1.4 对象的继承"></a>1.4 对象的继承</h3><p>除了字面量和自定义的构造方法创建对象外，我们还可以通过js提供的构造函数object()或者继承来创建对象</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 字面量</span><br><span class="line"><span class="built_in">let</span> o1 = &#123;</span><br><span class="line">  name: <span class="string">'alice'</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 构造函数</span><br><span class="line"><span class="built_in">let</span> o2 = new Object();</span><br><span class="line"><span class="built_in">let</span> o3 = new Object();</span><br><span class="line"></span><br><span class="line">// 继承 </span><br><span class="line"><span class="built_in">let</span> o4 = new o1();                //04对象就是继承于01  01就是原型</span><br></pre></td></tr></table></figure>
+
+<p>原型：一个对象，它所继承的上一级对象是它的原型，它也是继承它的下一级对象的原型<br>属性是否存在：in<br>我们可以通过in来判断对象的属性是否存在</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> person = &#123;</span><br><span class="line">  name: <span class="string">'henry'</span>,</span><br><span class="line">  age: 18,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="string">'name'</span> <span class="keyword">in</span> person;              //<span class="literal">true</span></span><br><span class="line"><span class="string">'gender'</span> <span class="keyword">in</span> person;           // <span class="literal">false</span></span><br><span class="line"><span class="string">'toString'</span> <span class="keyword">in</span> person;        //<span class="literal">true</span>   toString属性是object对象的属性person继承了object所以person也有tostring属性</span><br></pre></td></tr></table></figure>
+<p>由上面可以看出对象拥有的属性包括自己的属性和继承的属性</p>
+<p>我们如何判断自身属性是否存在：hasOwnProperty可以帮我们解决这个问题</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> person = &#123;</span><br><span class="line">  name: <span class="string">'henry'</span>,</span><br><span class="line">  age: 18,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">person.hasOwnProperty(<span class="string">'name'</span>);         //<span class="literal">true</span></span><br><span class="line">person.hasOwnProperty(<span class="string">'gender'</span>);       //<span class="literal">false</span></span><br><span class="line">person.hasOwnProperty(<span class="string">'toString'</span>);     //<span class="literal">false</span>  可以看出tostring属性不是自身的属性</span><br></pre></td></tr></table></figure>
+
+<p>object 与 map,json的区别<br>json:一种轻量级的文本数据交换格式，可以看出编程语言之间用于传递数据的的一种数据格式<br>json格式和js对象的转化</p>
+<p>1 json=&gt;js对象:JSON.parse()</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 一个 JSON 字符串</span><br><span class="line">const jsonStr =</span><br><span class="line">  <span class="string">'&#123;"sites":[&#123;"name":"Runoob", "url":"www.runoob.com"&#125;,&#123;"name":"Google", "url":"www.google.com"&#125;,&#123;"name":"Taobao", "url":"www.taobao.com"&#125;]&#125;'</span>;</span><br><span class="line"></span><br><span class="line">// 转成 JavaScript 对象</span><br><span class="line">const obj = JSON.parse(jsonStr);</span><br></pre></td></tr></table></figure>
+<p>2 js对象转化为json：JSON.stringify（）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const jsonStr2 = JSON.stringify(obj)；</span><br></pre></td></tr></table></figure>
+
+<p>map :它和object有些相似，都可以保存键值对，但是他们任然有一些重大的区别<br>        1 object的键通常是字符串，map可以是任意类型（函数 对象等），因此map会比较方便<br>        2 object的键是无序的，而map中的键是有序的<br>        3 object的键值对数目需要使用object.keys()计算得到，而map可以直接得到<br>        4 Object需要借助object.keys()进行迭代，而map可以直接进行迭代<br>        5 object存在键名和原型键名冲突的问题，而map不存在，可以直接覆盖<br>但是map不能直接转化为json格式进行通讯，可以把把map看作object的补充</p>
+<h3 id="1-5-内置对象，math-storage"><a href="#1-5-内置对象，math-storage" class="headerlink" title="1.5 内置对象，math-storage"></a>1.5 内置对象，math-storage</h3><p>math对象：math也是js的原生对象，不过它不是构造函数，不能生成实例，所有的属性方法都必须在math对象上面调用。<br>我们来看看math提供的一些用途<br>常量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Math.E // 常数e。</span><br><span class="line">Math.LN2 // 2 的自然对数。</span><br><span class="line">Math.LN10 // 10 的自然对数。</span><br><span class="line">Math.LOG2E // 以 2 为底的e的对数。</span><br><span class="line">Math.LOG10E // 以 10 为底的e的对数。</span><br><span class="line">Math.PI // 常数π。</span><br><span class="line">Math.SQRT1_2 // 0.5 的平方根。</span><br><span class="line">Math.SQRT2 // 2 的平方根。</span><br></pre></td></tr></table></figure>
+<p>静态方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Math.abs() // 绝对值</span><br><span class="line">Math.ceil() // 向上取整</span><br><span class="line">Math.floor() // 向下取整</span><br><span class="line">Math.round() // 四舍五入取整</span><br><span class="line">Math.max() // 最大值</span><br><span class="line">Math.min() // 最小值</span><br><span class="line">Math.pow() // 指数运算</span><br><span class="line">Math.sqrt() // 平方根</span><br><span class="line">Math.log() // 自然对数</span><br><span class="line">Math.exp() // e的指数</span><br><span class="line">Math.random() // 随机数</span><br></pre></td></tr></table></figure>
+
+<p>storge对象：用于脚本在浏览器保存数据，两个对象部署了这个接口 window.sessionStorage和window.localStorage<br>sessionStorage:保存的数据用于浏览器的一次会话，当会话结束（通常是窗口被关闭），数据被清空<br>localStorage：保存的数据长期存在，下一次访问该网站的时候，网页可以直接读取以前保存的数据。<br>我们来主要看一下localStorage的用法：<br>数据的写入setItem</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">window.localStorage.setItem(<span class="string">'myLocalStorage'</span>, <span class="string">'storage Value'</span>);  //参数 键名和键值 都是字符串，</span><br><span class="line">                   不是字符串也要转化为字符串再存入浏览器  JSON.stringify（）可以将对象转化为json字符串</span><br></pre></td></tr></table></figure>
+
+<p>读取数据：getItem（）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">window.localStorage.getItem(<span class="string">'myLocalStorage'</span>);  //参数是键名</span><br></pre></td></tr></table></figure>
+<p>我们可以通过f12 application storage查看储存的数据</p>
+<p>清除缓存 ：window.localStorage.clear();</p>
+<h3 id="1-6-内置对象-string"><a href="#1-6-内置对象-string" class="headerlink" title="1.6 内置对象 string"></a>1.6 内置对象 string</h3><p>包装对象：原生对象可以把原始类型的值包装成对象</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> v2 = new String(<span class="string">'abc'</span>);</span><br></pre></td></tr></table></figure>
+<p>js提供了三大包装对象： string  number和boolean</p>
+<p>包装对象的好处：1 使js对象涵盖所有的值<br>             2 使原始数据的值能够很方便的调用一些方法 例如<br>字符串长度 length                        </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> len = <span class="string">'here is an apple'</span>.length;</span><br><span class="line">```     </span><br><span class="line">查找字符串：indexOf（）</span><br><span class="line">```bash</span><br><span class="line"><span class="built_in">let</span> str = <span class="string">'here is an apple'</span>;</span><br><span class="line">const index = str.indexOf(<span class="string">'an'</span>);                    //查找an字符串，返回下标（从0开始）  不存在返回-1</span><br><span class="line">console.log(index);</span><br></pre></td></tr></table></figure>
+
+<p>去掉两端空格：trim（）             //不改变原字符串，只是返回处理后的结果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">// <span class="string">'here'</span> 之前有一个空格，<span class="string">'apple'</span> 之后有三个空格</span><br><span class="line"><span class="built_in">let</span> str = <span class="string">' here is an apple   '</span>;</span><br><span class="line">const trimedStr = str.trim();         //去掉首尾的空格</span><br><span class="line">console.log(str.length);</span><br><span class="line">console.log(trimedStr.length);</span><br><span class="line">```       </span><br><span class="line"></span><br><span class="line">截取字符串：substring/substr    //不改变原字符串，只是返回处理后的结果</span><br><span class="line">```bash</span><br><span class="line"><span class="built_in">let</span> url = <span class="string">'https://www.youkeda.com/userhome#collect'</span>;</span><br><span class="line"></span><br><span class="line">// 首先找到 <span class="comment"># 后第一个字母的下标</span></span><br><span class="line">const index = url.indexOf(<span class="string">'#'</span>);</span><br><span class="line"></span><br><span class="line">// 有 <span class="built_in">hash</span> 才能进行截取，没有就直接提示不存在</span><br><span class="line"><span class="keyword">if</span> (index) &#123;</span><br><span class="line">  // 用 substring 截取字符串</span><br><span class="line">  const hash1 = url.substring(index + 1, url.length); //参数为开始时的下标和结束时的下标，如果第二个参数不设置，会截取到字符串的最后面</span><br><span class="line"></span><br><span class="line">  // 计算 <span class="built_in">hash</span> 的长度</span><br><span class="line">  const lenHash = url.length - index - 1;</span><br><span class="line">  // 用 substr 截取字符串</span><br><span class="line">  const hash2 = url.substr(index + 1, lenHash);     //参数为开始时的下标，和要截取的长度，如果第二个参数不设置，会截取到字符串的最后面</span><br><span class="line"></span><br><span class="line">  console.log(hash1);</span><br><span class="line">  console.log(hash2);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  console.log(<span class="string">'不存在 hash'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>分割字符串：spilt   返回一个数组</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const splitedStr = <span class="string">'a|b|c'</span>.split(<span class="string">'|'</span>);   //按照/来分割</span><br><span class="line">console.log(splitedStr);</span><br></pre></td></tr></table></figure>
+
+
+<p>几个方法汇总：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">属性/方法	                作用</span><br><span class="line">str.length	            返回字符串长度</span><br><span class="line">str.indexOf(sub)	    返回子字符串 sub 的开始下标，不存在则返回 -1   注意：这里的参数 sub 是个字符串变量</span><br><span class="line">                        </span><br><span class="line">str.trim()	            字符串前后去空格</span><br><span class="line">str.substring(s, e)	    截取下标从 s 到 e 的子字符串       注意：这里的参数 s 和 e是个数字变量</span><br><span class="line"></span><br><span class="line">str.substr(s, len)	    截取下标从 s 开始，长度为 len 的子字符串  注意：这里的参数 s 和 len 是个数字变量</span><br><span class="line"></span><br><span class="line">str.split(pattern)	    按规格 pattern 分割字符串     注意：这里的参数 pattern 是个字符串变量</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-7-内置对象-array"><a href="#1-7-内置对象-array" class="headerlink" title="1.7 内置对象 array"></a>1.7 内置对象 array</h3><p>array也是js的原生对象，它为数组提供了很多实用的方法，这里我们介绍几个比较常用的<br>连接数组 ：join（） 以指定参数作为分隔符，将数组成员连接为一个字符串返回</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> arr = [1, 2, 3, 4];</span><br><span class="line"></span><br><span class="line">arr.join(<span class="string">' '</span>) // <span class="string">'1 2 3 4'</span></span><br><span class="line">arr.join(<span class="string">' | '</span>) // <span class="string">"1 | 2 | 3 | 4"</span></span><br><span class="line">arr.join() // <span class="string">"1,2,3,4"</span></span><br><span class="line"></span><br><span class="line">可以看出和spilt的作用相反</span><br></pre></td></tr></table></figure>
+
+<p>倒序排列：reverse()<br>将数组元素颠倒排列然后返回数组</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> arr = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>];</span><br><span class="line">arr.reverse() // [<span class="string">"c"</span>, <span class="string">"b"</span>, <span class="string">"a"</span>]</span><br><span class="line">arr // [<span class="string">"c"</span>, <span class="string">"b"</span>, <span class="string">"a"</span>]</span><br></pre></td></tr></table></figure>
+
+<p>排序：sort（）<br>将数组成员默认按照字典顺序排序，如果自定义排序，只需要传入一个函数作为参数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> arr = [</span><br><span class="line">  &#123; name: <span class="string">'jenny'</span>, age: 18 &#125;,</span><br><span class="line">  &#123; name: <span class="string">'tom'</span>, age: 10 &#125;,</span><br><span class="line">  &#123; name: <span class="string">'mary'</span>, age: 40 &#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">arr.sort(<span class="keyword">function</span>(a, b) &#123;</span><br><span class="line">  <span class="built_in">return</span> a.age - b.age;         //返回值大于0 将第一个成员放在第二个成员后面</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">console.log(arr);</span><br></pre></td></tr></table></figure>
+<p>遍历：map和forEach<br>有返回值的遍历 map<br>它接受一个函数作为参数，然后将所有数组成员传入函数中，再将结果处理为数组返回</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> arr = [</span><br><span class="line">  &#123; name: <span class="string">'jenny'</span>, age: 18 &#125;,</span><br><span class="line">  &#123; name: <span class="string">'tom'</span>, age: 10 &#125;,</span><br><span class="line">  &#123; name: <span class="string">'mary'</span>, age: 40 &#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">// elem: 数组成员</span><br><span class="line">// index: 成员下标</span><br><span class="line">// a: 整个数组</span><br><span class="line">const handledArr = arr.map(<span class="keyword">function</span>(elem, index, a) &#123;</span><br><span class="line">  elem.age += 1;</span><br><span class="line">  console.log(elem, index, a);</span><br><span class="line">  <span class="built_in">return</span> elem.name</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">console.log(arr);</span><br><span class="line">console.log(handledArr);</span><br></pre></td></tr></table></figure>
+
+<p>无返回值的遍历数组：foreach</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const handledArr = arr.forEach(<span class="keyword">function</span>(elem, index, a) &#123;</span><br><span class="line">  elem.age += 1;</span><br><span class="line">  console.log(elem, index, a);</span><br><span class="line">  <span class="built_in">return</span> elem.name</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">console.log(handledArr);            //无返回值 undefined</span><br></pre></td></tr></table></figure>
+
+<p>array的几个方法总结</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">属性/方法	             作用</span><br><span class="line">arr.join(pattern)	按规则 pattern 连接数组，返回字符串</span><br><span class="line">arr.reverse()	    将原数组倒序排列</span><br><span class="line">arr.sort(func)	    自定义排序，根据传入的参数函数 func 将数组成员排序</span><br><span class="line">arr.map(func)	     根据传入的参数函数 func 对数组进行遍历操作，返回操作后的数组</span><br><span class="line">                      函数有三个参数，依次为：数组成员、对应下标、整个数组</span><br><span class="line">arr.forEach(func)	 根据传入的参数函数 func 对数组进行遍历操作，无返回值</span><br><span class="line">                     函数有三个参数，依次为：数组成员、对应下标、整个数组</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-8-内置对象-date"><a href="#1-8-内置对象-date" class="headerlink" title="1.8 内置对象   date"></a>1.8 内置对象   date</h3><p>js提供了一个原生的时间库：date对象 它是以国际标准时间1970.01.01.00.00.00为时间零点。单位是毫秒，前后各一亿天。</p>
+<p>获取当前时间：new date()<br>可以把date看作一个构造函数，然后获取它的实例，在不加参数的情况下，返回的就是当前的时间</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> now = new Date();</span><br><span class="line">console.log(now);                  //返回当前时间</span><br></pre></td></tr></table></figure>
+<p>传入一些参数，就会生成特定的时间对象</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 传入表示“年月日时分秒”的数字</span><br><span class="line"><span class="built_in">let</span> dt1 = new Date(2020, 0, 6, 0, 0, 0);</span><br><span class="line">console.log(dt1);</span><br><span class="line"></span><br><span class="line">// 传入日期字符串</span><br><span class="line"><span class="built_in">let</span> dt2 = new Date(<span class="string">'2020-1-6'</span>);</span><br><span class="line">console.log(dt2);</span><br><span class="line"></span><br><span class="line">// 传入距离国际标准时间的毫秒数</span><br><span class="line"><span class="built_in">let</span> dt3 = new Date(1578240000000);</span><br><span class="line">console.log(dt3);</span><br></pre></td></tr></table></figure>
+
+<p>日期运算<br>时间差：毫秒数  两个时间对象是可以直接相减的，返回的结果是二者的毫秒数差</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> dt1 = new Date(2020, 2, 1);</span><br><span class="line"><span class="built_in">let</span> dt2 = new Date(2020, 3, 1);</span><br><span class="line"></span><br><span class="line">// 求差值</span><br><span class="line"><span class="built_in">let</span> diff = dt2 - dt1;</span><br><span class="line"></span><br><span class="line">// 一天的毫秒数</span><br><span class="line"><span class="built_in">let</span> ms = 24 * 60 * 60 * 1000;</span><br><span class="line">console.log(diff / ms); // 31</span><br></pre></td></tr></table></figure>
+
+<p>早晚比较：大于小于符号<br>比较两个时间的早晚，可以使用大于小于符号，返回boolean值。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> dt1 = new Date(2020, 2, 1);</span><br><span class="line"><span class="built_in">let</span> dt2 = new Date(2020, 3, 1);</span><br><span class="line"></span><br><span class="line">console.log(dt1 &gt; dt2); // <span class="literal">false</span></span><br><span class="line">console.log(dt1 &lt; dt2); // <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>解析日期字符串：date.parse()<br>解析字符串，返回的是距离时间零点的毫秒数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> dt = Date.parse(<span class="string">'2020-1-6'</span>);</span><br><span class="line">console.log(dt); // 1578240000000</span><br></pre></td></tr></table></figure>
+
+<p>时间对象转时间字符串：to方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> dt = new Date();</span><br><span class="line"><span class="built_in">let</span> dtStr = dt.toJSON();        //toJson方法</span><br><span class="line"></span><br><span class="line">console.log(dtStr); //  我们是东八区，所以会快8个小时</span><br></pre></td></tr></table></figure>
+
+<p>获取时间对象的的年月日：get方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> dt = new Date();</span><br><span class="line">dt.getTime(); // 返回实例距离1970年1月1日00:00:00的毫秒数。</span><br><span class="line">dt.getDate(); // 返回实例对象对应每个月的几号（从1开始）。</span><br><span class="line">dt.getDay(); // 返回星期几，星期日为0，星期一为1，以此类推。</span><br><span class="line">dt.getFullYear(); // 返回四位的年份。</span><br><span class="line">dt.getMonth(); // 返回月份（0表示1月，11表示12月）。</span><br><span class="line">dt.getHours(); // 返回小时（0-23）。</span><br><span class="line">dt.getMilliseconds(); // 返回毫秒（0-999）。</span><br><span class="line">dt.getMinutes(); // 返回分钟（0-59）。</span><br><span class="line">dt.getSeconds(); // 返回秒（0-59）。</span><br></pre></td></tr></table></figure>
+
+<p>设置时间对象的年月日  ：set方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> dt = new Date();</span><br><span class="line">dt.setTime(ms); // 设置实例距离1970年1月1日00:00:00的毫秒数。</span><br><span class="line">dt.setDate(date); // 设置实例对象对应每个月的几号（从1开始）。</span><br><span class="line">dt.setFullYear(year); // 设置四位的年份。</span><br><span class="line">dt.setMonth(month); // 设置月份（0表示1月，11表示12月）。</span><br><span class="line">dt.setHours(hour); // 设置小时（0-23）。</span><br><span class="line">dt.setMilliseconds(ms); // 设置毫秒（0-999）。</span><br><span class="line">dt.setMinutes(min); // 设置分钟（0-59）。</span><br><span class="line">dt.setSeconds(sec); // 设置秒（0-59）。</span><br></pre></td></tr></table></figure>
+
+<p>时间对象，毫秒数，日期字符串之间的转化<br><img src="https://qgt-document.oss-cn-beijing.aliyuncs.com/P3-4-HTML-CSS/7/3.jpg" alt=""></p>
+
+</div>
+
+
+    <div class="post-guide">
+        <div class="item left">
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2020/08/05/%E5%85%A8%E6%A0%88/">
+                全栈
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+
+	<div id="vcomments"></div>
+
+
+<script>
+	
+		// 评论
+		new Valine({
+			av: AV,
+			el: '#vcomments',
+			notify: false,
+			verify: false,
+			path: window.location.pathname,
+			appId: '',
+			appKey: '',
+			placeholder: '请输入评论',
+			avatar: 'retro',
+			recordIP: false
+		})
+	
+	
+</script>
+	</div>
+	<div id="footer">
+	<p>
+	©2019-<span id="footerYear"></span> 
+	<a href="/">John Doe</a> 
+	
+	
+		|
+		<span id="busuanzi_container_site_pv">
+			pv
+			<span id="busuanzi_value_site_pv"></span>
+		</span>
+		|
+		<span id="busuanzi_container_site_uv"> 
+			uv
+			<span id="busuanzi_value_site_uv"></span>
+		</span>
+	
+	<br>
+	Theme <a href="//github.com/wujun234/hexo-theme-tree" target="_blank">Tree</a>
+	by <a href="//github.com/wujun234" target="_blank">WuJun</a>
+	Powered by <a href="//hexo.io" target="_blank">Hexo</a>
+	</p>
+</div>
+<script type="text/javascript"> 
+	document.getElementById('footerYear').innerHTML = new Date().getFullYear() + '';
+</script>
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+</body>
+</html>
