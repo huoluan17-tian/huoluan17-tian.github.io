@@ -8,6 +8,8 @@
 	<!-- title -->
 	
 	<title>
+	
+		实战项目一音乐评论分析 | 
 	 
 	Hexo
 	</title>
@@ -134,7 +136,7 @@
 							</ul>
 			
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2020/08/10/%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE%E4%B8%80%E9%9F%B3%E4%B9%90%E8%AF%84%E8%AE%BA%E5%88%86%E6%9E%90/">
 										实战项目一音乐评论分析
 									</a>
@@ -166,33 +168,69 @@
 
 	<!-- 引入正文 -->
 	<div id="content">
-		<div id="index">
+		<h1 id="article-title">
+
+	实战项目一音乐评论分析
+</h1>
+<div class="article-meta">
 	
-		<div class="index-li">
-			<a href="/2020/07/28/Vue/">
-				<h2 class="index-title">
-					Vue
-				</h2>
-				<div class="index-brief">
-					第一章 vue介绍1.1Vue配置vue是构建用户界面的渐进式框架 特点是易用 灵活 性能优vue脚手架的安装 vue CLI安装 node.js 安装vue cli创建vue工程
-1.2 vue工程目录介绍工程介绍node_modules:存放npm命令下载的开发环境和生产环境的依赖包public
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2020-07-28</span>
-                    
-                            
-                    
-                </div>
-		</div>	
-	
-	
-	<div id="index-paginator">
-		
-	</div>
+	<span>John Doe</span>
+	<span>2020-08-10 16:39:45</span>
+    
+		<div id="article-categories">
+            
+		</div>
+    
 </div>
 
+<div id="article-content">
+	<h2 id="第一章-项目分析"><a href="#第一章-项目分析" class="headerlink" title="第一章 项目分析"></a>第一章 项目分析</h2><p>###1.1 项目介绍<br>项目流程<br><img src="https://style.youkeda.com/img/ham/course/j12/2.1-1.svg" alt=""></p>
+<p>一  项目需求：我们在网易云听歌的时候，经常会被下面的评论所打动。那么我们怎么才能知道每个歌手的歌曲评论中出现最频繁的词语是什么？<br>如图片示例<br><img src="https://style.youkeda.com/img/ham/course/j12/1-8.png" alt=""><br>从上面这些词语中，我们可以很迅速的了解歌曲评论的大概内容，实际上，统计这些词语的过程也是目前最流行的大数据领域的一种应用。</p>
+<p>二  功能描述<br>抓取单曲：采用爬虫+数据分析的方式，抓取指定歌手的热门单曲<br><img src="https://style.youkeda.com/img/ham/course/j12/1-6.png" alt=""><br>抓取评论：我们可以看到张信哲的热门歌曲有50首，我再抓取每首歌的热门评论。<br><img src="https://style.youkeda.com/img/ham/course/j12/1-7.png" alt=""><br>分词：我们纪录热门评论内容，对评论用工具分词，词汇出现的频率越高字体越大，呈现词云效果。<br><img src="https://style.youkeda.com/img/ham/course/j12/1-10.png" alt=""><br><img src="https://style.youkeda.com/img/ham/course/j12/1-11.png" alt=""></p>
+<p>三  技术方案<br>梳理需求，然后整合成如下所示技术方案<br>1 自动查询某个歌手的所有热门歌曲<br>2 自动获取每一首歌的基础信息，热门信息<br>3 自动获取每一首歌热门评论，最新评论<br>4 对所有热门评论进行统计形成 词云</p>
+<h2 id="第二章-获取热门歌单"><a href="#第二章-获取热门歌单" class="headerlink" title="第二章 获取热门歌单"></a>第二章 获取热门歌单</h2><p>认识api<br>信息描述                          信息说明<br>API地址                          <a href="http://neteaseapi.youkeda.com:3000/artists?id=xxx" target="_blank" rel="noopener">http://neteaseapi.youkeda.com:3000/artists?id=xxx</a><br>请求方式                          GET<br>参数说明                          id -歌手ID</p>
+<p>从上面可以看出，只要我们有了歌手id，我们就 可以查询到歌手所有的单曲信息。<br><img src="https://style.youkeda.com/img/ham/course/j12/2-1.png" alt=""><br>例如 我们找到周杰伦的id 6452,拼接好url <a href="http://neteaseapi.youkeda.com:3000/artists?id=6452" target="_blank" rel="noopener">http://neteaseapi.youkeda.com:3000/artists?id=6452</a> ，在网页中查找这个地址，我们<br>可以得到json格式的信息 从中，我们主要分析两个重要数据：<br>1 artist    是歌手的歌单（也叫“专辑”，这里统一称歌单）数据，里面包含了歌手信息，歌手名称，别名，简介，歌曲书，专辑数等<br>2 hotSongs  值的格式是：[]，表示歌曲数据集合。一个歌单包含一组歌曲。每个歌曲有id，名称等属性。</p>
+
+</div>
+
+
+    <div class="post-guide">
+        <div class="item left">
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2020/08/09/js%E5%9F%BA%E7%A1%80/">
+                js基础
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+
+	<div id="vcomments"></div>
+
+
+<script>
+	
+		// 评论
+		new Valine({
+			av: AV,
+			el: '#vcomments',
+			notify: false,
+			verify: false,
+			path: window.location.pathname,
+			appId: '',
+			appKey: '',
+			placeholder: '请输入评论',
+			avatar: 'retro',
+			recordIP: false
+		})
+	
+	
+</script>
 	</div>
 	<div id="footer">
 	<p>

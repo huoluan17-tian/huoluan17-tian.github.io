@@ -92,8 +92,8 @@
 			
 							<ul>
 								<li class="file">
-									<a href="/2020/07/28/Vue/">
-										Vue
+									<a href="/2020/08/01/Vuex/">
+										Vuex
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -101,8 +101,8 @@
 			
 							<ul>
 								<li class="file">
-									<a href="/2020/08/01/Vuex/">
-										Vuex
+									<a href="/2020/07/28/Vue/">
+										Vue
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -130,6 +130,15 @@
 								<li class="file">
 									<a href="/2020/08/05/%E5%85%A8%E6%A0%88/">
 										全栈
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/08/10/%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE%E4%B8%80%E9%9F%B3%E4%B9%90%E8%AF%84%E8%AE%BA%E5%88%86%E6%9E%90/">
+										实战项目一音乐评论分析
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -440,7 +449,7 @@
 <p>无尽滚动：当页面滚动到底部时，添加新的文章到body</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">window.addEventListener(<span class="string">'scroll'</span>, <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">  // 可以通过clientHeight获取内容高度</span><br><span class="line">  const height = document.body.clientHeight;</span><br><span class="line"></span><br><span class="line">  // 通过screen.height获取浏览器的高度</span><br><span class="line">  const screenHeight = window.screen.height;</span><br><span class="line"></span><br><span class="line">  // 当距离底部的距离小于500时，触发页面新增内容</span><br><span class="line">  <span class="keyword">if</span> (height - window.scrollY - screenHeight &lt; 500) &#123;</span><br><span class="line">    console.log(<span class="string">'加载新文章内容'</span>);</span><br><span class="line">    // 在底部添加10张图片</span><br><span class="line">    const div = document.createElement(<span class="string">'div'</span>);</span><br><span class="line">    <span class="built_in">let</span> str = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">      str += `</span><br><span class="line">       &lt;img</span><br><span class="line">        class=<span class="string">"first"</span></span><br><span class="line">        alt=<span class="string">""</span></span><br><span class="line">        src=<span class="string">"https://document.youkeda.com/P3-1-HTML-CSS/1.8/1.jpg?x-oss-process=image/resize,h_300"</span></span><br><span class="line">      /&gt;</span><br><span class="line">      `;</span><br><span class="line">    &#125;</span><br><span class="line">    div.innerHTML = str;</span><br><span class="line">    document.body.appendChild(div);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>分析一下运用到的技术：<br>1 内容高度document.body.clientHeight<br>2 浏览器高度 window.screen.height<br>3 滚动距离 window.scrollY<br>4 滚动距离底部距离 内容高度 - 浏览器高度 - 滚动距离</p>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>最后额外来添加一些关于网络请求的知识，基本的协议和url这些就不讲了，我们来看看关于fetch方法的知识<br>我们可以使用fetch方法获取api返回的数据，示例</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>最后额外来添加一些关于网络请求的知识，基本的协议和url这些就不讲了，我们来看看关于fetch<br>我们可以使用fetch方法获取api返回的数据，示例</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fetch(                                       //使用fetch方法</span><br><span class="line">  <span class="string">'https://www.fastmock.site/mock/b73a1b9229212a9a3749e046b1e70285/f4/f4-11-1-1'</span></span><br><span class="line">)</span><br><span class="line">  .<span class="keyword">then</span>(<span class="keyword">function</span> (response) &#123;</span><br><span class="line">    <span class="built_in">return</span> response.json();</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="keyword">then</span>(<span class="keyword">function</span> (myJson) &#123;</span><br><span class="line">    console.log(myJson);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
 <p>我们看到示例中有.then这个语法，要理解这个语法我们先来看看fetch返回的结果是什么？<br>fetch返回的是一个Promise对象</p>
 <p>promise是异步编程的一种解决方案，之前的异步编程都是通过回调方法来实现的。</p>
@@ -452,6 +461,11 @@
 
     <div class="post-guide">
         <div class="item left">
+            
+              <a href="/2020/08/10/%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE%E4%B8%80%E9%9F%B3%E4%B9%90%E8%AF%84%E8%AE%BA%E5%88%86%E6%9E%90/">
+                  <i class="fa fa-angle-left" aria-hidden="true"></i>
+                  实战项目一音乐评论分析
+              </a>
             
         </div>
         <div class="item right">
