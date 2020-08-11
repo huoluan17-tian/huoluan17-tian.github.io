@@ -92,8 +92,8 @@
 			
 							<ul>
 								<li class="file">
-									<a href="/2020/08/01/Vuex/">
-										Vuex
+									<a href="/2020/07/28/Vue/">
+										Vue
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -101,8 +101,8 @@
 			
 							<ul>
 								<li class="file">
-									<a href="/2020/07/28/Vue/">
-										Vue
+									<a href="/2020/08/01/Vuex/">
+										Vuex
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -190,6 +190,21 @@
 <p>三  技术方案<br>梳理需求，然后整合成如下所示技术方案<br>1 自动查询某个歌手的所有热门歌曲<br>2 自动获取每一首歌的基础信息，热门信息<br>3 自动获取每一首歌热门评论，最新评论<br>4 对所有热门评论进行统计形成 词云</p>
 <h2 id="第二章-获取热门歌单"><a href="#第二章-获取热门歌单" class="headerlink" title="第二章 获取热门歌单"></a>第二章 获取热门歌单</h2><p>认识api<br>信息描述                          信息说明<br>API地址                          <a href="http://neteaseapi.youkeda.com:3000/artists?id=xxx" target="_blank" rel="noopener">http://neteaseapi.youkeda.com:3000/artists?id=xxx</a><br>请求方式                          GET<br>参数说明                          id -歌手ID</p>
 <p>从上面可以看出，只要我们有了歌手id，我们就 可以查询到歌手所有的单曲信息。<br><img src="https://style.youkeda.com/img/ham/course/j12/2-1.png" alt=""><br>例如 我们找到周杰伦的id 6452,拼接好url <a href="http://neteaseapi.youkeda.com:3000/artists?id=6452" target="_blank" rel="noopener">http://neteaseapi.youkeda.com:3000/artists?id=6452</a> ，在网页中查找这个地址，我们<br>可以得到json格式的信息 从中，我们主要分析两个重要数据：<br>1 artist    是歌手的歌单（也叫“专辑”，这里统一称歌单）数据，里面包含了歌手信息，歌手名称，别名，简介，歌曲书，专辑数等<br>2 hotSongs  值的格式是：[]，表示歌曲数据集合。一个歌单包含一组歌曲。每个歌曲有id，名称等属性。</p>
+<p>开发阶段的核心步骤：<br>1需求分析：得到关键模型 歌曲和歌单<br>完成数据爬取需要搭配的服务  歌单服务接口和实现类 （模型+服务 是java通用的一种思路）<br>2概要设计：<br><img src="https://style.youkeda.com/img/ham/course/j12/2-2-1.svg" alt=""><br>注意：service提供服务接口， impl提供实现类 ，Model存放模型<br>3项目依赖：添加必要的依赖库</p>
+<h3 id="2-2模型设计"><a href="#2-2模型设计" class="headerlink" title="2.2模型设计"></a>2.2模型设计</h3><p>歌单及歌曲模型详细设计，分析api返回的对象</p>
+<p>第一层是artist歌单，第二层是歌单的各个字段，我们来看看里面比较重要的字段</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">字段                                 含义</span><br><span class="line">id                                  歌单的唯一id</span><br><span class="line"><span class="built_in">alias</span>                               别名 明星的各种名字，花名艺名英文名等</span><br><span class="line">picUrl                              封面图</span><br><span class="line">briefDesc                            艺人介绍</span><br><span class="line">img1v1Url                           正方形封面图  展示歌单列表</span><br><span class="line">name                                 艺人的名称</span><br></pre></td></tr></table></figure>
+<p>并列第一层是歌曲字段：歌曲中比较有用的字段</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字段                                  含义</span><br><span class="line">id                                    歌曲的id</span><br><span class="line">name                                  歌曲的名字</span><br></pre></td></tr></table></figure>
+<p><img src="https://style.youkeda.com/img/ham/course/j12/2-2-2.svg" alt=""></p>
+<h3 id="2-3服务设计"><a href="#2-3服务设计" class="headerlink" title="2.3服务设计"></a>2.3服务设计</h3><p>服务的接口和实现类，组成了操作数据的核心能力。<br>分析：<br>一 抓取：抓取歌单的办法<br>给其他类调用，应该定义为public<br>不需要返回值，只是抓取功能所以方法返回值定义为void<br>方法的作用是开始抓取任务，可以命名为start<br>方法的参数是字符串型的歌单ID，歌单属于某位歌手，我们命名为artistId</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public void start(String artistId);</span><br></pre></td></tr></table></figure>
+<p>二 歌单<br>抓取歌单的目的是为了使用歌单，所以我们还要提供查询方法查询歌单，方法的参数也是歌单Id</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public Artist getArtist(String artistId);</span><br></pre></td></tr></table></figure>
+<p>三 歌曲<br>歌单中有很多歌曲，我们还可以提供一个查询歌曲的办法，方法参数为歌单ID和歌曲ID</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public Song getSong(String artistId, String songId);</span><br></pre></td></tr></table></figure>
+<p>制作模型图<br><img src="https://style.youkeda.com/img/ham/course/j12/2-2-3.svg" alt=""><br>小知识：对于服务实现类，我们往往需要一个初始化实例变量的方法来提高扩展性.</p>
+<h3 id="2-4-爬取歌单实现步骤（一）"><a href="#2-4-爬取歌单实现步骤（一）" class="headerlink" title="2.4 爬取歌单实现步骤（一）"></a>2.4 爬取歌单实现步骤（一）</h3><p>start()方法的实现思路<br><img src="https://style.youkeda.com/img/ham/course/j12/2-2-4.svg" alt=""><br>1 实现类中的start（）方法按照如上顺序实现步骤，就可以实现歌单的抓取<br>2 封装为一个私有方法，是因为包含了一系列的子步骤。</p>
 
 </div>
 
