@@ -92,8 +92,8 @@
 			
 							<ul>
 								<li class="file">
-									<a href="/2020/08/01/Vuex/">
-										Vuex
+									<a href="/2020/07/28/Vue/">
+										Vue
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -101,8 +101,8 @@
 			
 							<ul>
 								<li class="file">
-									<a href="/2020/07/28/Vue/">
-										Vue
+									<a href="/2020/08/01/Vuex/">
+										Vuex
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -214,6 +214,31 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public Song getSong(String artistId, String songId);</span><br></pre></td></tr></table></figure>
 <p>制作模型图<br><img src="https://style.youkeda.com/img/ham/course/j12/2-2-3.svg" alt=""><br>小知识：对于服务实现类，我们往往需要一个初始化实例变量的方法来提高扩展性.</p>
 <h3 id="2-4-爬取歌单实现步骤（一）"><a href="#2-4-爬取歌单实现步骤（一）" class="headerlink" title="2.4 爬取歌单实现步骤（一）"></a>2.4 爬取歌单实现步骤（一）</h3><p>start()方法的实现思路<br><img src="https://style.youkeda.com/img/ham/course/j12/2-2-4.svg" alt=""><br>1 实现类中的start（）方法按照如上顺序实现步骤，就可以实现歌单的抓取<br>2 封装为一个私有方法，是因为包含了一系列的子步骤。</p>
+<h3 id="2-5爬取歌单实现步骤-二"><a href="#2-5爬取歌单实现步骤-二" class="headerlink" title="2.5爬取歌单实现步骤(二)"></a>2.5爬取歌单实现步骤(二)</h3><p>构建填充了属性的artist实例<br><img src="https://style.youkeda.com/img/ham/course/j12/2-2-4-2.svg" alt=""><br>在start方法中添加一个私有方法，方法的作用：在抓取的源数据对象中解析artist数据字段，创建歌单对象并填充属性值</p>
+<h3 id="2-6-爬取歌单实现步骤（三）"><a href="#2-6-爬取歌单实现步骤（三）" class="headerlink" title="2.6 爬取歌单实现步骤（三）"></a>2.6 爬取歌单实现步骤（三）</h3><p>在start方法中构建填充了属性的song实例<br><img src="https://style.youkeda.com/img/ham/course/j12/2-2-4-3.svg" alt=""><br>在start方法中添加一个私有方法，方法的作用：解析hotSongs字段，创建歌曲集合，并为歌曲对象填充属性。</p>
+<h3 id="2-7-爬取歌单实现步骤（四）"><a href="#2-7-爬取歌单实现步骤（四）" class="headerlink" title="2.7 爬取歌单实现步骤（四）"></a>2.7 爬取歌单实现步骤（四）</h3><p>回顾一下之前的流程<br><img src="https://style.youkeda.com/img/ham/course/j12/2-2-4.svg" alt=""><br>对于start方法，我们已经完成了前三个步骤，即完成了歌单的歌曲对象，我们来完成最后的两个步骤，将歌曲对象存入本地的数据仓库。</p>
+<h3 id="2-8-查询歌单和歌曲服务实现"><a href="#2-8-查询歌单和歌曲服务实现" class="headerlink" title="2.8 查询歌单和歌曲服务实现"></a>2.8 查询歌单和歌曲服务实现</h3><p>我们来看看任务详细设计图<br><img src="https://style.youkeda.com/img/ham/course/j12/2-2-3.svg" alt=""><br>实现类的start方法已经完毕了，我们现在来看看剩下两个方法的完成。<br>getArtist方法 目的：根据歌单id查询歌单对象<br>这个比较简单，只需要用参数artistId 从本地 artists取出歌单对象即可<br>getSong方法：根据歌曲id查询歌曲对象<br>我们可以通过第一个参数获取歌单对象，然后再遍历歌单中的歌曲，找到id相同的歌曲返回即可。</p>
+<h3 id="第三章-歌曲信息"><a href="#第三章-歌曲信息" class="headerlink" title="第三章 歌曲信息"></a>第三章 歌曲信息</h3><p>本章的目标 ：1 获取每首歌的详细信息：音乐文件地址 所在专辑 所属歌手<br>           2 获取每首歌的热门评论和最新的10条评论</p>
+<h3 id="3-1-歌曲详细信息"><a href="#3-1-歌曲详细信息" class="headerlink" title="3.1  歌曲详细信息"></a>3.1  歌曲详细信息</h3><p>我们先来看看一首歌的详细信息 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">信息描述                           信息说明</span><br><span class="line">api地址                           http://neteaseapi.youkeda.com:3000/song/detail?ids=xxx,xxx</span><br><span class="line">请求方式                           GET</span><br><span class="line">参数说明                           ids － 歌曲id，如果查询多个歌曲id之间用逗号隔开</span><br></pre></td></tr></table></figure>
+<p>获取每首歌的评论</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">信息描述                           信息说明</span><br><span class="line">api地址                           http://neteaseapi.youkeda.com:3000/comment/music?id=xxx&amp;<span class="built_in">limit</span>=xxx</span><br><span class="line">请求方式                           GET</span><br><span class="line">参数说明                           id － 歌曲id     <span class="built_in">limit</span> － 评论条数</span><br></pre></td></tr></table></figure>
+
+<p>获取每首歌的音乐文件地址</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">信息描述                           信息说明</span><br><span class="line">api地址                          http://neteaseapi.youkeda.com:3000/song/url?id=xxx,xxx</span><br><span class="line">请求方式                           GET</span><br><span class="line">参数说明                           id － 歌曲id，如果查询多个歌曲id之间用逗号隔开，注意不是ids</span><br></pre></td></tr></table></figure>
+
+<p>模型设计：由于业务需求，我们之前使用的歌曲模型需要扩展属性。<br>我们新增加了用户模型（user）评论模型（comment）专辑模型（album）并且将歌曲模型进行了扩展 如下图<br><img src="https://style.youkeda.com/img/ham/course/j12/3-1-1-1.svg" alt=""></p>
+<h3 id="3-2服务设计"><a href="#3-2服务设计" class="headerlink" title="3.2服务设计"></a>3.2服务设计</h3><p>当我们完成歌曲模型的拓展之后就要开始相关接口和方法的设计了。<br>我们在抓取歌单的时候，已经抓取到歌曲的基础信息了，那么我们只需要在抓取过程中拓展，抓取歌曲的详细信息和评论信息即可。<br>我们来看看uml图<br><img src="https://style.youkeda.com/img/ham/course/j12/3-2-1-1.svg" alt=""><br>我们来看看完成过程：<br>1 我们把start() 方法里完成的抓取步骤，挪到 initArtistHotSongs() 中，作为歌曲和歌单初始化的方法。<br>2 增加三个新的装配方法：assembleSongDetail() 组装歌曲的详细信息<br>                    assembleSongComment() 组装歌曲的评论<br>                    assembleSongUrl() 组装歌曲的音乐文件地址<br>3 start() 方法的作为装配工，按顺序调用各个步骤：<br><img src="https://style.youkeda.com/img/ham/course/j12/3-2-2.svg" alt=""><br>4 start() 方法变化较大，相当于做了一次重构<br>上面的过程相当于是把代码进行了一次重构，使得代码更加清晰，更容易理解和维护（把相对独立的操作封装起来）    </p>
+<p>什么是重构？<br>在不改变代码接口的情况下，对代码作出修改，以改进程序的内部结构。本质上说，重构就是在代码写好之后改进它的设计。<br>重构有什么好处？<br>1 提高代码质量（性能 可读性 可重用性）<br>2 修改bug<br>3 增加新功能  </p>
+<h3 id="3-3歌曲详细信息"><a href="#3-3歌曲详细信息" class="headerlink" title="3.3歌曲详细信息"></a>3.3歌曲详细信息</h3><p>我们来回忆一下爬取歌单，爬取评论 爬取歌曲信息，大概都是这样的：<br><img src="https://style.youkeda.com/img/ham/course/j12/3-3-1.svg" alt=""><br>我们再来看看歌曲详细信息的api:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">信息描述                           信息说明</span><br><span class="line">api地址                           http://neteaseapi.youkeda.com:3000/song/detail?ids=xxx,xxx</span><br><span class="line">请求方式                           GET</span><br><span class="line">参数说明                           ids － 歌曲id，如果查询多个歌曲id之间用逗号隔开</span><br></pre></td></tr></table></figure>
+<p>我们发现它的参数ids要复杂一些，所以我们必须要组装ids的值。组装时，我们要把歌单遍历，然后找出所有的歌曲Id.<br>小技巧：String sIdsParam = String.join(“,”, songIds);这个用法可以使一个歌单中所有歌曲的id，组装成用逗号分割的字符串。  </p>
+<p>这里我们还要重构一个方法（private Map getArtistObj(String artistId)）来使得爬取歌曲详情时候复用，避免重复代码。<br>调用歌曲详情 API 返回的结果中，歌曲存放在一个集合中，使用起来不方便。可以把源歌曲详情对象放在一个 Map 中，可以很方便的读取.<br><img src="https://style.youkeda.com/img/ham/course/j12/3-2-1.svg" alt=""></p>
+<h3 id="3-4歌曲评论及音乐文件"><a href="#3-4歌曲评论及音乐文件" class="headerlink" title="3.4歌曲评论及音乐文件"></a>3.4歌曲评论及音乐文件</h3><p>抓取信息的实现：<br><img src="https://style.youkeda.com/img/ham/course/j12/3-3-1.svg" alt=""><br>我们来看看api是否支持批量参数的区别：<br>如果支持（歌曲详情API、歌曲文件API)：就要选调用API获取批量数据，再对歌曲进行循环遍历，解析出需要的源数据<br>如果不支持（歌曲评论API）：先对歌曲进行循环遍历，每次遍历都调用一次 API ，再解析数据。这么做效率比较低</p>
+<p>方法重构：歌曲详情API、歌曲文件API 都支持批量查询，对应的 assembleSongDetail() 方法 、 assembleSongUrl() 方法，<br>都需要组装 xxxx,xxxx格式的参数。<br><img src="https://style.youkeda.com/img/ham/course/j12/3-2-1.svg" alt=""><br>这一节我们就开发完剩下的assembleSongComment() 和 assembleSongUrl() 方法，并且完成方法的重构。</p>
+<h2 id="第四章-图云"><a href="#第四章-图云" class="headerlink" title="第四章 图云"></a>第四章 图云</h2><p>我们在前面三章抓取了歌单信息，最后一章我们来把它组成图云，类似下图。<br><img src="https://style.youkeda.com/img/ham/course/j12/1-8.png" alt=""><br>图云实现的理论思路：1  先对评论进行分词<br>                2  把分词以后关键词出现的次数进行统计排序<br>                3  根据关键词的频率进行视觉显示<br>但是上面的思路实现起来十分困难，设计到非常复杂的技术（词性标注，自然语言分析，歧义词分析，图片绘制，图文智能排版等），所以<br>我们可以使用别人已经写好的工具:kumo,使用时添加依赖即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;com.kennycason&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;kumo-core&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.17&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- 下面tokenizers是为了中文分词引入 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;com.kennycason&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;kumo-tokenizers&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.17&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://style.youkeda.com/img/ham/course/j12/4-1-1-1.svg" alt=""><br>我们参照流程图<br><img src="https://style.youkeda.com/img/ham/course/j12/4-1-2.svg" alt=""></p>
 
 </div>
 
