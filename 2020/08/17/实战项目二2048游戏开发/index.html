@@ -8,6 +8,8 @@
 	<!-- title -->
 	
 	<title>
+	
+		实战项目二2048游戏开发 | 
 	 
 	Hexo
 	</title>
@@ -152,7 +154,7 @@
 							</ul>
 			
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2020/08/17/%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE%E4%BA%8C2048%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">
 										实战项目二2048游戏开发
 									</a>
@@ -184,33 +186,67 @@
 
 	<!-- 引入正文 -->
 	<div id="content">
-		<div id="index">
+		<h1 id="article-title">
+
+	实战项目二2048游戏开发
+</h1>
+<div class="article-meta">
 	
-		<div class="index-li">
-			<a href="/2020/07/28/Vue/">
-				<h2 class="index-title">
-					Vue
-				</h2>
-				<div class="index-brief">
-					第一章 vue介绍1.1Vue配置vue是构建用户界面的渐进式框架 特点是易用 灵活 性能优vue脚手架的安装 vue CLI安装 node.js 安装vue cli创建vue工程
-1.2 vue工程目录介绍工程介绍node_modules:存放npm命令下载的开发环境和生产环境的依赖包public
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2020-07-28</span>
-                    
-                            
-                    
-                </div>
-		</div>	
-	
-	
-	<div id="index-paginator">
-		
-	</div>
+	<span>John Doe</span>
+	<span>2020-08-17 12:23:07</span>
+    
+		<div id="article-categories">
+            
+		</div>
+    
 </div>
 
+<div id="article-content">
+	<h2 id="第一章-2048游戏介绍"><a href="#第一章-2048游戏介绍" class="headerlink" title="第一章 2048游戏介绍"></a>第一章 2048游戏介绍</h2><h3 id="1-1-项目介绍"><a href="#1-1-项目介绍" class="headerlink" title="1.1 项目介绍"></a>1.1 项目介绍</h3><p>相信大家都玩过2048这个游戏，这次我们就一步步地来完成2048的开发，这个项目它需要用到html css和js的知识。</p>
+<p>需求分析：<br>1 游戏是一个4x4的方格，每一个方格我们称为Tile或者Cell<br>2 游戏开始会随机出现2个方格，每个的值90%的可能性为2，10%的可能性为4<br>3 通过键盘的上下左右键可以控制方格按一个方向移动，直到不能移动为止。<br>4 如果移动以后两个Tile 的内容值一样，则进行合并。<br>5 每个 Tile 移动会有 100ms 的移动动画。<br>6 每个 Tile 的出现有个短暂的放大效果<br>7 每次 Tile 的合并有个短暂的放大回弹效果<br>8 顶部 Score 记录当前分数，BestScore 记录有史以来最高分，每次合并都会产生分数的变化，分数计算规则为：分数 = 原来分数 + 合并后的值。<br>9 游戏将时时刻刻记录进度，刷新页面重现游戏进度。<br>10 当某个 Tile 的值为 2048，游戏胜利。<br>11 当每个方格都有值，并且相邻两个方格无法再进行合并，则游戏结束</p>
+<p>实战技术知识点<br>1 静态页面渲染：需要 HTML、CSS 基础知识，包括学习的SCSS知识。<br>2 开始游戏等事件处理：需要使用 DOM 监听事件。<br>3 Tile 移动处理：需要监听键盘事件（暂时不处理 H5 中手势事件的情况）。<br>4 Tile 动态随机添加：需要使用 DOM 动态操作。<br>5 Tile 移动，合并： 需要使用 Javascript 列表，对象，方法等数据结构和常用技巧。<br>6 Tile 动画：需要使用 CSS 的 transform 和 animation 等动画效果。<br>7 本地缓存：需要使用 Javascript localStorage 浏览器缓存。<br>8…</p>
+<p><a href="https://2048game.com/" target="_blank" rel="noopener">2048游戏链接</a></p>
+<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2>
+</div>
+
+
+    <div class="post-guide">
+        <div class="item left">
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2020/08/11/java%E9%83%A8%E5%88%86%E8%A7%A3%E6%9E%90/">
+                java部分解析
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+
+	<div id="vcomments"></div>
+
+
+<script>
+	
+		// 评论
+		new Valine({
+			av: AV,
+			el: '#vcomments',
+			notify: false,
+			verify: false,
+			path: window.location.pathname,
+			appId: '',
+			appKey: '',
+			placeholder: '请输入评论',
+			avatar: 'retro',
+			recordIP: false
+		})
+	
+	
+</script>
 	</div>
 	<div id="footer">
 	<p>
