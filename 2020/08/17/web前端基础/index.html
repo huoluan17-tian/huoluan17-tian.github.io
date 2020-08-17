@@ -92,8 +92,8 @@
 			
 							<ul>
 								<li class="file">
-									<a href="/2020/08/01/Vuex/">
-										Vuex
+									<a href="/2020/07/28/Vue/">
+										Vue
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -101,8 +101,8 @@
 			
 							<ul>
 								<li class="file">
-									<a href="/2020/07/28/Vue/">
-										Vue
+									<a href="/2020/08/01/Vuex/">
+										Vuex
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -217,18 +217,46 @@
 <p>什么是html：<br>HTML 描述了一个网站的结构，是一种标记语言而非编程语言。<br>一个 HTML 元素是 HTML 文件的一个基本组成单元。</p>
 <p>什么是css(层叠样式表):<br>css主要职能就是确定布局和元素的表现,它不能单独使用，必须要和html和xml配合使用。<br>简单来说css可以改变html元素的样式。</p>
 <p>什么是js?<br>JavaScript（通常缩写为JS）是一种高级的、解释型的编程语言，它能使网页可交互（例如拥有复杂的动画，可点击的按钮，通俗的菜单、表<br>单验证、页面特效、操作页面元素等），常用来为网页添加各式各样的动态功能,为用户提供更流畅美观的浏览效果.</p>
-<h2 id="第二章-认识html"><a href="#第二章-认识html" class="headerlink" title="第二章 认识html"></a>第二章 认识html</h2><p>###2.1 Html元素的结构<br>HTML 的语言形式为标签（如<p>）包围的 HTML 元素。<br><img src="https://document.youkeda.com/P3-1-HTML-CSS/1.2/1.png" alt=""><br>html标签有以下特点：<br>1 由尖括号包围关键词组成，比如：<p>、<h1>、<div>、<span> 等；<br>2 通常成对出现，比如<div> 和 </div>，第一个就是开始标签，第二个就是结束标签，要注意开始标签和结束标签的区别在于，结束标签比开始标签多一个“/”；<br>3 虽然标签通常是成对出现的，但并不是所有标签都有对应的结束标签，比如 <input>、<img> 等，它们往往是单独呈现的</p>
+<h2 id="第二章-认识html"><a href="#第二章-认识html" class="headerlink" title="第二章 认识html"></a>第二章 认识html</h2><h3 id="2-1-Html元素的结构"><a href="#2-1-Html元素的结构" class="headerlink" title="2.1 Html元素的结构"></a>2.1 Html元素的结构</h3><p>HTML 的语言形式为标签（如<p>）包围的 HTML 元素。<br><img src="https://document.youkeda.com/P3-1-HTML-CSS/1.2/1.png" alt=""></p>
+<pre><code class="bash">html标签有以下特点：
+1 由尖括号包围关键词组成，比如：&lt;p&gt;、&lt;h1&gt;、&lt;div&gt;、&lt;span&gt; 等；
+2 通常成对出现，比如&lt;div&gt; 和 &lt;/div&gt;，第一个就是开始标签，第二个就是结束标签，要注意开始标签和结束标签的区别在于，结束标签比开始标签多一个“/”；
+3 虽然标签通常是成对出现的，但并不是所有标签都有对应的结束标签，比如 &lt;input&gt;、&lt;img&gt; 等，它们往往是单独呈现的</code></pre>
 <p>剖析一个 HTML 元素：<br><img src="https://document.youkeda.com/P3-1-HTML-CSS/1.2/2.jpg" alt=""></p>
 <p>在 HTML 中，元素可以发生嵌套:<br><img src="https://document.youkeda.com/P3-1-HTML-CSS/1.2/3.png" alt=""><br><img src="https://document.youkeda.com/P3-1-HTML-CSS/1.2/16.png" alt=""></p>
 <p>完整的html文档：<br><img src="https://document.youkeda.com/P3-1-HTML-CSS/1.2/4.jpg" alt=""></p>
-<ol>
-<li><!DOCTYPE html>
-<p>(1). 作用：告知浏览器该页面文件的文档类型，指示 web 浏览器使用哪个 HTML 版本编写页面。<br>(2). 位置：&lt;!DOCTYPE&gt; 声明必须是 HTML 文档的第一行，位于 <html> 标签之前。<br>(3). &lt;!DOCTYPE&gt; 声明对大小写不敏感。<br>(4). &lt;!DOCTYPE&gt; 声明没有结束标签</p>
-</li>
-<li><html lang="en">...</html>
-</li>
-</ol>
+<pre><code class="bash">1. &lt;!DOCTYPE html&gt;
+(1). 作用：告知浏览器该页面文件的文档类型，指示 web 浏览器使用哪个 HTML 版本编写页面。
+(2). 位置：&lt;!DOCTYPE&gt; 声明必须是 HTML 文档的第一行，位于 &lt;html&gt; 标签之前。
+(3). &lt;!DOCTYPE&gt; 声明对大小写不敏感。
+(4). &lt;!DOCTYPE&gt; 声明没有结束标签
 
+2. &lt;html lang=<span class="string">"en"</span>&gt;...&lt;/html&gt;
+(1). 此元素可告知浏览器其自身是一个 HTML 文档。
+(2). &lt;html&gt; 与 &lt;/html&gt; 标签限定了文档的开始点和结束点，在它们之间是文档的头部和主体。文档的头部由 &lt;head&gt; 标签定义，而主体由 &lt;body&gt; 
+标签定义。
+(3). lang 属性（语言属性）：当搜索引擎或者浏览器拿到语言属性后，有可能做一些针对指定语言的辅助操作，‘en’表示英文。
+
+3 标签属性
+(1). 标签可以拥有零个或多个标签属性，注意：标签属性与标签名称、标签属性与标签属性之间需用一个空格隔开。
+(2). 标签属性可以赋予标签更多的信息，标签属性通常是以 key=<span class="string">"value"</span> 即 名称=<span class="string">"值"</span> 的形式出现。
+(3). 常见的标签属性有：class、id、style、lang、src 等。
+
+
+4. 文档的头部
+&lt;head&gt;...&lt;/head&gt;
+(1). head 元素定义文档的头部，我们通常在这里引用样式表、提供元信息等。
+(2). 文档的头部中的&lt;title&gt;...&lt;/title&gt;定义文档的标题，在网页上体现为网页标签的标题。
+(3). 一个 &lt;head&gt; 元素必须包含且只能包含一个 &lt;title&gt; 元素。
+
+5. 文档的主体
+&lt;body&gt;...&lt;/body&gt;
+(1). body 元素定义文档的主体，包含文档的所有内容（比如文本、超链接、图像、表格和列表等等）。</code></pre>
+<p>html中的注释：</p>
+<pre><code class="bash">每一个编程语言都有注释，html也不例外，在HTML中我们用&lt;!-- --&gt;标签来表示注释： 注释不会显示在浏览器网页中。</code></pre>
+<p><img src="https://document.youkeda.com/P3-1-HTML-CSS/1.2/6.png" alt=""></p>
+<p>认识MDN:<br>Mozilla 开发者网络（Mozilla Developer Network，MDN）是由 Mozilla、Microsoft、Google、Samsung 和 W3C 联合打造成的最好的 Web<br>文档，是学习 Web 开发的一个权威、全面、高质量的网站，文档丰富，资料全面，非常适合大家学习使用，请把它当成你 Web 开发学习时的百科全书。<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML" target="_blank" rel="noopener">MDN网址</a></p>
+<h2 id="第三章-html文本标签"><a href="#第三章-html文本标签" class="headerlink" title="第三章 html文本标签"></a>第三章 html文本标签</h2><h3 id="3-1-块状和内联标签"><a href="#3-1-块状和内联标签" class="headerlink" title="3.1 块状和内联标签"></a>3.1 块状和内联标签</h3>
 </div>
 
 
