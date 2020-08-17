@@ -92,8 +92,8 @@
 			
 							<ul>
 								<li class="file">
-									<a href="/2020/07/28/Vue/">
-										Vue
+									<a href="/2020/08/01/Vuex/">
+										Vuex
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -101,8 +101,8 @@
 			
 							<ul>
 								<li class="file">
-									<a href="/2020/08/01/Vuex/">
-										Vuex
+									<a href="/2020/07/28/Vue/">
+										Vue
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -130,6 +130,15 @@
 								<li class="file">
 									<a href="/2020/08/09/js%E5%9F%BA%E7%A1%80/">
 										js基础
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/08/17/web%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/">
+										web前端基础
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -206,12 +215,28 @@
 <p>需求分析：<br>1 游戏是一个4x4的方格，每一个方格我们称为Tile或者Cell<br>2 游戏开始会随机出现2个方格，每个的值90%的可能性为2，10%的可能性为4<br>3 通过键盘的上下左右键可以控制方格按一个方向移动，直到不能移动为止。<br>4 如果移动以后两个Tile 的内容值一样，则进行合并。<br>5 每个 Tile 移动会有 100ms 的移动动画。<br>6 每个 Tile 的出现有个短暂的放大效果<br>7 每次 Tile 的合并有个短暂的放大回弹效果<br>8 顶部 Score 记录当前分数，BestScore 记录有史以来最高分，每次合并都会产生分数的变化，分数计算规则为：分数 = 原来分数 + 合并后的值。<br>9 游戏将时时刻刻记录进度，刷新页面重现游戏进度。<br>10 当某个 Tile 的值为 2048，游戏胜利。<br>11 当每个方格都有值，并且相邻两个方格无法再进行合并，则游戏结束</p>
 <p>实战技术知识点<br>1 静态页面渲染：需要 HTML、CSS 基础知识，包括学习的SCSS知识。<br>2 开始游戏等事件处理：需要使用 DOM 监听事件。<br>3 Tile 移动处理：需要监听键盘事件（暂时不处理 H5 中手势事件的情况）。<br>4 Tile 动态随机添加：需要使用 DOM 动态操作。<br>5 Tile 移动，合并： 需要使用 Javascript 列表，对象，方法等数据结构和常用技巧。<br>6 Tile 动画：需要使用 CSS 的 transform 和 animation 等动画效果。<br>7 本地缓存：需要使用 Javascript localStorage 浏览器缓存。<br>8…</p>
 <p><a href="https://2048game.com/" target="_blank" rel="noopener">2048游戏链接</a></p>
-<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2>
+<h2 id="第二章-2048静态页面开发"><a href="#第二章-2048静态页面开发" class="headerlink" title="第二章 2048静态页面开发"></a>第二章 2048静态页面开发</h2><h3 id="2-1-静态页面开发"><a href="#2-1-静态页面开发" class="headerlink" title="2.1 静态页面开发"></a>2.1 静态页面开发</h3><p>我们先看看页面结构<br><img src="https://style.youkeda.com/img/course/f10/2/2.jpeg" alt=""><br>整个css的文件比较大，为了更加清晰的理解 CSS 文件。我们利用 SCSS @import 特性对文件进行分离，如下文件目录。</p>
+<pre><code class="bash">|-- images
+|-- style
+    |-- index.scss  // scss入口文件 + footer
+    |-- nav.scss    // 头部区域文件
+    |-- main.scss   // 主体区域文件
+    |-- desc.scss   // 描述区域文件
+|-- index.html</code></pre>
+<p>我们利用scss 变量声明中心方格区域的长宽，间隔等属性，如果以后我们需要适配移动端，只需要修改这里的变量值即可，<br>这就是scss的优势—可编程的 CSS。</p>
+<p>利用html和css完成下面静态页面的开发<br><img src="https://style.youkeda.com/img/course/f10/2/3.png" alt=""></p>
+<p>接下来我们渲染加入了方块的静态页面：如下图<br><img src="https://style.youkeda.com/img/course/f10/2/4.png" alt=""><br>我们来分析一下方块的相同点和不同点：<br>1 它们都有一样的大小，圆角，动效。所以我们需要设置一个统一的 class 为tile。<br>2 它们每个数字颜色和字体大小都不同，因此我们需要为每个值设置单独的样式，class 为tile-(x)(x 为 2、4、8、16 …… 2048)。<br>3 它们的位置可以总结为行(row)，列(column)，因此我们可以使用绝对定位进行布局，class 为title-position-(row)-(column)。<br>4 每个元素都有移动（translate）和 放缩（scale）动画，因为两个动画都是transform的一个属性，会出现冲突。因此我们将每个 Tile<br>分为外框tile和tile-inner两个部分，tile用于元素移动，title-inner用于元素放缩。</p>
+
 </div>
 
 
     <div class="post-guide">
         <div class="item left">
+            
+              <a href="/2020/08/17/web%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/">
+                  <i class="fa fa-angle-left" aria-hidden="true"></i>
+                  web前端基础
+              </a>
             
         </div>
         <div class="item right">
