@@ -237,7 +237,7 @@
 <h3 id="1-3-线上数据库的购买和设置"><a href="#1-3-线上数据库的购买和设置" class="headerlink" title="1.3 线上数据库的购买和设置"></a>1.3 线上数据库的购买和设置</h3><p>RDS（Relational Database Service），关系型数据库服务是一种即开即用、稳定可靠、可弹性伸缩的在线数据库服务。<br>我们来看看rds和自建数据库的差别：</p>
 <p>支出项         自建数据库                            rds<br>运维           需要招一个靠谱的 DBA，年薪 12w          不需要额外招人，无额外费用<br>服务器及扩容    需要购买昂贵的服务器，扩容时间按月计       可以按需购买服务器，扩容时间按分钟计<br>备份和网络安全   需要自行搭建防火墙和备份机               不需要，阿里云会提供相应的服务<br>网络费和电费     需要专门搭建网络专线，并缴纳不菲的电费和通<br>               信费，机房需要防尘防水通风               不需要，机器在阿里云上面<br>故障解决能力     解决按日计算，由自己的 DBA 负责解决        解决按小时计算，解决不了就投诉，搞个大新闻<br>抗灾能力        服务器会老化会起火会出现各种意外            阿里云保障安全，出问题阿里云赔偿</p>
 <p>自己在阿里云上面购买rds然后配置数据库。（上网找视频）</p>
-<h2 id="第二章-crud"><a href="#第二章-crud" class="headerlink" title="第二章 crud"></a>第二章 crud</h2><h3 id="3-1-表格的结构"><a href="#3-1-表格的结构" class="headerlink" title="3.1 表格的结构"></a>3.1 表格的结构</h3><p>数据库和表：在云服务器上我们可以创建很多DB，它们共用一个云服务，我们配置链接的是其中一个数据库。<br><img src="https://qgt-style.oss-cn-hangzhou.aliyuncs.com/newcoursep4/d1/d1-3/db1.png" alt=""><br>表名：一般英文小写字母，单词之间用_分隔<br>字段：在数据库表中，每一列都是一个字段，第一行是字段名，下面都是字段的值，我们读取数据时，从第二行开始读取，对应的数组下标是0<br><img src="https://qgt-style.oss-cn-hangzhou.aliyuncs.com/newcoursep4/d1/d1-1/%E5%AD%A6%E7%94%9F%E8%A1%A8.png" alt=""><br>主键:每一张数据库表都可以有一个主键（现在要求要有）（primary key），主键最大的作用就是用来标识数据.特点：<br>1 主键是一个特殊字段<br>2 表格可以没有主键，但是最多只能拥有一个主键<br>3 主键的值不能为NULL，必须有对应的值<br>4 主键的值必须是绝对唯一的，即不能出现两个相同的主键值，比如名字就不能作为主键，因为会出现重名的情况。<br>5 我们一般使用主键和其他表进行关联</p>
+<h2 id="第二章-crud"><a href="#第二章-crud" class="headerlink" title="第二章 crud"></a>第二章 crud</h2><h3 id="2-1-表格的结构"><a href="#2-1-表格的结构" class="headerlink" title="2.1 表格的结构"></a>2.1 表格的结构</h3><p>数据库和表：在云服务器上我们可以创建很多DB，它们共用一个云服务，我们配置链接的是其中一个数据库。<br><img src="https://qgt-style.oss-cn-hangzhou.aliyuncs.com/newcoursep4/d1/d1-3/db1.png" alt=""><br>表名：一般英文小写字母，单词之间用_分隔<br>字段：在数据库表中，每一列都是一个字段，第一行是字段名，下面都是字段的值，我们读取数据时，从第二行开始读取，对应的数组下标是0<br><img src="https://qgt-style.oss-cn-hangzhou.aliyuncs.com/newcoursep4/d1/d1-1/%E5%AD%A6%E7%94%9F%E8%A1%A8.png" alt=""><br>主键:每一张数据库表都可以有一个主键（现在要求要有）（primary key），主键最大的作用就是用来标识数据.特点：<br>1 主键是一个特殊字段<br>2 表格可以没有主键，但是最多只能拥有一个主键<br>3 主键的值不能为NULL，必须有对应的值<br>4 主键的值必须是绝对唯一的，即不能出现两个相同的主键值，比如名字就不能作为主键，因为会出现重名的情况。<br>5 我们一般使用主键和其他表进行关联</p>
 <p>sql常用数据类型：<br>类型                含义<br>VARCHAR            可变的长字符串，可以类比于Java中的String类型<br>INT                整型，和Java中的int类型一致<br>DOUBLE             浮点型，和Java中的double类型一致,一般不加长度限制<br>DATETIME           时间类型，长度为0，格式为YYYY-MM-DD HH:MM:SS，值为2019-12-31 23:59:59<br>BIGINT              长整形，和Java中的long类型一致</p>
 <p>数据：我们通常把表格中的一行称为一条数据，通过主键来快速查找数据，也可以通过其他字段来操作数据。</p>
 <p>crud<br>英文        中文    SQL                HTTP<br>CREATE    创建    INSERT（插入）    POST<br>READ    读取    SELECT（查询）    GET<br>UPDATE    更新    UPDATE            POST<br>DELETE    删除    DELETE                DELETE</p>
@@ -263,6 +263,139 @@
 <pre><code class="bash">drop table table_name;             //table_name 表格名
 另一种写法
 DROP TABLE IF EXISTS table_name; </code></pre>
+<h3 id="2-3插入语句（insert）"><a href="#2-3插入语句（insert）" class="headerlink" title="2.3插入语句（insert）"></a>2.3插入语句（insert）</h3><p>插入数据的语法：</p>
+<pre><code class="bash">INSERT INTO table_name(field1,field2,...fieldN)
+VALUES
+(value1,value2,...valueN);                       //表示插入若干个字段和对应的值
+
+例如
+INSERT INTO
+  `user` (`id`, `mobile`, `nickname`, `gmt_created`)
+VALUES
+  (1, <span class="string">'13426069530'</span>, <span class="string">'叶冰'</span>, now()); //gmt_created是datetime类型，我们一般使用now()
+                                      这个函数来获取服务器当前时间，并将它作为值插入</code></pre>
+<p>插入语句的简化: 如果主键设置为自增，可以不添加主键的字段和值<br>             如果插入的是所有的字段的数据，那么可以省略字段名，直接插入值。</p>
+<pre><code class="bash">INSERT INTO table_name
+VALUES
+(value1,value2,...valueN);</code></pre>
+<p>批量插入数据：</p>
+<pre><code class="bash">INSERT INTO table_name
+VALUES
+(value1,value2,...valueN),              //对应一行
+(value1,value2,...valueN);              //对应表格的一行</code></pre>
+<h3 id="2-4-查询select"><a href="#2-4-查询select" class="headerlink" title="2.4 查询select"></a>2.4 查询select</h3><p>语法：            </p>
+<pre><code class="bash">SELECT field1,field2,.... FROM table_name;  //从指定表中查询指定列的信息
+SELECT * FROM timi_adc;               //查询timi_adc的所有字段信息
+
+
+SELECT
+  id,
+  hero_name
+FROM
+  timi_adc;              //从timi_adc中查询hero-name字段的信息</code></pre>
+<p>限定条件 where子句<br>语法：</p>
+<pre><code class="bash">SELECT * FROM table_name WHERE condition;  //condition就是条件判断</code></pre>
+<h3 id="2-5-limit子句"><a href="#2-5-limit子句" class="headerlink" title="2.5 limit子句"></a>2.5 limit子句</h3><p>返回指定的行数<br>语法</p>
+<pre><code class="bash">SELECT * FROM table_name LIMIT parameter;   //parameter是参数
+
+示例
+SELECT * FROM timi_adc  LIMIT 
+  5, 6;          //这句话表示返回第6行开始的之后6行  第一个参数5表示从第6行开始，第二个6表示查询6行
+
+SELECT * FROM timi_adc  LIMIT 5;  //表示查询一到5行 等同于<span class="built_in">limit</span> 0,5</code></pre>
+<p>一般会和where一起使用，例如：查询查询登场率超过百分之10的前5条数据</p>
+<pre><code class="bash">SELECT  * FROM  timi_adc WHERE  appearance_rate &gt; 0.1 LIMIT 5;</code></pre>
+<h3 id="2-6排序-order-by子句"><a href="#2-6排序-order-by子句" class="headerlink" title="2.6排序 order by子句"></a>2.6排序 order by子句</h3><p>语法：排序默认按照升序排序，对于int,double而言，是从小到大，对于varchar而言，是从字母A到Z，<br>对于datetime而言，是从过去到现在</p>
+<pre><code class="bash">SELECT * FROM table_name ORDER BY field_name;
+
+示例
+SELECT
+  *
+FROM
+  timi_adc
+ORDER BY
+  win_rate;             //胜率从小到大排序</code></pre>
+<p>加上desc使其变为倒序</p>
+<pre><code class="bash">SELECT
+  *
+FROM
+  timi_adc
+ORDER BY
+  win_rate DESC;       //胜率从大到小排序</code></pre>
+<h3 id="2-7-更新和删除"><a href="#2-7-更新和删除" class="headerlink" title="2.7 更新和删除"></a>2.7 更新和删除</h3><p>更新 update语句语法：<br>注意：UPDATE语句我们必须加入WHERE限定条件，否则的话UPDATE语句就会对整列起作用</p>
+<pre><code class="bash">UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
+
+示例：
+UPDATE
+  timi_adc
+SET
+  ban_rate = 0.01
+WHERE
+  hero_name = <span class="string">'艾琳'</span>;           //把艾琳的ban率改为0.01</code></pre>
+<p>删除语句语法：</p>
+<pre><code class="bash">DELETE FROM table_name [WHERE Clause]
+
+示例
+delete from user <span class="built_in">where</span> id=4; //删除id=4的行
+
+delete from `user` <span class="built_in">where</span> id&lt;20; //删除id小于20的所有行
+
+delete from user;  //删除表中所有数据</code></pre>
+<h2 id="第三章-查询优化"><a href="#第三章-查询优化" class="headerlink" title="第三章 查询优化"></a>第三章 查询优化</h2><h3 id="3-1-like-查询"><a href="#3-1-like-查询" class="headerlink" title="3.1 like 查询"></a>3.1 like 查询</h3><p>我们来看看模糊查询：like子句</p>
+<pre><code class="bash">SELECT * FROM table_name WHERE condition LIKE condition;//SQL LIKE 子句中，我们的使用百分号 %字符来表
+                                    示任意字符，如果我们没有使用任何的%，那此时LIKE就相当于=
+
+示例
+SELECT * FROM timi_adc WHERE hero_name LIKE <span class="string">'%孙%'</span>;  //查询名字中带有孙字的英雄</code></pre>
+<p>%的位置会决定搜索结果的不同，’%孙%’示这个字符串含孙，’孙%’表示这个字符串以孙开头，’%孙’表示这个字符串以孙结尾</p>
+<p>我们来看一下_</p>
+<pre><code class="bash">SELECT * FROM timi_adc WHERE hero_name LIKE <span class="string">'_尚香'</span>; //表示查询名为x尚香的英雄 如孙尚香可以被查询到而公孙尚香不可以</code></pre>
+<h3 id="3-2-and-与or"><a href="#3-2-and-与or" class="headerlink" title="3.2 and 与or"></a>3.2 and 与or</h3><p>使用多个条件时会使用and和or关键字</p>
+<pre><code class="bash"> SELECT * FROM table_name WHERE conditionA AND/OR condtionB;
+
+示例
+SELECT
+  *
+FROM
+  timi_adc
+WHERE
+  win_rate &gt; 0.5
+  AND win_rate &lt; 0.51
+  OR win_rate &lt; 0.47;   //胜率在0.5到0.51或者小于0.47的英雄信息
+
+我们可以添加（）来分割条件，使得条件更加清晰</code></pre>
+<h3 id="3-3-in-not-in"><a href="#3-3-in-not-in" class="headerlink" title="3.3 in/not in"></a>3.3 in/not in</h3><p>精准查询 in 语法：</p>
+<pre><code class="bash">SELECT * FROM table_name WHERE column IN (condtionA,condtionB);
+
+示例：
+SELECT
+  *
+FROM
+  timi_adc
+WHERE
+  fever IN (<span class="string">'T0'</span>, <span class="string">'T3'</span>);  //表示查询热度to或者t3的英雄</code></pre>
+<p>not in /not like</p>
+<pre><code class="bash">SELECT
+  *
+FROM
+  timi_adc
+WHERE
+  fever NOT IN (<span class="string">'T0'</span>)  //表示查询除了to之外的所有英雄 not <span class="keyword">in</span>表示否定  注意括号不能省略</code></pre>
+<h3 id="3-4-null值的处理"><a href="#3-4-null值的处理" class="headerlink" title="3.4 null值的处理"></a>3.4 null值的处理</h3><p>null的概念：NULL对应的是NOT NULL,它们是 MySQL 字段的数据类型的属性，本身不属于任何数据类型，<br>NULL值也不等于空值，空值是不占用存储空间的，NULL占用存储空间 </p>
+<p>MySQL为处理 NULL 值提供了三种运算符：<br>IS NULL：当列的值是 NULL 时，这个运算符返回 true<br>IS NOT NULL：当列的值不为 NULL，这个运算符返回 true<br>&lt;=&gt;：比较操作符，当比较的两个值都为 NULL 时或者相等时，返回为 true</p>
+<p>语法：</p>
+<pre><code class="bash">SELECT field_name1,field_name2
+FROM table_name
+WHERE field_name2 IS NOT NULL/IS NULL;  
+
+示例：
+SELECT
+  id,
+  mobile
+FROM
+  student
+WHERE
+  mobile IS NOT NULL;          //查询mobile不为空的字段的id和mobile</code></pre>
 
 </div>
 
