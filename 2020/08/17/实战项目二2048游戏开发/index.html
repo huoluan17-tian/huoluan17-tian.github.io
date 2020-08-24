@@ -243,7 +243,56 @@
 |-- index.html</code></pre>
 <p>我们利用scss 变量声明中心方格区域的长宽，间隔等属性，如果以后我们需要适配移动端，只需要修改这里的变量值即可，<br>这就是scss的优势—可编程的 CSS。</p>
 <p>利用html和css完成下面静态页面的开发<br><img src="https://style.youkeda.com/img/course/f10/2/3.png" alt=""></p>
-<p>接下来我们渲染加入了方块的静态页面：如下图<br><img src="https://style.youkeda.com/img/course/f10/2/4.png" alt=""><br>我们来分析一下方块的相同点和不同点：<br>1 它们都有一样的大小，圆角，动效。所以我们需要设置一个统一的 class 为tile。<br>2 它们每个数字颜色和字体大小都不同，因此我们需要为每个值设置单独的样式，class 为tile-(x)(x 为 2、4、8、16 …… 2048)。<br>3 它们的位置可以总结为行(row)，列(column)，因此我们可以使用绝对定位进行布局，class 为title-position-(row)-(column)。<br>4 每个元素都有移动（translate）和 放缩（scale）动画，因为两个动画都是transform的一个属性，会出现冲突。因此我们将每个 Tile<br>分为外框tile和tile-inner两个部分，tile用于元素移动，title-inner用于元素放缩。</p>
+<p>接下来我们渲染加入了方块的静态页面：如下图<br><img src="https://style.youkeda.com/img/course/f10/2/4.png" alt=""><br>我们来分析一下方块的相同点和不同点：<br>1 它们都有一样的大小，圆角，动效。所以我们需要设置一个统一的 class 为tile。<br>2 它们每个数字颜色和字体大小都不同，因此我们需要为每个值设置单独的样式，class 为tile-(x)(x 为 2、4、8、16 …… 2048)。<br>3 它们的位置可以总结为行(row)，列(column)，因此我们可以使用绝对定位进行布局，class 为title-position-(row)-(column)。<br>4 每个元素都有移动（translate）和 放缩（scale）动画，因为两个动画都是transform的一个属性，会出现冲突。因此我们将每个 Tile<br>分为外框tile和tile-inner两个部分，tile用于元素移动，title-inner用于元素放缩。<br>我们完成静态页面的渲染：<br><img src="https://style.youkeda.com/img/course/f10/2/5.png" alt=""></p>
+<h2 id="第三章-2048-对象设计"><a href="#第三章-2048-对象设计" class="headerlink" title="第三章  2048 对象设计"></a>第三章  2048 对象设计</h2><p>###3.1 2048 对象设计</p>
+<p>tile对象，我们编写js的时候考虑文件分离，考虑tile对象时，把每个方格当成一个tile对象。那么每个Tile应该有<br>row,column,value三个属性分别表示行、列、值，对应的 JS 代码为：</p>
+<pre><code class="bash">// tile.js
+<span class="keyword">function</span> Tile(position, value) {
+  this.row = position.row;
+  this.column = position.column;
+  this.value = value;
+}</code></pre>
+<p>grid对象，它是管理tile对象的，它是4x4的方格。</p>
+<pre><code class="bash">// grid.js
+<span class="keyword">function</span> Grid(size = 4) {
+  this.size = size;
+}</code></pre>
+<p>用grid对象来存储Tile内容，在这里我们可以使用二维数组来存储：</p>
+<pre><code class="bash">//grid.js
+<span class="keyword">function</span> Grid(size = 4) {
+  this.size = size;
+  this.cells = [];
+  this.init();
+}
+
+// prototype 设置方法
+Grid.prototype.init = <span class="keyword">function</span>(size) {
+  <span class="keyword">for</span> (<span class="built_in">let</span> row = 0; row &lt; size; row++) {
+    this.cells.push([]);
+    <span class="keyword">for</span> (<span class="built_in">let</span> column = 0; column &lt; size; column++) {
+      this.cells[row].push(null);
+    }
+  }
+};</code></pre>
+<p>引入js</p>
+<pre><code class="bash">&lt;html&gt;
+  ...
+  &lt;body&gt;
+    ...
+    &lt;script src=<span class="string">"./scripts/tile.js"</span>&gt;&lt;/script&gt;
+    &lt;script src=<span class="string">"./scripts/grid.js"</span>&gt;&lt;/script&gt;
+    &lt;script src=<span class="string">"./scripts/index.js"</span>&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>往grid添加tile</p>
+<pre><code class="bash">//grid.js
+
+//...
+
+Grid.prototype.add = <span class="keyword">function</span>(tile) {
+  this.cells[tile.row][tile.column] = tile;
+};</code></pre>
+<p>uml图：<br><img src="https://style.youkeda.com/img/course/f10/3/7.svg" alt=""></p>
 
 </div>
 
