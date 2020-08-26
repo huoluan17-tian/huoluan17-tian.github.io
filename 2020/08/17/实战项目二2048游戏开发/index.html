@@ -92,8 +92,8 @@
 			
 							<ul>
 								<li class="file">
-									<a href="/2020/08/01/Vuex/">
-										Vuex
+									<a href="/2020/07/28/Vue/">
+										Vue
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -101,8 +101,8 @@
 			
 							<ul>
 								<li class="file">
-									<a href="/2020/07/28/Vue/">
-										Vue
+									<a href="/2020/08/01/Vuex/">
+										Vuex
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -482,6 +482,1164 @@ Manager.prototype.listenerFn = <span class="keyword">function</span>(direction) 
     this.render.render(this.grid);
   }
 };</code></pre>
+<h2 id="第六章-2048动画效果"><a href="#第六章-2048动画效果" class="headerlink" title="第六章 2048动画效果"></a>第六章 2048动画效果</h2><p>###6.1  移动动画<br>回顾一下之前的代码逻辑<br><img src="https://style.youkeda.com/img/course/f10/6/1.svg" alt=""><br>方块移动动画：<br>1 使用CSS特性transition: transform 100ms ease-in-out，给transform加入动画效果。<br>2 因为我们的每个Tile节点是临时创建的，并不会出现class切换的效果，当然也不会出现transform值变化过程，<br>  无法使用动画。我们可以使用一个猥琐逻辑，首先将Tileclass 设置为原始位置，然后延迟设置为当前位置。<br> 示例：</p>
+<pre><code class="bash">开始时Tile在 1 行 1 列，16ms 后位置变成了 1 行 4 列
+const div = document.createElement(<span class="string">'div'</span>);
+div.setAttribute(<span class="string">'class'</span>, <span class="string">'tile-position-1-1'</span>);
+setTimeout(() =&gt; {
+  div.setAttribute(<span class="string">'class'</span>, <span class="string">'tile-posiiton-1-4'</span>);
+}, 16);</code></pre>
+<p>代码实现：</p>
+<pre><code class="bash">// tile.js
+<span class="keyword">function</span> Tile(position, value) {
+  this.row = position.row;
+  this.column = position.column;
+  this.value = value;
+
+  // 新增prePosition属性
+  this.prePosition = null;
+}
+
+Tile.prototype.updatePosition = <span class="keyword">function</span>(position) {
+  // 更新的时候，先将当前位置，保存为prePosition
+  this.prePosition = { row: this.row, column: this.column };
+
+  this.row = position.row;
+  this.column = position.column;
+};</code></pre>
+<h3 id="6-2-移动动画（二）"><a href="#6-2-移动动画（二）" class="headerlink" title="6.2 移动动画（二）"></a>6.2 移动动画（二）</h3><p>为了在merge的时候也保留移动动画，我们需要保留merge的两个原始Tile，才能实现方块移动效果。<br>我们继续在Tile里增加属性，代码如下：</p>
+<pre><code class="bash">// tile.js
+<span class="keyword">function</span> Tile(position, value) {
+  this.row = position.row;
+  this.column = position.column;
+  this.value = value;
+
+  // 新增prePosition属性
+  this.prePosition = null;
+  // 存储merged两个Tile
+  this.mergedTiles = null;
+}
+
+// 移动核心逻辑
+Manager.prototype.listenerFn = <span class="keyword">function</span>(direction) {
+  //...
+  <span class="keyword">if</span> (next &amp;&amp; next.value === tile.value) {
+    // 合并位置是next的位置，合并的value是tile.value * 2
+    const merged = new Tile(
+      {
+        row: next.row,
+        column: next.column
+      },
+      tile.value * 2
+    );
+    this.score += merged.value;
+
+    //...
+    <span class="keyword">if</span> (merged.value === this.aim) {
+      this.status = <span class="string">'WIN'</span>;
+    }
+
+    // 特别注意下面两句话
+    merged.mergedTiles = [tile, next];
+    tile.updatePosition({ row: next.row, column: next.column });
+    moved = <span class="literal">true</span>;
+  }
+
+  // ...
+};</code></pre>
+<h2 id="第七章-2048-储存"><a href="#第七章-2048-储存" class="headerlink" title="第七章 2048 储存"></a>第七章 2048 储存</h2><p>###7.1 本地储存<br>我们先来看几个问题：<br>1 有哪些信息需要被储存？<br>当前分数 最高分数 当前方格面板中的每一个方格数字<br>2在什么时候进行保存<br>在每一次移动之后，渲染之前进行保存。</p>
+<pre><code class="bash">//manager.js
+
+Manager.prototype._render = <span class="function"><span class="title">function</span></span>() {
+  // 添加在此处进行处理
+
+  this.render.render(this.grid, { score: this.score, status: this.status });
+};</code></pre>
+<p>3 用什么技术进行保存？<br>window.localStorage<br>4 应该在什么时候恢复进度？<br>当页面重新加载的时候，初始化的时候，如果有历史进度，则加载历史进度</p>
+<pre><code class="bash">// 历史最高分
+const BestScoreKey = <span class="string">'2048BestScore'</span>;
+// 方格状态 和 分数
+const CellStateKey = <span class="string">'2048CellState'</span>;
+
+<span class="keyword">function</span> <span class="function"><span class="title">Storage</span></span>() {}
+
+Storage.prototype.setCellState = <span class="keyword">function</span>({ score, grid }) {
+  // 存储方格状态 和 分数
+};
+
+Storage.prototype.getCellState = <span class="function"><span class="title">function</span></span>() {
+  // 获取方格状态
+};</code></pre>
+<h3 id="7-2本地存储（二）"><a href="#7-2本地存储（二）" class="headerlink" title="7.2本地存储（二）"></a>7.2本地存储（二）</h3><p>序列化和反序列化<br>将对象信息变成字符串信息，我们通常叫做序列化。在这里我们分两步进行：<br>1将grid变成通用的json格式<br>2利用Json.stringify()将json序列化为字符串</p>
+<pre><code class="bash">//tile.js
+Tile.prototype.serialize = <span class="function"><span class="title">function</span></span>() {
+  <span class="built_in">return</span> {
+    position: {
+      row: this.row,
+      column: this.column
+    },
+    value: this.value
+  };
+};
+
+//grid.js
+
+Grid.prototype.serialize = <span class="function"><span class="title">function</span></span>() {
+  const cellState = [];
+
+  // cellState 是一个二维数组，分别存储整个Grid信息。
+  // 如果该位置有Tile, 则返回 Tile序列化结果
+  // 如果该位置没有Tile，则存储null
+  <span class="keyword">for</span> (<span class="built_in">let</span> row = 0; row &lt; this.size; row++) {
+    cellState[row] = [];
+    <span class="keyword">for</span> (<span class="built_in">let</span> column = 0; column &lt; this.size; column++) {
+      cellState[row].push(
+        this.cells[row][column] ? this.cells[row][column].serialize() : null
+      );
+    }
+  }
+
+  <span class="built_in">return</span> {
+    size: this.size,
+    cells: cellState
+  };
+};
+
+
+反序列化
+<span class="keyword">function</span> Grid(size = 4, state) {
+  this.size = size;
+  this.cells = this.init(size);
+
+  // 如果有之前的进度，则恢复
+  <span class="keyword">if</span> (state) {
+    this.recover(state);
+  }
+}
+
+Grid.prototype.recover = <span class="keyword">function</span>({ size, cells }) {
+  this.size = size;
+  // 遍历这个二维数组，如果某个cell存在，则新建一个Tile节点。
+  <span class="keyword">for</span> (<span class="built_in">let</span> row = 0; row &lt; this.size; row++) {
+    <span class="keyword">for</span> (<span class="built_in">let</span> column = 0; column &lt; this.size; column++) {
+      const cell = cells[row][column];
+      <span class="keyword">if</span> (cell) {
+        this.cells[row][column] = new Tile(cell.position, cell.value);
+      }
+    }
+  }</code></pre>
+<p>历史进度流程：</p>
+<pre><code class="bash">const CellStateKey = <span class="string">'2048CellState'</span>;
+
+//...
+
+// 存储方格状态和分数
+Storage.prototype.setCellState = <span class="keyword">function</span>({ score, grid }) {
+  window.localStorage.setItem(
+    CellStateKey,
+    JSON.stringify({
+      score,
+      grid: grid.serialize()
+    })
+  );
+};
+
+// 获取方格信息
+Storage.prototype.getCellState = <span class="function"><span class="title">function</span></span>() {
+  const cellState = window.localStorage.getItem(CellStateKey);
+  <span class="built_in">return</span> cellState ? JSON.parse(cellState) : null;
+};
+
+<span class="keyword">function</span> Manager(size = 4, aim = 2048) {
+  //...
+  // 新增storage属性
+  this.storage = new Storage();
+  //...
+}
+
+Manager.prototype._render = <span class="function"><span class="title">function</span></span>() {
+  // 渲染之前调用存储
+  this.storage.setCellState({ score: this.score, grid: this.grid });
+  this.render.render(this.grid, { score: this.score, status: this.status });
+};
+
+// manager.js
+Manager.prototype.defaultStart = <span class="function"><span class="title">function</span></span>() {
+  const state = this.storage.getCellState();
+  // 如果存在缓存则恢复
+  <span class="keyword">if</span> (state) {
+    this.score = state.score;
+    this.status = <span class="string">'DOING'</span>;
+    this.grid = new Grid(this.size, state.grid);
+    this._render();
+  } <span class="keyword">else</span> {
+    this.start();
+  }
+};</code></pre>
+<h2 id="第八章-项目完整代码"><a href="#第八章-项目完整代码" class="headerlink" title="第八章 项目完整代码"></a>第八章 项目完整代码</h2><p>html</p>
+<pre><code class="bash">&lt;!DOCTYPE html&gt;
+&lt;html lang=<span class="string">"en"</span>&gt;
+  &lt;head&gt;
+    &lt;meta charset=<span class="string">"UTF-8"</span> /&gt;
+    &lt;title&gt;优课达-2048&lt;/title&gt;
+    &lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"./style/index.css"</span> /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div class=<span class="string">"container"</span>&gt;
+      &lt;nav&gt;
+        &lt;h1&gt;2048&lt;/h1&gt;
+        &lt;div class=<span class="string">"score"</span>&gt;
+          &lt;div class=<span class="string">"now"</span>&gt;
+            &lt;span class=<span class="string">"label"</span>&gt;SCORE&lt;/span&gt;
+            &lt;span class=<span class="string">"value"</span>&gt;0&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class=<span class="string">"best"</span>&gt;
+            &lt;span class=<span class="string">"label"</span>&gt;BEST&lt;/span&gt;
+            &lt;span class=<span class="string">"value"</span>&gt;0&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/nav&gt;
+      &lt;div class=<span class="string">"desc"</span>&gt;
+        &lt;p&gt;
+          &lt;strong&gt;Play 2048 Game online&lt;/strong&gt;Join the numbers and get to the
+          &lt;strong&gt;2048 tile!&lt;/strong&gt;
+        &lt;/p&gt;
+        &lt;button&gt;New Game&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;main&gt;
+        &lt;div class=<span class="string">"game-grid"</span>&gt;
+          &lt;div class=<span class="string">"grid-row"</span>&gt;
+            &lt;div class=<span class="string">"grid-cell"</span>&gt;&lt;/div&gt;
+            &lt;div class=<span class="string">"grid-cell"</span>&gt;&lt;/div&gt;
+            &lt;div class=<span class="string">"grid-cell"</span>&gt;&lt;/div&gt;
+            &lt;div class=<span class="string">"grid-cell"</span>&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=<span class="string">"grid-row"</span>&gt;
+            &lt;div class=<span class="string">"grid-cell"</span>&gt;&lt;/div&gt;
+            &lt;div class=<span class="string">"grid-cell"</span>&gt;&lt;/div&gt;
+            &lt;div class=<span class="string">"grid-cell"</span>&gt;&lt;/div&gt;
+            &lt;div class=<span class="string">"grid-cell"</span>&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=<span class="string">"grid-row"</span>&gt;
+            &lt;div class=<span class="string">"grid-cell"</span>&gt;&lt;/div&gt;
+            &lt;div class=<span class="string">"grid-cell"</span>&gt;&lt;/div&gt;
+            &lt;div class=<span class="string">"grid-cell"</span>&gt;&lt;/div&gt;
+            &lt;div class=<span class="string">"grid-cell"</span>&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=<span class="string">"grid-row"</span>&gt;
+            &lt;div class=<span class="string">"grid-cell"</span>&gt;&lt;/div&gt;
+            &lt;div class=<span class="string">"grid-cell"</span>&gt;&lt;/div&gt;
+            &lt;div class=<span class="string">"grid-cell"</span>&gt;&lt;/div&gt;
+            &lt;div class=<span class="string">"grid-cell"</span>&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=<span class="string">"tile-container"</span>&gt;
+          &lt;!-- &lt;div class=<span class="string">"tile tile-2 tile-position-1-1"</span>&gt;
+            &lt;div class=<span class="string">"tile-inner"</span>&gt;2&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=<span class="string">"tile tile-4 tile-position-1-2"</span>&gt;
+            &lt;div class=<span class="string">"tile-inner"</span>&gt;4&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=<span class="string">"tile tile-8 tile-position-1-3"</span>&gt;
+            &lt;div class=<span class="string">"tile-inner"</span>&gt;8&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=<span class="string">"tile tile-16 tile-position-1-4"</span>&gt;
+            &lt;div class=<span class="string">"tile-inner"</span>&gt;16&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=<span class="string">"tile tile-32 tile-position-2-1"</span>&gt;
+            &lt;div class=<span class="string">"tile-inner"</span>&gt;32&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=<span class="string">"tile tile-64 tile-position-2-2"</span>&gt;
+            &lt;div class=<span class="string">"tile-inner"</span>&gt;64&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=<span class="string">"tile tile-128 tile-position-2-3"</span>&gt;
+            &lt;div class=<span class="string">"tile-inner"</span>&gt;128&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=<span class="string">"tile tile-256 tile-position-2-4"</span>&gt;
+            &lt;div class=<span class="string">"tile-inner"</span>&gt;256&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=<span class="string">"tile tile-512 tile-position-3-1"</span>&gt;
+            &lt;div class=<span class="string">"tile-inner"</span>&gt;512&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=<span class="string">"tile tile-1024 tile-position-3-2"</span>&gt;
+            &lt;div class=<span class="string">"tile-inner"</span>&gt;1024&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=<span class="string">"tile tile-2048 tile-position-3-3"</span>&gt;
+            &lt;div class=<span class="string">"tile-inner"</span>&gt;2048&lt;/div&gt;
+          &lt;/div&gt; --&gt;
+        &lt;/div&gt;
+      &lt;/main&gt;
+      &lt;footer&gt;
+        &lt;img src=<span class="string">"./images/logo.png"</span> /&gt;
+        &lt;span&gt;出品&lt;/span&gt;
+      &lt;/footer&gt;
+      &lt;div class=<span class="string">"mask status"</span>&gt;
+        &lt;div class=<span class="string">"content"</span>&gt;Game Over!&lt;/div&gt;
+        &lt;button&gt;Try again&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script src=<span class="string">"./scripts/tile.js"</span>&gt;&lt;/script&gt;
+    &lt;script src=<span class="string">"./scripts/grid.js"</span>&gt;&lt;/script&gt;
+    &lt;script src=<span class="string">"./scripts/render.js"</span>&gt;&lt;/script&gt;
+    &lt;script src=<span class="string">"./scripts/listener.js"</span>&gt;&lt;/script&gt;
+    &lt;script src=<span class="string">"./scripts/storage.js"</span>&gt;&lt;/script&gt;
+    &lt;script src=<span class="string">"./scripts/manager.js"</span>&gt;&lt;/script&gt;
+    &lt;script src=<span class="string">"./scripts/index.js"</span>&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>scss</p>
+<pre><code class="bash">//desc.scc
+.desc {
+  display: flex;
+  padding: 0 42px;
+  align-items: center;
+
+  p {
+    font-size: 15px;
+    color: <span class="comment">#635545;</span>
+    flex: 1;
+  }
+
+  button {
+    margin: 0;
+    padding: 0;
+    width: 98px;
+    height: 44px;
+    border-radius: 4px;
+    background-color: <span class="comment">#8f7a66;</span>
+    font-size: 14px;
+    color: <span class="comment">#fff;</span>
+    line-height: 44px;
+    text-align: center;
+    font-weight: 700;
+    font-family: Arial-Black;
+  }
+}
+
+
+// index.scss
+p {
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+  &amp;:focus {
+    outline: none;
+  }
+}
+
+@import <span class="string">'./nav.scss'</span>;
+@import <span class="string">'./desc.scss'</span>;
+@import <span class="string">'./main.scss'</span>;
+
+.body {
+  margin: 0;
+  padding: 0;
+  font-family: <span class="string">'Clear Sans'</span>, <span class="string">'Helvetica Neue'</span>, Arial, sans-serif;
+  color: <span class="comment">#776e65;</span>
+}
+
+.container {
+  position: relative;
+  width: 375px;
+  height: 667px;
+  position: fixed;
+  background-color: <span class="comment">#faf8ef;</span>
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-top: 78px;
+
+  img {
+    width: 100px;
+    height: 36px;
+  }
+
+  span {
+    margin-left: 16px;
+    font-size: 14px;
+    color: <span class="comment">#8f7a67;</span>
+    font-weight: 500;
+  }
+}
+
+.mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.4);
+
+  .content {
+    font-family: Arial-Black;
+    font-size: 26px;
+    color: <span class="comment">#8f7a67;</span>
+    text-align: center;
+  }
+
+  button {
+    margin-top: 20px;
+    width: 98px;
+    height: 44px;
+    background: <span class="comment">#8f7a67;</span>
+    border-radius: 4px;
+    font-size: 14px;
+    color: <span class="comment">#ffffff;</span>
+    text-align: center;
+    font-family: Arial-Black;
+    font-weight: 700;
+    line-height: 44px;
+  }
+}
+
+
+//main.scss
+<span class="variable">$field</span>-width: 290px;
+<span class="variable">$grid</span>-spacing: 10px;
+<span class="variable">$grid</span>-row-cells: 4;
+<span class="variable">$tile</span>-size: (<span class="variable">$field</span>-width - <span class="variable">$grid</span>-spacing * (<span class="variable">$grid</span>-row-cells + 1)) /
+  <span class="variable">$grid</span>-row-cells;
+<span class="variable">$tile</span>-border-radius: 3px;
+
+main {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  width: <span class="variable">$field</span>-width;
+  height: <span class="variable">$field</span>-width;
+  position: relative;
+  padding: <span class="variable">$grid</span>-spacing;
+  background: <span class="comment">#bbada0;</span>
+  border-radius: 8px;
+
+  .game-grid {
+    .grid-row {
+      margin-bottom: <span class="variable">$grid</span>-spacing;
+      display: flex;
+
+      .grid-cell {
+        width: <span class="variable">$tile</span>-size;
+        height: <span class="variable">$tile</span>-size;
+        margin-right: <span class="variable">$grid</span>-spacing;
+        <span class="built_in">float</span>: left;
+        border-radius: 3px;
+        background: rgba(238, 228, 218, 0.35);
+
+        &amp;:last-child {
+          margin-right: 0;
+        }
+      }
+
+      &amp;:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .tile-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    .tile {
+      position: absolute;
+      width: <span class="variable">$tile</span>-size;
+      height: <span class="variable">$tile</span>-size;
+      border-radius: 4px;
+      transition: transform 100ms ease-in-out;
+    }
+
+    .tile-inner {
+      width: 100%;
+      height: 100%;
+      line-height: <span class="variable">$tile</span>-size;
+      background: <span class="comment">#eee4da;</span>
+      text-align: center;
+      font-weight: bold;
+      font-size: 34px;
+      color: <span class="comment">#776e65;</span>
+    }
+
+    @<span class="keyword">for</span> <span class="variable">$x</span> from 1 through <span class="variable">$grid</span>-row-cells {
+      @<span class="keyword">for</span> <span class="variable">$y</span> from 1 through <span class="variable">$grid</span>-row-cells {
+        .tile-position-<span class="comment">#{$x}-#{$y} {</span>
+          <span class="variable">$xPos</span>: <span class="variable">$grid</span>-spacing + floor((<span class="variable">$tile</span>-size + <span class="variable">$grid</span>-spacing) * (<span class="variable">$y</span> - 1));
+          <span class="variable">$yPos</span>: <span class="variable">$grid</span>-spacing + floor((<span class="variable">$tile</span>-size + <span class="variable">$grid</span>-spacing) * (<span class="variable">$x</span> - 1));
+          transform: translate(<span class="variable">$xPos</span>, <span class="variable">$yPos</span>);
+        }
+      }
+    }
+
+    .tile-merged .tile-inner {
+      z-index: 20;
+      animation: pop 200ms ease 100ms;
+      animation-fill-mode: backwards;
+    }
+
+    .tile-new .tile-inner {
+      animation: appear 200ms ease-in-out;
+      animation-delay: 100ms;
+      animation-fill-mode: backwards;
+    }
+
+    .tile.tile-2 .tile-inner {
+      background: <span class="comment">#eee4da;</span>
+    }
+    .tile.tile-4 .tile-inner {
+      background: <span class="comment">#ede0c8;</span>
+    }
+    .tile.tile-8 .tile-inner {
+      color: <span class="comment">#f9f6f2;</span>
+      background: <span class="comment">#f2b179;</span>
+    }
+    .tile.tile-16 .tile-inner {
+      color: <span class="comment">#f9f6f2;</span>
+      background: <span class="comment">#f59563;</span>
+    }
+    .tile.tile-32 .tile-inner {
+      color: <span class="comment">#f9f6f2;</span>
+      background: <span class="comment">#f67c5f;</span>
+    }
+    .tile.tile-64 .tile-inner {
+      color: <span class="comment">#f9f6f2;</span>
+      background: <span class="comment">#f65e3b;</span>
+    }
+    .tile.tile-128 .tile-inner {
+      color: <span class="comment">#f9f6f2;</span>
+      background: <span class="comment">#edcf72;</span>
+      font-size: 30px;
+    }
+
+    .tile.tile-256 .tile-inner {
+      color: <span class="comment">#f9f6f2;</span>
+      background: <span class="comment">#edcc61;</span>
+      font-size: 30px;
+    }
+
+    .tile.tile-512 .tile-inner {
+      color: <span class="comment">#f9f6f2;</span>
+      background: <span class="comment">#edc850;</span>
+      font-size: 30px;
+    }
+
+    .tile.tile-1024 .tile-inner {
+      color: <span class="comment">#f9f6f2;</span>
+      background: <span class="comment">#edc53f;</span>
+      font-size: 22px;
+    }
+
+    .tile.tile-2048 .tile-inner {
+      color: <span class="comment">#f9f6f2;</span>
+      background: <span class="comment">#edc22e;</span>
+      font-size: 22px;
+    }
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+//nav.scss
+nav {
+  height: 68px;
+  padding: 30px 42px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    margin: 0;
+    font-size: 34px;
+    font-weight: 700px;
+    color: <span class="comment">#635545;</span>
+  }
+  .score {
+    display: flex;
+    &gt; div {
+      width: 68px;
+      height: 68px;
+      margin-left: 10px;
+      border-radius: 6px;
+      background-color: <span class="comment">#bbada0;</span>
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .label {
+        font-size: 15px;
+        font-weight: bold;
+        color: <span class="comment">#eee4d9;</span>
+      }
+
+      .value {
+        font-size: 28px;
+        font-weight: 700;
+        color: <span class="comment">#ffffff;</span>
+      }
+    }
+  }
+}
+</code></pre>
+<p>js</p>
+<pre><code class="bash">//grid.js
+//grid.js
+<span class="keyword">function</span> Grid(size = 4, state) {
+  this.size = size;
+  this.cells = [];
+  this.init(size);
+  // 如果有之前的进度，则恢复
+  <span class="keyword">if</span> (state) {
+    this.recover(state);
+  }
+}
+
+Grid.prototype.recover = <span class="keyword">function</span>({ size, cells }) {
+  this.size = size;
+  // 遍历这个二维数组，如果某个cell存在，则新建一个Tile节点。
+  <span class="keyword">for</span> (<span class="built_in">let</span> row = 0; row &lt; this.size; row++) {
+    <span class="keyword">for</span> (<span class="built_in">let</span> column = 0; column &lt; this.size; column++) {
+      const cell = cells[row][column];
+      <span class="keyword">if</span> (cell) {
+        this.cells[row][column] = new Tile(cell.position, cell.value);
+      }
+    }
+  }
+};
+
+// prototype 设置方法
+Grid.prototype.init = <span class="keyword">function</span>(size) {
+  <span class="keyword">for</span> (<span class="built_in">let</span> row = 0; row &lt; size; row++) {
+    this.cells.push([]);
+    <span class="keyword">for</span> (<span class="built_in">let</span> column = 0; column &lt; size; column++) {
+      this.cells[row].push(null);
+    }
+  }
+};
+
+Grid.prototype.add = <span class="keyword">function</span>(tile) {
+  this.cells[tile.row][tile.column] = tile;
+};
+
+Grid.prototype.remove = <span class="keyword">function</span>(tile) {
+  this.cells[tile.row][tile.column] = null;
+};
+
+// 获取所有可用方格的位置
+Grid.prototype.availableCells = <span class="function"><span class="title">function</span></span>() {
+  const availableCells = [];
+  <span class="keyword">for</span> (<span class="built_in">let</span> row = 0; row &lt; this.cells.length; row++) {
+    <span class="keyword">for</span> (<span class="built_in">let</span> column = 0; column &lt; this.cells[row].length; column++) {
+      // 如果当前方格没有内容，则其可用（空闲）
+      <span class="keyword">if</span> (!this.cells[row][column]) {
+        availableCells.push({ row, column });
+      }
+    }
+  }
+  <span class="built_in">return</span> availableCells;
+};
+
+// 随机获取某个可用方格的位置
+Grid.prototype.randomAvailableCell = <span class="function"><span class="title">function</span></span>() {
+  // 获取到所有的空闲方格
+  const cells = this.availableCells();
+  <span class="keyword">if</span> (cells.length &gt; 0) {
+    // 利用Math.random()随机获取其中的某一个
+    <span class="built_in">return</span> cells[Math.floor(Math.random() * cells.length)];
+  }
+};
+
+// 获取某个位置的Tile
+Grid.prototype.get = <span class="keyword">function</span>(position) {
+  <span class="keyword">if</span> (this.outOfRange(position)) {
+    <span class="built_in">return</span> null;
+  }
+  <span class="built_in">return</span> this.cells[position.row][position.column];
+};
+
+// 判断某个位置是否超出边界
+Grid.prototype.outOfRange = <span class="keyword">function</span>(position) {
+  <span class="built_in">return</span> (
+    position.row &lt; 0 ||
+    position.row &gt;= this.size ||
+    position.column &lt; 0 ||
+    position.column &gt;= this.size
+  );
+};
+
+Grid.prototype.serialize = <span class="function"><span class="title">function</span></span>() {
+  const cellState = [];
+
+  // cellState 是一个二维数组，分别存储整个Grid信息。
+  // 如果该位置有Tile, 则返回 Tile序列化结果
+  // 如果该位置没有Tile，则存储null
+  <span class="keyword">for</span> (<span class="built_in">let</span> row = 0; row &lt; this.size; row++) {
+    cellState[row] = [];
+    <span class="keyword">for</span> (<span class="built_in">let</span> column = 0; column &lt; this.size; column++) {
+      cellState[row].push(
+        this.cells[row][column] ? this.cells[row][column].serialize() : null
+      );
+    }
+  }
+
+  <span class="built_in">return</span> {
+    size: this.size,
+    cells: cellState
+  };
+};
+
+
+//index.js
+new Manager();
+
+
+// listener.js
+<span class="keyword">function</span> Listener({ move: moveFn, start: startFn }) {
+  window.addEventListener(<span class="string">'keyup'</span>, <span class="keyword">function</span>(e) {
+    switch (e.keyCode) {
+      <span class="keyword">case</span> 38:
+        moveFn({ row: -1, column: 0 });
+        <span class="built_in">break</span>;
+      <span class="keyword">case</span> 37:
+        moveFn({ row: 0, column: -1 });
+        <span class="built_in">break</span>;
+      <span class="keyword">case</span> 39:
+        moveFn({ row: 0, column: 1 });
+        <span class="built_in">break</span>;
+      <span class="keyword">case</span> 40:
+        moveFn({ row: 1, column: 0 });
+        <span class="built_in">break</span>;
+    }
+  });
+
+  const buttons = document.querySelectorAll(<span class="string">'button'</span>);
+  <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; buttons.length; i++) {
+    buttons[i].addEventListener(<span class="string">'click'</span>, <span class="function"><span class="title">function</span></span>() {
+      startFn();
+    });
+  }
+}
+
+
+
+//manager.js
+<span class="keyword">function</span> Manager(size = 4, aim = 8) {
+  this.size = size;
+  this.aim = aim;
+  this.render = new Render();
+  this.storage = new Storage();
+  <span class="built_in">let</span> self = this;
+  this.listener = new Listener({
+    move: <span class="keyword">function</span>(direction) {
+      self.listenerFn(direction);
+    },
+    start: <span class="function"><span class="title">function</span></span>() {
+      self.start();
+    }
+  });
+  this.defaultStart();
+}
+
+Manager.prototype.defaultStart = <span class="function"><span class="title">function</span></span>() {
+  const state = this.storage.getCellState();
+  <span class="built_in">let</span> bestScore = this.storage.getBestScore();
+  <span class="keyword">if</span> (!bestScore) {
+    bestScore = 0;
+  }
+  this.bestScore = bestScore;
+  // 如果存在缓存则恢复
+  <span class="keyword">if</span> (state) {
+    this.score = state.score;
+    this.status = <span class="string">'DOING'</span>;
+    this.grid = new Grid(this.size, state.grid);
+    this._render();
+  } <span class="keyword">else</span> {
+    this.start();
+  }
+};
+
+Manager.prototype.start = <span class="function"><span class="title">function</span></span>() {
+  this.score = 0;
+  this.status = <span class="string">'DOING'</span>;
+  this.grid = new Grid(this.size);
+  <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; 2; i++) {
+    //初始化
+    this.addRandomTile();
+  }
+  this._render();
+};
+
+Manager.prototype._render = <span class="function"><span class="title">function</span></span>() {
+  // 渲染之前调用存储
+  this.storage.setCellState({ score: this.score, grid: this.grid });
+  <span class="keyword">if</span> (this.score &gt; this.bestScore) {
+    this.bestScore = this.score;
+    this.storage.setBestScore(this.bestScore);
+  }
+  this.render.render(this.grid, {
+    score: this.score,
+    status: this.status,
+    bestScore: this.bestScore
+  });
+};
+
+// 随机添加一个节点
+Manager.prototype.addRandomTile = <span class="function"><span class="title">function</span></span>() {
+  const position = this.grid.randomAvailableCell();
+  <span class="keyword">if</span> (position) {
+    // 90%概率为2，10%为4
+    const value = Math.random() &lt; 0.9 ? 2 : 4;
+    // 随机一个方格的位置
+    const position = this.grid.randomAvailableCell();
+    // 添加到grid中
+    this.grid.add(new Tile(position, value));
+  }
+};
+
+// 移动核心逻辑
+Manager.prototype.listenerFn = <span class="keyword">function</span>(direction) {
+  // 定义一个变量，判断是否引起移动
+  <span class="built_in">let</span> moved = <span class="literal">false</span>;
+
+  const { rowPath, columnPath } = this.getPaths(direction);
+  <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; rowPath.length; i++) {
+    <span class="keyword">for</span> (<span class="built_in">let</span> j = 0; j &lt; columnPath.length; j++) {
+      const position = { row: rowPath[i], column: columnPath[j] };
+      const tile = this.grid.get(position);
+      <span class="keyword">if</span> (tile) {
+        // 当此位置有Tile的时候才进行移动
+        const { aim, next } = this.getNearestAvaibleAim(position, direction);
+
+        // 区分合并和移动，当next值和tile值相同的时候才进行合并
+        <span class="keyword">if</span> (next &amp;&amp; next.value === tile.value) {
+          // 合并位置是next的位置，合并的value是tile.value * 2
+          const merged = new Tile(
+            {
+              row: next.row,
+              column: next.column
+            },
+            tile.value * 2
+          );
+
+          this.score += merged.value;
+          //将合并以后节点，加入grid
+          this.grid.add(merged);
+          //在grid中删除原始的节点
+          this.grid.remove(tile);
+          //判断游戏是否获胜
+          <span class="keyword">if</span> (merged.value === this.aim) {
+            this.status = <span class="string">'WIN'</span>;
+          }
+          merged.mergedTiles = [tile, next];
+          tile.updatePosition({ row: next.row, column: next.column });
+          moved = <span class="literal">true</span>;
+        } <span class="keyword">else</span> {
+          this.moveTile(tile, aim);
+          moved = <span class="literal">true</span>;
+        }
+      }
+    }
+  }
+
+  // 移动以后进行重新渲染
+  <span class="keyword">if</span> (moved) {
+    this.addRandomTile();
+    <span class="keyword">if</span> (this.checkFailure()) {
+      this.status = <span class="string">'FAILURE'</span>;
+    }
+    this._render();
+  }
+};
+
+// 移动Tile，先将grid中老位置删除，在添加新位置
+Manager.prototype.moveTile = <span class="keyword">function</span>(tile, aim) {
+  this.grid.cells[tile.row][tile.column] = null;
+  tile.updatePosition(aim);
+  this.grid.cells[aim.row][aim.column] = tile;
+};
+
+// 根据方向，确定遍历的顺序
+Manager.prototype.getPaths = <span class="keyword">function</span>(direction) {
+  <span class="built_in">let</span> rowPath = [];
+  <span class="built_in">let</span> columnPath = [];
+  <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; this.size; i++) {
+    rowPath.push(i);
+    columnPath.push(i);
+  }
+
+  // 向右的时候
+  <span class="keyword">if</span> (direction.column === 1) {
+    columnPath = columnPath.reverse();
+  }
+
+  // 向下的时候
+  <span class="keyword">if</span> (direction.row === 1) {
+    rowPath = rowPath.reverse();
+  }
+  <span class="built_in">return</span> {
+    rowPath,
+    columnPath
+  };
+};
+
+// 寻找移动方向目标位置
+Manager.prototype.getNearestAvaibleAim = <span class="keyword">function</span>(aim, direction) {
+  // 位置 + 方向向量的计算公式
+  <span class="keyword">function</span> addVector(position, direction) {
+    <span class="built_in">return</span> {
+      row: position.row + direction.row,
+      column: position.column + direction.column
+    };
+  }
+  aim = addVector(aim, direction);
+
+  // 获取grid中某个位置的元素
+  <span class="built_in">let</span> next = this.grid.get(aim);
+
+  // 如果next元素存在（也就是此目标位置已经有Tile），或者是超出游戏边界，则跳出循环。目的：就是找到最后一个空白且不超过边界的方格
+  <span class="keyword">while</span> (!this.grid.outOfRange(aim) &amp;&amp; !next) {
+    aim = addVector(aim, direction);
+    next = this.grid.get(aim);
+  }
+
+  // 这时候的aim总是多计算了一步，因此我们还原一下
+  aim = {
+    row: aim.row - direction.row,
+    column: aim.column - direction.column
+  };
+
+  <span class="built_in">return</span> {
+    aim,
+    next
+  };
+};
+
+// 判断游戏是否失败
+Manager.prototype.checkFailure = <span class="function"><span class="title">function</span></span>() {
+  // 获取空白的Cell
+  const emptyCells = this.grid.availableCells();
+  // 如果存在空白，则游戏肯定没有失败
+  <span class="keyword">if</span> (emptyCells.length &gt; 0) {
+    <span class="built_in">return</span> <span class="literal">false</span>;
+  }
+
+  <span class="keyword">for</span> (<span class="built_in">let</span> row = 0; row &lt; this.grid.size; row++) {
+    <span class="keyword">for</span> (<span class="built_in">let</span> column = 0; column &lt; this.grid.size; column++) {
+      <span class="built_in">let</span> now = this.grid.get({ row, column });
+
+      // 根据4个方向，判断临近的Tile的Value值是否相同
+      <span class="built_in">let</span> directions = [
+        { row: 0, column: 1 },
+        { row: 0, column: -1 },
+        { row: 1, column: 0 },
+        { row: -1, column: 0 }
+      ];
+      <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; directions.length; i++) {
+        const direction = directions[i];
+        const next = this.grid.get({
+          row: row + direction.row,
+          column: column + direction.column
+        });
+        // 判断Value是否相同
+        <span class="keyword">if</span> (next &amp;&amp; next.value === now.value) {
+          <span class="built_in">return</span> <span class="literal">false</span>;
+        }
+      }
+    }
+  }
+  <span class="built_in">return</span> <span class="literal">true</span>;
+};
+
+//render.js
+//render.js
+<span class="keyword">function</span> <span class="function"><span class="title">Render</span></span>() {
+  this.tileContainer = document.querySelector(<span class="string">'.tile-container'</span>);
+  this.scoreContainer = document.querySelector(<span class="string">'.now .value'</span>);
+  this.statusContainer = document.querySelector(<span class="string">'.status'</span>);
+  this.bestScoreContainer = document.querySelector(<span class="string">'.best .value'</span>);
+}
+
+// 渲染整个grid
+Render.prototype.render = <span class="keyword">function</span>(grid, { score, status, bestScore }) {
+  this.empty();
+  this.renderScore(score);
+  this.renderBestScore(bestScore);
+  this.renderStatus(status);
+  <span class="keyword">for</span> (<span class="built_in">let</span> row = 0; row &lt; grid.size; row++) {
+    <span class="keyword">for</span> (<span class="built_in">let</span> column = 0; column &lt; grid.size; column++) {
+      // 如果grid中某个cell不为空，则渲染这个cell
+      <span class="keyword">if</span> (grid.cells[row][column]) {
+        this.renderTile(grid.cells[row][column]);
+      }
+    }
+  }
+};
+
+Render.prototype.renderBestScore = <span class="keyword">function</span>(bestScore) {
+  this.bestScoreContainer.innerHTML = bestScore;
+};
+
+Render.prototype.renderScore = <span class="keyword">function</span>(score) {
+  this.scoreContainer.innerHTML = score;
+};
+
+Render.prototype.renderStatus = <span class="keyword">function</span>(status) {
+  <span class="keyword">if</span> (status === <span class="string">'DOING'</span>) {
+    this.statusContainer.style.display = <span class="string">'none'</span>;
+    <span class="built_in">return</span>;
+  }
+  this.statusContainer.style.display = <span class="string">'flex'</span>;
+  this.statusContainer.querySelector(<span class="string">'.content'</span>).innerHTML =
+    status === <span class="string">'WIN'</span> ? <span class="string">'You Win!'</span> : <span class="string">'Game Over!'</span>;
+};
+
+// 清空tileContainer
+Render.prototype.empty = <span class="function"><span class="title">function</span></span>() {
+  this.tileContainer.innerHTML = <span class="string">''</span>;
+};
+
+// 渲染单个tile
+Render.prototype.renderTile = <span class="keyword">function</span>(tile) {
+  // 创建一个tile-inner
+  const tileInner = document.createElement(<span class="string">'div'</span>);
+  tileInner.setAttribute(<span class="string">'class'</span>, <span class="string">'tile-inner'</span>);
+  tileInner.innerHTML = tile.value;
+
+  // 创建一个tile
+  const tileDom = document.createElement(<span class="string">'div'</span>);
+  <span class="built_in">let</span> classList = [
+    <span class="string">'tile'</span>,
+    `tile-<span class="variable">${tile.value}</span>`,
+    `tile-position-<span class="variable">${tile.row + 1}</span>-<span class="variable">${tile.column + 1}</span>`
+  ];
+
+  <span class="keyword">if</span> (tile.prePosition) {
+    // 先设置之前的位置
+    classList[2] = `tile-position-<span class="variable">${tile.prePosition.row + 1}</span>-${tile.prePosition
+      .column + 1}`;
+    // 延迟设置当前的位置
+    setTimeout(<span class="function"><span class="title">function</span></span>() {
+      classList[2] = `tile-position-<span class="variable">${tile.row + 1}</span>-<span class="variable">${tile.column + 1}</span>`;
+      tileDom.setAttribute(<span class="string">'class'</span>, classList.join(<span class="string">' '</span>));
+    }, 16);
+  } <span class="keyword">else</span> <span class="keyword">if</span> (tile.mergedTiles) {
+    classList.push(<span class="string">'tile-merged'</span>);
+    //如果有mergedTiles，则渲染mergedTile的两个Tile
+    tileDom.setAttribute(<span class="string">'class'</span>, classList.join(<span class="string">' '</span>));
+    <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; tile.mergedTiles.length; i++) {
+      this.renderTile(tile.mergedTiles[i]);
+    }
+  } <span class="keyword">else</span> {
+    classList.push(<span class="string">'tile-new'</span>);
+  }
+
+  tileDom.setAttribute(<span class="string">'class'</span>, classList.join(<span class="string">' '</span>));
+  tileDom.appendChild(tileInner);
+  this.tileContainer.appendChild(tileDom);
+};
+
+
+//storage.js
+// 历史最高分
+const BestScoreKey = <span class="string">'2048BestScore'</span>;
+// 方格状态和分数
+const CellStateKey = <span class="string">'2048CellState'</span>;
+
+<span class="keyword">function</span> <span class="function"><span class="title">Storage</span></span>() {}
+
+Storage.prototype.setBestScore = <span class="keyword">function</span>(bestScore) {
+  window.localStorage.setItem(BestScoreKey, bestScore);
+};
+
+Storage.prototype.getBestScore = <span class="function"><span class="title">function</span></span>() {
+  <span class="built_in">return</span> window.localStorage.getItem(BestScoreKey);
+};
+
+// 存储方格状态和分数
+Storage.prototype.setCellState = <span class="keyword">function</span>({ score, grid }) {
+  window.localStorage.setItem(
+    CellStateKey,
+    JSON.stringify({
+      score,
+      grid: grid.serialize()
+    })
+  );
+};
+
+// 获取方格信息
+Storage.prototype.getCellState = <span class="function"><span class="title">function</span></span>() {
+  const cellState = window.localStorage.getItem(CellStateKey);
+  <span class="built_in">return</span> cellState ? JSON.parse(cellState) : null;
+};
+
+
+//tile.js
+<span class="keyword">function</span> Tile(position, value) {
+  this.row = position.row;
+  this.column = position.column;
+  this.value = value;
+
+  // 新增prePosition属性
+  this.prePosition = null;
+  // 存储merged两个Tile
+  this.mergedTiles = null;
+}
+
+Tile.prototype.updatePosition = <span class="keyword">function</span>(position) {
+  // 更新的时候，先将当前位置，保存为prePosition
+  this.prePosition = { row: this.row, column: this.column };
+
+  this.row = position.row;
+  this.column = position.column;
+};
+
+Tile.prototype.serialize = <span class="function"><span class="title">function</span></span>() {
+  <span class="built_in">return</span> {
+    position: {
+      row: this.row,
+      column: this.column
+    },
+    value: this.value
+  };
+};
+</code></pre>
 
 </div>
 
